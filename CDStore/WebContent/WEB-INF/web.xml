@@ -2,17 +2,8 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>CDStore</display-name>
   <welcome-file-list>
-    <welcome-file>register.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <display-name>CustomerInfo</display-name>
-    <servlet-name>CustomerInfo</servlet-name>
-    <servlet-class>com.K9.hibernate.controller.CustomerInfoControllerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CustomerInfo</servlet-name>
-    <url-pattern>/register</url-pattern>
-  </servlet-mapping>
   <servlet>
     <display-name>Apache-Axis Servlet</display-name>
     <servlet-name>AxisServlet</servlet-name>
@@ -39,14 +30,5 @@
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/servlet/AdminServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <display-name>CustomerInfoControlerServlet</display-name>
-    <servlet-name>CustomerInfoControlerServlet</servlet-name>
-    <servlet-class>com.K9.hibernate.controller.CustomerInfoControllerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CustomerInfoControlerServlet</servlet-name>
-    <url-pattern>/CustomerInfoControlerServlet</url-pattern>
   </servlet-mapping>
 </web-app>
