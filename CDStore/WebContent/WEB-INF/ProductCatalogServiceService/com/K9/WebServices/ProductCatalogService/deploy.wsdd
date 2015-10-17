@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ProductCatalogServiceService WSDL service -->
+
+  <service name="ProductCatalogService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ProductCatalogService.WebServices.K9.com"/>
+      <parameter name="wsdlServiceElement" value="ProductCatalogServiceService"/>
+      <parameter name="schemaQualified" value="http://ProductCatalogService.WebServices.K9.com"/>
+      <parameter name="wsdlServicePort" value="ProductCatalogService"/>
+      <parameter name="className" value="com.K9.WebServices.ProductCatalogService.ProductCatalogService"/>
+      <parameter name="wsdlPortType" value="ProductCatalogService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getProductInfo" qname="operNS:getProductInfo" returnQName="retNS:getProductInfoReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://ProductCatalogService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:productId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getProductList" qname="operNS:getProductList" returnQName="retNS:getProductListReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getCategoryList" qname="operNS:getCategoryList" returnQName="retNS:getCategoryListReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getProductListByCategory" qname="operNS:getProductListByCategory" returnQName="retNS:getProductListByCategoryReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://ProductCatalogService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:categoryId" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="getCategoryList getProductListByCategory getProductList getProductInfo"/>
+
+  </service>
+</deployment>

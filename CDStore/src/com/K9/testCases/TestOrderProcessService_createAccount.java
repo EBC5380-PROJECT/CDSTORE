@@ -1,0 +1,97 @@
+package com.K9.testCases;
+
+
+
+/**
+ * This is a unit test that tests the CategoryDAO class.
+ */
+import org.junit.Test;
+
+import com.K9.WebServices.OrderProcessService.*;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Map;
+
+import org.skyscreamer.jsonassert.*;
+import com.K9.util.*;
+
+import org.json.*;
+import com.google.gson.*;
+
+
+import com.K9.hibernate.bean.AccountInfo;
+
+public class TestOrderProcessService_createAccount {
+	{
+	
+	OrderProcessService service = new OrderProcessService();
+	
+	AccountInfo accntInfo = new AccountInfo();
+
+	accntInfo.setAccountName("mbp7");
+	//accntInfo.setbillingAddressId(1);
+	accntInfo.setEmail("mbp@gmail.com");
+	//accntInfo.setShippingAddressId(1);
+	accntInfo.setPassword1("password");
+	
+		
+	accntInfo.setShippingAddressStreet("2564 Maple drive");
+	accntInfo.setShippingAddressCity("Ottawa");
+	accntInfo.setShippingAddressProvince("ON");
+	accntInfo.setShippingAddressCountry("Canada");
+	accntInfo.setShippingAddressPostalCode("K4R6T5");
+	accntInfo.setShippingAddressPhone("613 856-7458");
+	
+	
+	
+	accntInfo.setBillingAddressStreet("2564 Maple drive");
+	accntInfo.setBillingAddressCity("Ottawa");
+	accntInfo.setBillingAddressProvince("ON");
+	accntInfo.setBillingAddressCountry("Canada");
+	accntInfo.setBillingAddressPostalCode("K4R6T5");
+	accntInfo.setBillingAddressPhone("613 856-7458");
+	
+	
+	try {
+		 
+		
+		Gson gson = new Gson();
+		String accountInfo = gson.toJson(accntInfo);
+		
+		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp7\"}");
+		String accountName = jsonObj.toString();
+		
+		
+			    
+		String result = service.creatAccount(accountName, accountInfo);
+	
+		
+		MessageUtil messageUtil = new MessageUtil(result);
+	    String msg = messageUtil.printMessage("TestCategoryDAO:");
+		
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		//throw e;
+	}
+	
+		
+	
+	}
+	
+	  
+	   
+        @Test
+  	   public void testResult() {	  
+
+        	//JSONAssert.assertEquals("ff", categoryString, success);
+        	//assertEquals("{"categoryId":1,"categoryName":"COUNTRY"},{"categoryId":2,"categoryName":"ROCK"},{"categoryId":3,"categoryName":"POP"}",categoryString);
+  	   }
+      
+	  
+}
+
+	  	   
+
+

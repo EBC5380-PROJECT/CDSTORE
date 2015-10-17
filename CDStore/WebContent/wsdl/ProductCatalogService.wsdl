@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ProductCatalogService.WebServices.K9.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ProductCatalogService.WebServices.K9.com" xmlns:intf="http://ProductCatalogService.WebServices.K9.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://ProductCatalogService.WebServices.K9.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getProductInfo">
+    <complexType>
+     <sequence>
+      <element name="productId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="getProductInfoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductList">
+    <complexType/>
+   </element>
+   <element name="getProductListResponse">
+    <complexType>
+     <sequence>
+      <element name="getProductListReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCategoryList">
+    <complexType/>
+   </element>
+   <element name="getCategoryListResponse">
+    <complexType>
+     <sequence>
+      <element name="getCategoryListReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductListByCategory">
+    <complexType>
+     <sequence>
+      <element name="categoryId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductListByCategoryResponse">
+    <complexType>
+     <sequence>
+      <element name="getProductListByCategoryReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getProductListRequest">
+
+      <wsdl:part element="impl:getProductList" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCategoryListRequest">
+
+      <wsdl:part element="impl:getCategoryList" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductInfoRequest">
+
+      <wsdl:part element="impl:getProductInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductListByCategoryRequest">
+
+      <wsdl:part element="impl:getProductListByCategory" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCategoryListResponse">
+
+      <wsdl:part element="impl:getCategoryListResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductListResponse">
+
+      <wsdl:part element="impl:getProductListResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductListByCategoryResponse">
+
+      <wsdl:part element="impl:getProductListByCategoryResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductInfoResponse">
+
+      <wsdl:part element="impl:getProductInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ProductCatalogService">
+
+      <wsdl:operation name="getProductInfo">
+
+         <wsdl:input message="impl:getProductInfoRequest" name="getProductInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getProductInfoResponse" name="getProductInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductList">
+
+         <wsdl:input message="impl:getProductListRequest" name="getProductListRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getProductListResponse" name="getProductListResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCategoryList">
+
+         <wsdl:input message="impl:getCategoryListRequest" name="getCategoryListRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCategoryListResponse" name="getCategoryListResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductListByCategory">
+
+         <wsdl:input message="impl:getProductListByCategoryRequest" name="getProductListByCategoryRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getProductListByCategoryResponse" name="getProductListByCategoryResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ProductCatalogServiceSoapBinding" type="impl:ProductCatalogService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getProductInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getProductInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getProductInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductList">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getProductListRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getProductListResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCategoryList">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCategoryListRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCategoryListResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductListByCategory">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getProductListByCategoryRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getProductListByCategoryResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ProductCatalogServiceService">
+
+      <wsdl:port binding="impl:ProductCatalogServiceSoapBinding" name="ProductCatalogService">
+
+         <wsdlsoap:address location="http://localhost:8080/CDStore/services/ProductCatalogService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
