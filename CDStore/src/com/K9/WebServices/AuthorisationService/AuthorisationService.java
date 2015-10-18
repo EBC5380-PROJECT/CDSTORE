@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 public class AuthorisationService {
 	
 	
-	public boolean authorisePurchase(String paymentInfo, String order) {
+	public boolean authorisePurchase(String paymentInfo, String purchaseOrder) {
 	       
 		{
 		 
@@ -29,7 +29,7 @@ public class AuthorisationService {
 			 Orders order1 = new Orders();
 			 
 			 Gson gson = new Gson();
-			 order1 = gson.fromJson(order, Orders.class);	
+			 order1 = gson.fromJson(purchaseOrder, Orders.class);	
 	         
 	         if(order1.getTotalCost() > totalCreditAmount)
 	        	 return false;

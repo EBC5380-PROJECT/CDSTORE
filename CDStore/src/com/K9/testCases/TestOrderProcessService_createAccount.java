@@ -42,12 +42,12 @@ public class TestOrderProcessService_createAccount {
 	
 	
 	
-	accntInfo.setBillingAddressStreet("2564 Maple drive");
-	accntInfo.setBillingAddressCity("Ottawa");
+	accntInfo.setBillingAddressStreet("235 Oak av");
+	accntInfo.setBillingAddressCity("Perth");
 	accntInfo.setBillingAddressProvince("ON");
 	accntInfo.setBillingAddressCountry("Canada");
-	accntInfo.setBillingAddressPostalCode("K4R6T5");
-	accntInfo.setBillingAddressPhone("613 856-7458");
+	accntInfo.setBillingAddressPostalCode("K0A 8F9");
+	accntInfo.setBillingAddressPhone("613 235-4875");
 	
 	
 	try {

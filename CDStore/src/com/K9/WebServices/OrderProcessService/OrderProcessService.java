@@ -119,7 +119,7 @@ public String getAccount(String accountName, String password) {
 
 
 
-public String createOrder(String shoppingCartInfo, String shippingInfo) {
+public void createOrder(String shoppingCartInfo, String shippingInfo) throws JSONException {
 	
 	
 	
@@ -146,17 +146,16 @@ public String createOrder(String shoppingCartInfo, String shippingInfo) {
 			  orderItem.addOrderItem(orderId, shippingInfo2.getCdId(), shippingInfo2.getQuantity()); 	 
 			}
 		
-		 return "jj";
-		    
-		 
-	   } catch (HibernateException e) {
-          System.out.println(e.getMessage());
-          System.out.println("error");
-          return e.getMessage();
-          //throw e;
-      } catch (JSONException e) {
-    	  return e.getMessage();
-      }
+		 } catch (JSONException f) {
+	   	  	System.out.println(f.getMessage());
+	        System.out.println("error");
+	   	  throw f;
+	     } catch (Exception f) {
+	    	 System.out.println(f.getMessage());
+		     System.out.println("error");
+		   	  throw f;
+	     }
+     
 	
  }        	
 
@@ -177,16 +176,15 @@ public void confirmOrder(String purchaseOrder, String shippingInfo, String payme
 		 Gson gson = new Gson();
          Orders orders = gson.fromJson(purchaseOrder, Orders.class);	
 		 
-         
-		 authorisedPurchase = false;
+         // once the web service call to authorisation ws is completed, the followning line of code will be removed
+         //TODO
+		 authorisedPurchase = true;
 		 
 		 if (authorisedPurchase)
 			 status="PROCESSED";		
 		 else 
 			 status="DENIED";	
-		 
-		 
-		 
+		
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 
 		 ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());

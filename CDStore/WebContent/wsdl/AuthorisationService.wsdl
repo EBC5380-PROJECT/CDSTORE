@@ -8,7 +8,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="paymentInfo" type="xsd:string"/>
-      <element name="order" type="xsd:string"/>
+      <element name="purchaseOrder" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
@@ -38,7 +38,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:portType name="AuthorisaationService">
+   <wsdl:portType name="AuthorisationService">
 
       <wsdl:operation name="authorisePurchase">
 
@@ -54,7 +54,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:portType>
 
-   <wsdl:binding name="AuthorisaationServiceSoapBinding" type="impl:AuthorisaationService">
+   <wsdl:binding name="AuthorisationServiceSoapBinding" type="impl:AuthorisationService">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
@@ -78,11 +78,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:binding>
 
-   <wsdl:service name="AuthorisaationServiceService">
+   <wsdl:service name="AuthorisationServiceService">
 
-      <wsdl:port binding="impl:AuthorisaationServiceSoapBinding" name="AuthorisaationService">
+      <wsdl:port binding="impl:AuthorisationServiceSoapBinding" name="AuthorisationService">
 
-         <wsdlsoap:address location="http://localhost:8080/CDStore/services/AuthorisaationService"/>
+         <wsdlsoap:address location="http://localhost:8080/CDStore/services/AuthorisationService"/>
 
       </wsdl:port>
 
