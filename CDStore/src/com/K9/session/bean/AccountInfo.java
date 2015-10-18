@@ -1,10 +1,10 @@
 /**
- * Account Bean - contains CD Store client account information
+ * AccountInfo Bean - contains CD Store client account information
  * @author MBP
  *
  */
 
-package com.K9.hibernate.bean;
+package com.K9.session.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,10 +16,9 @@ public class AccountInfo implements Serializable{
 	
 	// Getters and Setters are defined below for the values in this bean
 	
-	// accountId is the primary key for this class and is auto-generated in the database
+	// This bean is not persisted in the database.  Used to transfer information from the view to the model.
 	
-	private int accountInfoId;
-	
+		
 	private String accountName;
 	private String password1;
 	private int billingAddressId;
@@ -42,13 +41,6 @@ public class AccountInfo implements Serializable{
     private String shippingAddressPhone;
       
     
-	 public int getAccountInfoId() {
-	        return accountInfoId;
-	    }
-	 
-	    public void setAccountId(int accountInfoId) {
-	        this.accountInfoId = accountInfoId;
-	    }
 	     
 	 public String getAccountName() {
 	        return accountName;

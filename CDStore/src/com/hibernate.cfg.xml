@@ -11,12 +11,12 @@
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
+  <mapping class="com.K9.hibernate.bean.Account"/>
+  <mapping class="com.K9.hibernate.bean.Address"/>
   <mapping class="com.K9.hibernate.bean.Category"/>
   <mapping class="com.K9.hibernate.bean.CD"/>
-  <mapping class="com.K9.hibernate.bean.Address"/>
   <mapping class="com.K9.hibernate.bean.OrderItem"/>
-  <mapping class="com.K9.hibernate.bean.OrderStatus"/>
-  <mapping class="com.K9.hibernate.bean.Account"/>
   <mapping class="com.K9.hibernate.bean.Orders"/>
+  <mapping class="com.K9.hibernate.bean.OrderStatus"/>
  </session-factory>
 </hibernate-configuration>

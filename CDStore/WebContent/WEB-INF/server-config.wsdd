@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -51,11 +51,11 @@
    <ns1:parameter qname="ns4:password" type="xsd:string"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="createOrder confirmOrder creatAccount getAccount"/>
-  <ns1:parameter name="wsdlPortType" value="OrderProcessService"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://OrderProcessService.WebServices.K9.com"/>
-  <ns1:parameter name="wsdlServicePort" value="OrderProcessService"/>
+  <ns1:parameter name="wsdlPortType" value="OrderProcessService"/>
   <ns1:parameter name="className" value="com.K9.WebServices.OrderProcessService.OrderProcessService"/>
+  <ns1:parameter name="wsdlServicePort" value="OrderProcessService"/>
+  <ns1:parameter name="schemaQualified" value="http://OrderProcessService.WebServices.K9.com"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://OrderProcessService.WebServices.K9.com"/>
   <ns1:parameter name="wsdlServiceElement" value="OrderProcessServiceService"/>
  </ns1:service>
@@ -69,13 +69,27 @@
    <ns1:parameter qname="ns8:categoryId" type="xsd:int"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="getCategoryList getProductListByCategory getProductList getProductInfo"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="ProductCatalogService"/>
-  <ns1:parameter name="className" value="com.K9.WebServices.ProductCatalogService.ProductCatalogService"/>
-  <ns1:parameter name="wsdlServicePort" value="ProductCatalogService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="schemaQualified" value="http://ProductCatalogService.WebServices.K9.com"/>
+  <ns1:parameter name="wsdlServicePort" value="ProductCatalogService"/>
+  <ns1:parameter name="className" value="com.K9.WebServices.ProductCatalogService.ProductCatalogService"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://ProductCatalogService.WebServices.K9.com"/>
   <ns1:parameter name="wsdlServiceElement" value="ProductCatalogServiceService"/>
+ </ns1:service>
+ <ns1:service name="AuthorisaationService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="authorisePurchase" qname="ns9:authorisePurchase" returnQName="ns9:authorisePurchaseReturn" returnType="xsd:boolean" soapAction="" xmlns:ns9="http://AuthorisationService.WebServices.K9.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:paymentInfo" type="xsd:string"/>
+   <ns1:parameter qname="ns9:order" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="authorisePurchase"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="AuthorisaationService"/>
+  <ns1:parameter name="className" value="com.K9.WebServices.AuthorisationService.AuthorisaationService"/>
+  <ns1:parameter name="wsdlServicePort" value="AuthorisaationService"/>
+  <ns1:parameter name="schemaQualified" value="http://AuthorisationService.WebServices.K9.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://AuthorisationService.WebServices.K9.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="AuthorisaationServiceService"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

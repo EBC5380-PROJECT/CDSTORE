@@ -1,17 +1,19 @@
 package com.K9.hibernate.dao;
  
 import org.hibernate.HibernateException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import com.K9.hibernate.bean.Address;
+import com.K9.hibernate.bean.OrderItem;
 
+
+public class OrderItemDAO {
+	
  
-public class AddressDAO {
- 
-    public int addAddressDetails(String street, String city, String province, String country, String postalCode, String phone) {
+    public int addOrderItem(int orderId, int cdid, int quantity) {
         try {
             // 1. configuring hibernate
         	Configuration  configuration = new Configuration ().configure();
@@ -27,16 +29,15 @@ public class AddressDAO {
             Transaction transaction = session.beginTransaction();
             
             
-            Address addressInfo = new Address();
+            OrderItem orderItem = new OrderItem();
+        	
+                     
+            orderItem.setOrderId(orderId);
+            orderItem.setCdId(cdid);
+            orderItem.setQuantity(quantity);
            
-            addressInfo.setStreet(street);
-            addressInfo.setCity(city);
-            addressInfo.setProvince(province);
-            addressInfo.setCountry(country);
-            addressInfo.setPostalCode(postalCode);
-            addressInfo.setPhone(phone);
             
-            session.save(addressInfo);
+            session.save(orderItem);
             
             
             transaction.commit();
@@ -44,7 +45,7 @@ public class AddressDAO {
             
               
             
-            return addressInfo.getAddressId();
+            return orderItem.getOrderitemId();
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
@@ -53,5 +54,5 @@ public class AddressDAO {
         }
  
     }
-    
+   
 }

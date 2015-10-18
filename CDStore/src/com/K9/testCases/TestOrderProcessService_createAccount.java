@@ -8,19 +8,16 @@ package com.K9.testCases;
 import org.junit.Test;
 
 import com.K9.WebServices.OrderProcessService.*;
+import com.K9.session.bean.AccountInfo;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
-import java.util.Map;
 
-import org.skyscreamer.jsonassert.*;
+//import org.skyscreamer.jsonassert.*;
 import com.K9.util.*;
 
 import org.json.*;
 import com.google.gson.*;
-
-
-import com.K9.hibernate.bean.AccountInfo;
 
 public class TestOrderProcessService_createAccount {
 	{

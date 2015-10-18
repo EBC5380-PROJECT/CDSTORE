@@ -9,9 +9,17 @@ import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Column;
 import java.io.Serializable;
  
+@NamedNativeQuery(
+		name = "callUpdateStatusProcedure",
+		query = "CALL sp_updateOrderStatus(:orderId, :orderStatus)",
+		resultClass = Orders.class
+		)
+
+
 @Entity
 public class Orders implements Serializable{
 	static final long serialVersionUID = 41L;
@@ -63,7 +71,7 @@ public class Orders implements Serializable{
         return shippingCharge;
     }
      
-    public void setAccountId(Double shippingCharge) {
+    public void setShippingCharge(Double shippingCharge) {
         this.shippingCharge = shippingCharge;
     }
     
