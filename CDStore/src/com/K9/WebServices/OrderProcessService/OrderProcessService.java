@@ -134,7 +134,7 @@ public String createOrder(String shoppingCartInfo, String shippingInfo) {
 		 shippingInfo1 = gson.fromJson(shippingInfo, ShippingInfo.class);	
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO();
-		 int orderId=ordersDAO.addOrder(shippingInfo1.getAccountId(), "Ordered", shippingInfo1.getShippingCharge(), shippingInfo1.getTaxes(), shippingInfo1.getTotalCost());
+		 int orderId=ordersDAO.addOrder(shippingInfo1.getAccountId(), "ORDERED", shippingInfo1.getShippingCharge(), shippingInfo1.getTaxes(), shippingInfo1.getTotalCost());
 		 
 			 		
 		JSONArray jsonList = new JSONArray(shoppingCartInfo);		
@@ -177,19 +177,19 @@ public void confirmOrder(String purchaseOrder, String shippingInfo, String payme
 		 Gson gson = new Gson();
          Orders orders = gson.fromJson(purchaseOrder, Orders.class);	
 		 
-         System.out.println("accountID"+orders.getOrderId());
          
-		 authorisedPurchase = true;
+		 authorisedPurchase = false;
 		 
 		 if (authorisedPurchase)
-			 status="Processed";		
+			 status="PROCESSED";		
 		 else 
-			 status="Denied";	
+			 status="DENIED";	
 		 
-		 status="test2";
-		 System.out.println("status"+ status);
+		 
+		 
+		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 
-		 ordersDAO.updateOrderStatus(orders.getOrderId(), status);
+		 ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
 		
 		 
 	   } catch (HibernateException e) {

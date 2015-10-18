@@ -1,0 +1,44 @@
+
+Web Service Interfaces:
+
+
+
+ProductCatalogService  
+
+
+getCategoryList()
+input;
+output:  [{"categoryId":1,"categoryName":"COUNTRY"},{"categoryId":2,"categoryName":"ROCK"},{"categoryId":3,"categoryName":"POP"}]
+
+
+getProductList()
+input:
+output: [{"cdId":1,"title":"Johnny Cash Greatest Hits","artistName":"KJ","description":"Greatest Hits, Vol. 1 is a compilation album by country singer Johnny Cash, released in 1967 on Columbia Records. It is notable in that it marks the first appearance of \u0027Jackson\u0027, Cash\u0027s famous duet with his future wife, June Carter","categoryId":2,"price":16.0,"image":"image1"},{"cdId":2,"title":"16 Biggest Hits","artistName":"kd","description":"16 Biggest Hits is a compilation album by country singer Willie Nelson. It was released on July 14, 1998","categoryId":1,"price":16.0,"image":"image2"}]
+
+
+getProductInfo(String productId)
+input: {"productId":1}      
+ouput: [{"cdId":1,"title":"Johnny Cash Greatest Hits","artistName":"KJ","description":"Greatest Hits, Vol. 1 is a compilation album by country singer Johnny Cash, released in 1967 on Columbia Records. It is notable in that it marks the first appearance of \u0027Jackson\u0027, Cash\u0027s famous duet with his future wife, June Carter","categoryId":2,"price":16.0,"image":"image1"}]
+
+
+getProductListByCategory(String categoryId)
+input: {"categoryId":1}      
+output: [{"cdId":2,"title":"16 Biggest Hits","artistName":"kd","description":"16 Biggest Hits is a compilation album by country singer Willie Nelson. It was released on July 14, 1998","categoryId":1,"price":16.0,"image":"image2"}]
+
+
+
+Order Process Service:
+
+
+creatAccount(String accountName, String accountInfo)
+input: {"accountName":"mbp7"},{"accountInfoId":0,"accountName":"mbp7","password1":"password","billingAddressId":0,"shippingAddressId":0,"email":"mbp@gmail.com","billingAddressStreet":"2564 Maple drive","billingAddressCity":"Ottawa","billingAddressProvince":"ON","billingAddressCountry":"Canada","billingAddressPostalCode":"K4R6T5","billingAddressPhone":"613 856-7458","shippingAddressStreet":"2564 Maple drive","shippingAddressCity":"Ottawa","shippingAddressProvince":"ON","shippingAddressCountry":"Canada","shippingAddressPostalCode":"K4R6T5","shippingAddressPhone":"613 856-7458"}
+output: String is returned with two possible values:
+	(1) String will be empty if the account was created successfully
+	(2) If the accountName is not unique, the string that will be returned is: "error Message:  Account name is not unique"
+
+
+getAccount(String accountName, String password)
+input:{"accountName":"mbp"},{"password":"password"}
+ [{"accountId":1,"accountName":"mbp","password1":"password","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}]
+        
+    

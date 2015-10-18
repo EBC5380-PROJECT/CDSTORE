@@ -63,7 +63,7 @@ public class OrdersDAO {
  
     }
     
-    public void updateOrderStatus(int orderId, String orderStatus) {
+    public void updateOrderStatus(int orderId, String orderStatus, int accountId) {
         try {
             // 1. configuring hibernate
         	Configuration  configuration = new Configuration ().configure();
@@ -90,7 +90,8 @@ public class OrdersDAO {
             
             Query query = session.getNamedQuery("callUpdateStatusProcedure")
             		 .setParameter("orderId", orderId)
-            		 .setParameter("orderStatus", orderStatus);
+            		 .setParameter("orderStatus", orderStatus)
+            		 .setParameter("accountId", accountId);
             
             int result = query.executeUpdate();
             System.out.println("result"+result);

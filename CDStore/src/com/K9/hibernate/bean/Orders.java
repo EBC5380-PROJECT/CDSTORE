@@ -15,7 +15,7 @@ import java.io.Serializable;
  
 @NamedNativeQuery(
 		name = "callUpdateStatusProcedure",
-		query = "CALL sp_updateOrderStatus(:orderId, :orderStatus)",
+		query = "CALL sp_updateOrderStatus(:orderId, :orderStatus, :accountId)",
 		resultClass = Orders.class
 		)
 

@@ -26,7 +26,7 @@ public class TestOrderProcessService_createAccount {
 	
 	AccountInfo accntInfo = new AccountInfo();
 
-	accntInfo.setAccountName("mbp7");
+	accntInfo.setAccountName("mbp");
 	//accntInfo.setbillingAddressId(1);
 	accntInfo.setEmail("mbp@gmail.com");
 	//accntInfo.setShippingAddressId(1);
@@ -56,7 +56,7 @@ public class TestOrderProcessService_createAccount {
 		Gson gson = new Gson();
 		String accountInfo = gson.toJson(accntInfo);
 		
-		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp7\"}");
+		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp\"}");
 		String accountName = jsonObj.toString();
 		
 		
