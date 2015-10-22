@@ -1,13 +1,15 @@
+package com.K9.session.bean;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * AccountInfo Bean - contains CD Store client account information
  * @author MBP
  *
  */
 
-package com.K9.session.bean;
 
-import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity

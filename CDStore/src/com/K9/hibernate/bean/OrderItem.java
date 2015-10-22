@@ -1,8 +1,3 @@
-/**
- * OrderItem Bean - contains the item information that is part of an order
- * @author MBP
- *
- */
 package com.K9.hibernate.bean;
 
 import javax.persistence.Entity;
@@ -12,10 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import java.io.Serializable;
+
+
+/**
+ * OrderItem Bean - contains the item information that is part of an order
+ * @author MBP
+ *
+ */
  
 @Entity
 public class OrderItem implements Serializable{
-	static final long serialVersionUID = 41L;
+	static final long serialVersionUID = 1L;
 	
 	// Getters and Setters are defined below for the values in this bean
 	

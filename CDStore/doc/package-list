@@ -1,6 +1,8 @@
+com.K9.WebServices.AuthorisationService
 com.K9.WebServices.OrderProcessService
 com.K9.WebServices.ProductCatalogService
 com.K9.hibernate.bean
 com.K9.hibernate.dao
+com.K9.session.bean
 com.K9.testCases
 com.K9.util

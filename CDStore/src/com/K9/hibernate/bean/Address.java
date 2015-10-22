@@ -1,20 +1,22 @@
+package com.K9.hibernate.bean;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import java.io.Serializable;
+
 /**
  * Address Bean - contains CD Store client address information
  * @author MBP
  *
  */
-package com.K9.hibernate.bean;
 
-import javax.persistence.Entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import java.io.Serializable;
  
 @Entity
 public class Address implements Serializable{
-	static final long serialVersionUID = 41L;
+	static final long serialVersionUID = 1L;
 	
 	// Getters and Setters are defined below for the values in this bean
 	

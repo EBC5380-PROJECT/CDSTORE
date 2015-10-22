@@ -1,7 +1,5 @@
 package com.K9.hibernate.dao;
  
-import java.util.ArrayList;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -9,10 +7,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.sql.Update;
-
 import com.K9.hibernate.bean.Orders;
-import com.google.gson.Gson;
+
+
+/**
+ * This Data Access Object class is used to access the cd table in the database.  The hibernate framework is used to manage the interaction with the database.
+
+ * 
+ * @author MBP
+ */
 
 
 

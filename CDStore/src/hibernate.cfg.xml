@@ -15,7 +15,6 @@
   <mapping class="com.K9.hibernate.bean.CD"/>
   <mapping class="com.K9.hibernate.bean.Address"/>
   <mapping class="com.K9.hibernate.bean.OrderItem"/>
-  <mapping class="com.K9.hibernate.bean.OrderStatus"/>
   <mapping class="com.K9.hibernate.bean.Account"/>
   <mapping class="com.K9.hibernate.bean.Orders"/>
  </session-factory>

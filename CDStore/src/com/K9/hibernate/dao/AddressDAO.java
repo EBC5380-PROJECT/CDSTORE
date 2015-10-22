@@ -8,6 +8,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import com.K9.hibernate.bean.Address;
 
+
+/**
+ * This Data Access Object class is used to access the category table in the database.  The hibernate framework is used to manage the interaction with the database.
+
+ * 
+ * @author MBP
+ */
+
  
 public class AddressDAO {
  

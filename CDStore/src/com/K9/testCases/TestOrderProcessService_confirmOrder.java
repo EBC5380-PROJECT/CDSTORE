@@ -26,14 +26,14 @@ public class TestOrderProcessService_confirmOrder {
 	
 	ShippingInfo shippingInfo = new ShippingInfo();
 
-	shippingInfo.setAccountId(1);
+	shippingInfo.setAccountId(3);
 	shippingInfo.setShippingCharge(5.25);
 	shippingInfo.setTaxes(4.25);
 	shippingInfo.setTotalCost(20.36);
 	
 	Orders order = new Orders();
-	order.setOrderId(1);
-	order.setAccountId(1);
+	order.setOrderId(6);
+	order.setAccountId(3);
 	order.setShippingCharge(5.2);
 	order.setStatus("ORDERED");
 	order.setTaxes(6.2);

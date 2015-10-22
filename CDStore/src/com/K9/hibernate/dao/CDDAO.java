@@ -1,12 +1,5 @@
 package com.K9.hibernate.dao;
 
-/**
- * This Data Access Object class is used to access the cd table in the database.  The hibernate framework is used to manage the interaction with the database.
-
- * 
- * @author MBP
- */
- 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,6 +9,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+
+/**
+ * This Data Access Object class is used to access the cd table in the database.  The hibernate framework is used to manage the interaction with the database.
+
+ * 
+ * @author MBP
+ */
+ 
+
 
 public class CDDAO {
 	
@@ -80,7 +82,7 @@ public class CDDAO {
 	        } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
 	            System.out.println("error");
-	            return null;
+	            throw e;
 	        }
 	 
 	    }
@@ -147,7 +149,7 @@ public class CDDAO {
 		        } catch (HibernateException e) {
 		            System.out.println(e.getMessage());
 		            System.out.println("error");
-		            return null;
+		            throw e;
 		        }
 		 
 		    }
@@ -216,12 +218,10 @@ public class CDDAO {
 		        } catch (HibernateException e) {
 		            System.out.println(e.getMessage());
 		            System.out.println("error");
-		            return null;
+		            throw e;
 		        }
 		 
 		    }
-
-	 
-	 
+ 
 	 	
 }

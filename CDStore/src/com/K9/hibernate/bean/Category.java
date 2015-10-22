@@ -1,10 +1,3 @@
-/**
- * This bean class represents the different CD categories for the online store.
- * 
- * @author MBP
- *  
- *
- */
 package com.K9.hibernate.bean;
 
 import javax.persistence.Entity;
@@ -13,6 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Column;
 import java.io.Serializable;
+
+/**
+ * This bean class represents the different CD categories for the online store.
+ * 
+ * @author MBP
+ *  
+ *
+ */
 
 /**
  * @NamedNativeQuery references a stored procedure that is called to get all CD categories contained in the category database table. 

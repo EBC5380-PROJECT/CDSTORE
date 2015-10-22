@@ -1,27 +1,24 @@
 package com.K9.WebServices.OrderProcessService;
  
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 import org.hibernate.HibernateException;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.K9.hibernate.dao.*;
 import com.K9.hibernate.bean.Orders;
 import com.K9.hibernate.bean.OrderItem;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.K9.session.bean.*;
-import java.lang.reflect.*;
+
 
 
 public class OrderProcessService {
 	
-	
+	 @SuppressWarnings("rawtypes")		
 	public String creatAccount(String accountName, String accountInfo) {
 	       
 		{
@@ -49,7 +46,7 @@ public class OrderProcessService {
 				int billingAddressId = addressDAO.addAddressDetails(accntInfo.getBillingAddressStreet(), accntInfo.getBillingAddressCity(), accntInfo.getBillingAddressProvince(), accntInfo.getBillingAddressCountry(), accntInfo.getBillingAddressPostalCode(), accntInfo.getBillingAddressPhone());
 				 
 				 AddressDAO addressDAO1 = new AddressDAO();
-				 int shippingAddressId = addressDAO.addAddressDetails(accntInfo.getShippingAddressStreet(), accntInfo.getShippingAddressCity(), accntInfo.getShippingAddressProvince(), accntInfo.getShippingAddressCountry(), accntInfo.getShippingAddressPostalCode(), accntInfo.getShippingAddressPhone());
+				 int shippingAddressId = addressDAO1.addAddressDetails(accntInfo.getShippingAddressStreet(), accntInfo.getShippingAddressCity(), accntInfo.getShippingAddressProvince(), accntInfo.getShippingAddressCountry(), accntInfo.getShippingAddressPostalCode(), accntInfo.getShippingAddressPhone());
 					
 				 
 				 //Store the account information
@@ -58,7 +55,9 @@ public class OrderProcessService {
 				 return "";
 				 
 			 } else {
-				 return "error Message:  Account name is not unique";
+				 Locale locale = new Locale("en","US");
+				 ResourceBundle errorMessage = ResourceBundle.getBundle("com.K9.MessageBundle",locale);
+				 return errorMessage.getString("USER_NAME_NOT_UNIQUE_ERROR");
 				 
 			 }
 			 
@@ -68,7 +67,6 @@ public class OrderProcessService {
 		   } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
 	            System.out.println("error");
-	            //return e.getMessage();
 	            throw e;
 	        }
 		 
@@ -77,11 +75,10 @@ public class OrderProcessService {
 	}        	
 
 	 
- 	 
+@SuppressWarnings("rawtypes") 	 
 public String getAccount(String accountName, String password) {
     
 	
-	 String acctName;
 	 String accountName1;
 	 String acctInfo;
 	 String  password1;	
@@ -102,8 +99,11 @@ public String getAccount(String accountName, String password) {
 		 
 		 if (validUserCredentials) 
 			acctInfo = accntDAO.getAccountInfo(accountName1);
-		 else
-			 return "Error Message: UserName or password is invalid";
+		 else {
+			 Locale locale = new Locale("en","US");
+			 ResourceBundle errorMessage = ResourceBundle.getBundle("com.K9.MessageBundle",locale);
+			 return errorMessage.getString("LOGIN_ERROR");
+		 }
 		 
 			return acctInfo;
 		 
@@ -112,7 +112,6 @@ public String getAccount(String accountName, String password) {
 	   } catch (HibernateException e) {
            System.out.println(e.getMessage());
            System.out.println("error");
-           //return e.getMessage();
            throw e;
        }
   }        	
@@ -121,7 +120,8 @@ public String getAccount(String accountName, String password) {
 
 public void createOrder(String shoppingCartInfo, String shippingInfo) throws JSONException {
 	
-	
+	ResourceBundle rb = ResourceBundle.getBundle("com.K9.enums"); // prop.properties
+
 	
 	 
 	 try {
@@ -134,7 +134,7 @@ public void createOrder(String shoppingCartInfo, String shippingInfo) throws JSO
 		 shippingInfo1 = gson.fromJson(shippingInfo, ShippingInfo.class);	
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO();
-		 int orderId=ordersDAO.addOrder(shippingInfo1.getAccountId(), "ORDERED", shippingInfo1.getShippingCharge(), shippingInfo1.getTaxes(), shippingInfo1.getTotalCost());
+		 int orderId=ordersDAO.addOrder(shippingInfo1.getAccountId(), rb.getString("ORDERED"), shippingInfo1.getShippingCharge(), shippingInfo1.getTaxes(), shippingInfo1.getTotalCost());
 		 
 			 		
 		JSONArray jsonList = new JSONArray(shoppingCartInfo);		
@@ -163,6 +163,7 @@ public void createOrder(String shoppingCartInfo, String shippingInfo) throws JSO
 
 public void confirmOrder(String purchaseOrder, String shippingInfo, String paymentInfo) {
 	 
+	ResourceBundle rb = ResourceBundle.getBundle("com.K9.enums"); // prop.properties
 	 
 	 try {
 
@@ -181,12 +182,13 @@ public void confirmOrder(String purchaseOrder, String shippingInfo, String payme
 		 authorisedPurchase = true;
 		 
 		 if (authorisedPurchase)
-			 status="PROCESSED";		
+			 status= rb.getString("PROCESSED");		
 		 else 
-			 status="DENIED";	
+			 status=rb.getString("DENIED");	
 		
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 
+		 
 		 ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
 		
 		 

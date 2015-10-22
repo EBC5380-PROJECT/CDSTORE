@@ -1,12 +1,14 @@
+package com.K9.hibernate.bean;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+
 /**
  * CD Bean - contains CD Store CD information
  * @author MBP
  *
  */
-package com.K9.hibernate.bean;
-
-import javax.persistence.*;
-import java.io.Serializable;
 
 
 /**

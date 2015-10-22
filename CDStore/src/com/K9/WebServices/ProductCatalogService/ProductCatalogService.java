@@ -19,7 +19,7 @@ public class ProductCatalogService {
 		   } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
 	            System.out.println("error");
-	            return null;
+	            throw e;
 	        }
 	        	
 	        		    }
@@ -37,7 +37,7 @@ public class ProductCatalogService {
 		    		   } catch (HibernateException e) {
 		    	            System.out.println(e.getMessage());
 		    	            System.out.println("error");
-		    	            return null;
+		    	            throw e;
 		    	        }
 		        
 	 }
@@ -52,7 +52,7 @@ public class ProductCatalogService {
 		   } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
 	            System.out.println("error");
-	            return null;
+	            throw e;
 	        }
     
    }	 
@@ -66,7 +66,7 @@ public class ProductCatalogService {
 		   } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
 	            System.out.println("error");
-	            return null;
+	            throw e;
 	        }
     
   }

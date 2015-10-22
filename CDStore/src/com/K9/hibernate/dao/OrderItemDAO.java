@@ -10,6 +10,14 @@ import org.hibernate.cfg.Configuration;
 import com.K9.hibernate.bean.OrderItem;
 
 
+/**
+ * This Data Access Object class is used to access the cd table in the database.  The hibernate framework is used to manage the interaction with the database.
+
+ * 
+ * @author MBP
+ */
+
+
 public class OrderItemDAO {
 	
  

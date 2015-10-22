@@ -286,7 +286,7 @@ set orders.status = newStatus,
   
     FROM account
   
-    WHERE account.accountId AND accntId)
+    WHERE account.accountId = accntId)
   
 where orders.orderId = orderID;
 

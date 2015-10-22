@@ -1,9 +1,6 @@
 package com.K9.hibernate.dao;
  
 import org.hibernate.HibernateException;
-
-
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,8 +9,16 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import com.K9.hibernate.bean.Account;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
+
+/**
+ * This Data Access Object class is used to access the category table in the database.  The hibernate framework is used to manage the interaction with the database.
+
+ * 
+ * @author MBP
+ */
+
+		
  
 public class AccountDAO {
  
@@ -51,7 +56,7 @@ public class AccountDAO {
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             System.out.println("error");
-            return false;
+            throw e;
         }
  
     }
@@ -90,7 +95,7 @@ public class AccountDAO {
     	 } catch (HibernateException e) {
              System.out.println(e.getMessage());
              System.out.println("error");
-             return false;
+             throw e;
          }
     
     }
@@ -180,7 +185,6 @@ public class AccountDAO {
             
    	 } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error");
             throw e;
         }
    

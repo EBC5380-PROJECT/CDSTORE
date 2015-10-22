@@ -1,15 +1,16 @@
 package com.K9.session.bean;
+
+import java.io.Serializable;
+
 /**
  * Orders Bean - contains order information 
  * @author MBP
  *
  */
-//import javax.persistence.Entity;
-import java.io.Serializable;
-import java.util.Date;
+
  
 public class PaymentInfo implements Serializable{
-	static final long serialVersionUID = 41L;
+	static final long serialVersionUID = 1L;
 	
 	// Getters and Setters are defined below for the values in this bean
 	

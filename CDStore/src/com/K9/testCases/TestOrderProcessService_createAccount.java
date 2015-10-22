@@ -7,6 +7,7 @@ package com.K9.testCases;
  */
 import org.junit.Test;
 
+
 import com.K9.WebServices.OrderProcessService.*;
 import com.K9.session.bean.AccountInfo;
 
@@ -26,7 +27,7 @@ public class TestOrderProcessService_createAccount {
 	
 	AccountInfo accntInfo = new AccountInfo();
 
-	accntInfo.setAccountName("mbp");
+	accntInfo.setAccountName("mbp2");
 	//accntInfo.setbillingAddressId(1);
 	accntInfo.setEmail("mbp@gmail.com");
 	//accntInfo.setShippingAddressId(1);
@@ -56,7 +57,7 @@ public class TestOrderProcessService_createAccount {
 		Gson gson = new Gson();
 		String accountInfo = gson.toJson(accntInfo);
 		
-		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp\"}");
+		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp2\"}");
 		String accountName = jsonObj.toString();
 		
 		

@@ -1,14 +1,13 @@
-/**
- * Account Bean - contains CD Store client account information
- * @author MBP
- *
- */
-
 package com.K9.hibernate.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Account Bean - contains CD Store client account information
+ * @author MBP
+ *
+ */
 
 /**
  * @NamedNativeQuery references a stored procedure that is called to get account info for a specific user in the account database table. 
@@ -48,30 +47,30 @@ public class Account implements Serializable{
 	
 	 
     
-	 public int getAccountId() {
-	        return accountId;
-	    }
-	 
-	    public void setAccountId(int accountId) {
-	        this.accountId = accountId;
-	    }
-	     
-	 public String getAccountName() {
-	        return accountName;
-	    }
-	 
-	    public void setAccountName(String accountName) {
-	        this.accountName = accountName;
-	    }
-	    
-	    
-	    public String getPassword1() {
-	        return password1;
-	    }
-	 
-	    public void setPassword1(String password1) {
-	        this.password1 = password1;
-	    }
+	public int getAccountId() {
+        return accountId;
+    }
+ 
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+     
+    public String getAccountName() {
+        return accountName;
+    }
+ 
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+    
+    
+    public String getPassword1() {
+        return password1;
+    }
+ 
+    public void setPassword1(String password1) {
+        this.password1 = password1;
+    }
 	    
    
     public int getbillingAddressId() {
