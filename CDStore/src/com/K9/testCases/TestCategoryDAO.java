@@ -5,21 +5,14 @@ package com.K9.testCases;
  */
 import org.junit.Test;
 
-
-
-import static org.junit.Assert.assertEquals;
 import org.skyscreamer.jsonassert.*;
 
 import com.K9.hibernate.dao.CategoryDAO;
 import com.K9.util.*;
 import org.json.*;
+import org.json.*;
 import com.google.gson.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import com.google.gson.Gson;
 
 
 public class TestCategoryDAO {
@@ -38,13 +31,24 @@ public class TestCategoryDAO {
       
    
         @Test
-  	   public void testResult() {	  
-
-        	//JSONAssert.assertEquals("ff", categoryString, success);
+  	   public void testResult() throws JSONException {	 
+        	
+        	//creating expected result json string
+    		//JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp3\"}");
+    		//String accountName = jsonObj.toString();
+        	try {
+        	boolean pass = false;
+        
+    		JSONArray jsonObj = new JSONArray("[{\"categoryId\":\''1\'',\"categoryName\":\"COUNTRY\"},{\"categoryId\":\'2\',\"categoryName\":\"ROCK\"},{\"categoryId\":\'3\',\"categoryName\":\"POP\"}]");
+    		String expectedResult = jsonObj.toString();
+        	JSONAssert.assertEquals(expectedResult, categoryString, pass);
         	//assertEquals("{"categoryId":1,"categoryName":"COUNTRY"},{"categoryId":2,"categoryName":"ROCK"},{"categoryId":3,"categoryName":"POP"}",categoryString);
+  	   } catch (Exception e){
+  		   System.out.println("error:" + e);
   	   }
       
-        
+        //String jsonData="[{\"accountName\":\"mbp2\",\"cdid\":\"1\",\"quantity\":\"3\"},{\"accountName\":\"mbp2\",\"cdid\":\"2\",\"quantity\":\"2\"}]";
+        }	  
 
 }
 	  	   

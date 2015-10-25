@@ -1,7 +1,6 @@
 package com.K9.session.bean;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * AccountInfo Bean - contains CD Store client account information
@@ -13,8 +12,7 @@ import java.io.Serializable;
 
 
 @Entity
-public class AccountInfo implements Serializable{
-	static final long serialVersionUID = 1L;
+public class AccountInfo {
 	
 	// Getters and Setters are defined below for the values in this bean
 	
@@ -23,6 +21,9 @@ public class AccountInfo implements Serializable{
 		
 	private String accountName;
 	private String password1;
+	private String salt;
+	private String fName;
+	private String lName;
 	private int billingAddressId;
 	private int shippingAddressId;
 	private String email;
@@ -46,20 +47,44 @@ public class AccountInfo implements Serializable{
 	     
 	 public String getAccountName() {
 	        return accountName;
-	    }
+    }
+ 
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+    
+    
+    public String getPassword1() {
+        return password1;
+    }
+ 
+    public void setPassword1(String password1) {
+        this.password1 = password1;
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+ 
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+    public String getFName() {
+        return fName;
+    }
+ 
+    public void setFName(String fName) {
+        this.fName = fName;
+    }
+	  
+    public String getLName() {
+        return lName;
+    }
+ 
+    public void setLName(String lName) {
+        this.lName = lName;
+    }
 	 
-	    public void setAccountName(String accountName) {
-	        this.accountName = accountName;
-	    }
-	    
-	    
-	    public String getPassword1() {
-	        return password1;
-	    }
-	 
-	    public void setPassword1(String password1) {
-	        this.password1 = password1;
-	    }
 	    
    
     public int getbillingAddressId() {

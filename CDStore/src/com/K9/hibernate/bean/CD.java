@@ -1,7 +1,6 @@
 package com.K9.hibernate.bean;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 /**
@@ -49,9 +48,8 @@ import java.io.Serializable;
 
 
 @Entity
-public class CD implements Serializable{
-	static final long serialVersionUID = 1L;
-	
+public class CD {
+		
 	// Getters and Setters are defined below for the values in this bean
 	
 		// cdId is the primary key for this class and is auto-generated in the database

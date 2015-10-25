@@ -1,6 +1,5 @@
 package com.K9.session.bean;
 
-import java.io.Serializable;
 
 /**
  * Orders Bean - contains order information 
@@ -9,8 +8,7 @@ import java.io.Serializable;
  */
 
  
-public class PaymentInfo implements Serializable{
-	static final long serialVersionUID = 1L;
+public class PaymentInfo {
 	
 	// Getters and Setters are defined below for the values in this bean
 	

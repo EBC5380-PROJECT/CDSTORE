@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Column;
-import java.io.Serializable;
+
 
 /**
  * Address Bean - contains CD Store client address information
@@ -15,9 +15,8 @@ import java.io.Serializable;
 
  
 @Entity
-public class Address implements Serializable{
-	static final long serialVersionUID = 1L;
-	
+public class Address {
+		
 	// Getters and Setters are defined below for the values in this bean
 	
 	// addressId is the primary key for this class and is auto-generated in the database

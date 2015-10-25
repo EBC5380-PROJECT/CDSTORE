@@ -22,7 +22,9 @@ INSERT INTO category(categoryId,categoryName) VALUES (3,'POP');
  * account
  * accountId:		account id
  * accountName:		unique account name
- * password1:		password
+ * password1:		password hash containing salt
+ * fistName:		first name of user
+ * lastName:		last name of user
  * billingAddressId:  	billing address of user
  * shippingAddressId: 	shipping address of user
  * email:		email address of user
@@ -32,7 +34,9 @@ DROP TABLE IF EXISTS account;
 CREATE TABLE account(
  accountId INT UNSIGNED NOT NULL AUTO_INCREMENT,
  accountName VARCHAR(50) NOT NULL,
- password1 VARCHAR(50) NOT NULL,
+ password1 VARCHAR(500) NOT NULL,
+ fName VARCHAR(50) NOT NULL,
+ lName VARCHAR(100) NOT NULL,
  billingAddressId INT UNSIGNED NOT NULL,
  shippingAddressId INT UNSIGNED NOT NULL,
  email VARCHAR (50) NOT NULL,

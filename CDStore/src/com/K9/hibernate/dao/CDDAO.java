@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
+import com.K9.hibernate.bean.CD;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 
@@ -65,7 +67,7 @@ public class CDDAO {
 	             * The listCDs is transformed into a Json string.
 	             */        
 	            String json = new Gson().toJson(listCDs);
-	            System.out.println(json); 
+	           
 	                     
 	            /**
 	             * The transaction is finalised by calling the commit method.
@@ -132,8 +134,8 @@ public class CDDAO {
 		             */
 		        	
 		            String json = new Gson().toJson(listCDs);
-		            System.out.println(json); 
-		                     
+		            
+		            
 		            /**
 		             * The transaction is finalised by calling the commit method.
 		             */ 
@@ -159,10 +161,11 @@ public class CDDAO {
 		 * The getProductInfo method retrieves detailed information for a specific product (productId) in the CD database table.
 		 * 
 		 */
-	 
-	 @SuppressWarnings("rawtypes")
+	
 		public String getProductInfo(int productId) {
 		        try {
+		        	
+		        	CD CDQueryResult = new CD();
 		        	/**
 		        	 * The following steps 1-4 are specific to Hibernate and are used to establish connectivity and a session with the database
 		        	 * 
@@ -188,18 +191,22 @@ public class CDDAO {
 		            		.setParameter("productId", productId);
 		            
 		            /**
-		             * The result of the call to the stored procedure is returned and stored in the listCDs ArrayList.  The call to the stored proc
+		             * The result of the call to the stored procedure is returned and stored in the CD bean.  The call to the stored proc
 		             * requires an input parameter called productId.  This call retrieves the detailed information of a specific CD.
 		             */
 		            
-		            ArrayList listCDs = (ArrayList) query.list();
+		            if (query.list().isEmpty() != true) {
+			            CDQueryResult = (CD) query.uniqueResult();
+			            
+			         } 
 		            
+		            	            
 		            /**
-		             * The listCDs is transformed into a Json string.
+		             * CD is transformed into a Json string.
 		             */
 		            	
-		            String json = new Gson().toJson(listCDs);
-		            System.out.println(json); 
+		            String json = new Gson().toJson(CDQueryResult);
+		            
 		                     
 		            /**
 		             * The transaction is finalised by calling the commit method.

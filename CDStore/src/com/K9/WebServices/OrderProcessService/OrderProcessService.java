@@ -1,6 +1,8 @@
 package com.K9.WebServices.OrderProcessService;
  
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -13,16 +15,17 @@ import com.K9.hibernate.bean.Orders;
 import com.K9.hibernate.bean.OrderItem;
 import com.google.gson.Gson;
 import com.K9.session.bean.*;
+import com.K9.util.PasswordHash;
 
 
 
 public class OrderProcessService {
 	
 	 @SuppressWarnings("rawtypes")		
-	public String creatAccount(String accountName, String accountInfo) {
+	public String creatAccount(String accountName, String accountInfo) throws NoSuchAlgorithmException, InvalidKeySpecException {
 	       
 		{
-		 
+		 //public static final PasswordInfo n = new PasswordInfo();
 		 
 		 try {
 			 	 
@@ -49,8 +52,10 @@ public class OrderProcessService {
 				 int shippingAddressId = addressDAO1.addAddressDetails(accntInfo.getShippingAddressStreet(), accntInfo.getShippingAddressCity(), accntInfo.getShippingAddressProvince(), accntInfo.getShippingAddressCountry(), accntInfo.getShippingAddressPostalCode(), accntInfo.getShippingAddressPhone());
 					
 				 
-				 //Store the account information
-				 accntDAO.addAccountDetails(accntInfo.getAccountName(), accntInfo.getPassword1(), billingAddressId, shippingAddressId, accntInfo.getEmail());
+				 String password = PasswordHash.createHash(accntInfo.getPassword1()); 
+				 
+				 
+				 accntDAO.addAccountDetails(accntInfo.getAccountName(), password, accntInfo.getFName(), accntInfo.getLName(), billingAddressId, shippingAddressId, accntInfo.getEmail());
 				 
 				 return "";
 				 
@@ -60,9 +65,7 @@ public class OrderProcessService {
 				 return errorMessage.getString("USER_NAME_NOT_UNIQUE_ERROR");
 				 
 			 }
-			 
-			
-			 
+			 		 
 			 
 		   } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
@@ -76,7 +79,7 @@ public class OrderProcessService {
 
 	 
 @SuppressWarnings("rawtypes") 	 
-public String getAccount(String accountName, String password) {
+public String getAccount(String accountName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, JSONException {
     
 	
 	 String accountName1;

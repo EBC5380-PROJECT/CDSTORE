@@ -1,6 +1,5 @@
 package com.K9.session.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.K9.hibernate.bean.OrderItem;
@@ -12,8 +11,7 @@ import com.K9.hibernate.bean.OrderItem;
  */
 
 
-public class ShoppingCartInfo implements Serializable{
-	static final long serialVersionUID = 1L;
+public class ShoppingCartInfo {
 	
 	// Getters and Setters are defined below for the values in this bean
 	

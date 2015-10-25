@@ -1,7 +1,6 @@
 package com.K9.hibernate.bean;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Account Bean - contains CD Store client account information
@@ -28,9 +27,8 @@ import java.io.Serializable;
 	})
 
 @Entity
-public class Account implements Serializable{
-	static final long serialVersionUID = 1L;
-	
+public class Account{
+		
 	// Getters and Setters are defined below for the values in this bean
 	
 	// accountId is the primary key for this class and is auto-generated in the database
@@ -41,6 +39,8 @@ public class Account implements Serializable{
 	
 	private String accountName;
 	private String password1;
+	private String fName;
+	private String lName;
 	private int billingAddressId;
 	private int shippingAddressId;
 	private String email;
@@ -71,7 +71,8 @@ public class Account implements Serializable{
     public void setPassword1(String password1) {
         this.password1 = password1;
     }
-	    
+    
+      
    
     public int getbillingAddressId() {
         return billingAddressId;
@@ -99,6 +100,20 @@ public class Account implements Serializable{
         this.email = email;
     }
  
+    public String getFName() {
+        return fName;
+    }
+ 
+    public void setFName(String fName) {
+        this.fName = fName;
+    }
   
+    public String getLName() {
+        return lName;
+    }
+ 
+    public void setLName(String lName) {
+        this.lName = lName;
+    }
       
 }

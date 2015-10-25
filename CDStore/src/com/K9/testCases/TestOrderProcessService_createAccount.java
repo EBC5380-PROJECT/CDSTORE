@@ -17,6 +17,9 @@ import com.K9.session.bean.AccountInfo;
 //import org.skyscreamer.jsonassert.*;
 import com.K9.util.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import org.json.*;
 import com.google.gson.*;
 
@@ -27,11 +30,13 @@ public class TestOrderProcessService_createAccount {
 	
 	AccountInfo accntInfo = new AccountInfo();
 
-	accntInfo.setAccountName("mbp2");
+	accntInfo.setAccountName("mbp");
 	//accntInfo.setbillingAddressId(1);
 	accntInfo.setEmail("mbp@gmail.com");
 	//accntInfo.setShippingAddressId(1);
 	accntInfo.setPassword1("password");
+	accntInfo.setFName("Michele");
+	accntInfo.setLName("Belanger");
 	
 		
 	accntInfo.setShippingAddressStreet("2564 Maple drive");
@@ -57,21 +62,32 @@ public class TestOrderProcessService_createAccount {
 		Gson gson = new Gson();
 		String accountInfo = gson.toJson(accntInfo);
 		
-		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp2\"}");
+		//creating input json string
+		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp\"}");
 		String accountName = jsonObj.toString();
 		
 		
-			    
+		//mbp3	    
 		String result = service.creatAccount(accountName, accountInfo);
-	
 		
-		MessageUtil messageUtil = new MessageUtil(result);
-	    String msg = messageUtil.printMessage("TestCategoryDAO:");
+		if (result.isEmpty()){
+			//success
+		} else {
+			System.out.println(result);
+		}
+	
+	
 		
 	} catch (JSONException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		//throw e;
+	} catch (NoSuchAlgorithmException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (InvalidKeySpecException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 	
 		

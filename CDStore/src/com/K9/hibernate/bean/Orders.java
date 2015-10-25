@@ -1,12 +1,10 @@
 package com.K9.hibernate.bean;
 
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Column;
-import java.io.Serializable;
 
 
 /**
@@ -23,9 +21,8 @@ import java.io.Serializable;
 
 
 @Entity
-public class Orders implements Serializable{
-	static final long serialVersionUID = 1L;
-	
+public class Orders {
+		
 	// Getters and Setters are defined below for the values in this bean
 	
 		// orderId is the primary key for this class and is auto-generated in the database

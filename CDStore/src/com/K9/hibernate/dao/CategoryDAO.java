@@ -61,7 +61,6 @@ public class CategoryDAO {
              * The catelogyList is transformed into a Json string.
              */
         	String json = new Gson().toJson(categoryList);
-        	System.out.println(json); 
             
         	/**
              * The transaction is finalised by calling the commit method.

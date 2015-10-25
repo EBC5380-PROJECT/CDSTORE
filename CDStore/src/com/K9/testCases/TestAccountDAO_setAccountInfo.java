@@ -36,8 +36,13 @@ public class TestAccountDAO_setAccountInfo {
 		private int shippingAddressId=2;
 
 		private String email="mbp@gmail.com";
-        
-        boolean success = accountDAO.addAccountDetails(accountName, password1, billingAddressId, shippingAddressId, email);
+		
+		private String fName = "Michele";
+		
+		private String lName = "Belanger";
+		
+		        
+        boolean success = accountDAO.addAccountDetails(accountName, password1, fName, lName, billingAddressId, shippingAddressId, email);
         
          MessageUtil messageUtil = new MessageUtil("success");
         String msg = messageUtil.printMessage("TestCategoryDAO:");

@@ -52,9 +52,6 @@ public class OrdersDAO {
             
             
             transaction.commit();
-            System.out.println("\n\n Details Added \n");
-            
-              
             
             return ordersInfo.getOrderId();
  
@@ -88,17 +85,14 @@ public class OrdersDAO {
              * The following method session.getNamedQuery calls a stored procedure which is defined in the CD bean.
              */   
             
-            System.out.println(orderStatus);
-            System.out.println(orderId);
-            
+                        
             Query query = session.getNamedQuery("callUpdateStatusProcedure")
             		 .setParameter("orderId", orderId)
             		 .setParameter("orderStatus", orderStatus)
             		 .setParameter("accountId", accountId);
             
-            int result = query.executeUpdate();
-            System.out.println("result"+result);
-            
+            query.executeUpdate();
+                      
                      
             /**
              * The transaction is finalised by calling the commit method.

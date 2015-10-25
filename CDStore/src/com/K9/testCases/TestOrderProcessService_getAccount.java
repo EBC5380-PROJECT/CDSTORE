@@ -27,6 +27,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
@@ -59,11 +62,8 @@ public class TestOrderProcessService_getAccount {
 		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp\"}");
 		accountName = jsonObj.toString();
 		
-		JSONObject jsonObj2 = new JSONObject("{\"password\":\"password\"}");
+		JSONObject jsonObj2 = new JSONObject("{\"password\":\"password1\"}");
 		password1 = jsonObj2.toString();
-		
-		//Gson gson = new Gson();
-		//json = gson.toJson(accnt);
 		
 			
 		String result = service.getAccount(accountName, password1);
@@ -74,6 +74,12 @@ public class TestOrderProcessService_getAccount {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		//throw e;
+	} catch (NoSuchAlgorithmException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (InvalidKeySpecException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 	 
 	 

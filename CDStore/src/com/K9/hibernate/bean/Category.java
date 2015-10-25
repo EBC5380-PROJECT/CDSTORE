@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Column;
-import java.io.Serializable;
+
 
 /**
  * This bean class represents the different CD categories for the online store.
@@ -27,9 +27,8 @@ import java.io.Serializable;
 		)
 
 @Entity
-public class Category implements Serializable{
+public class Category {
 	
-	static final long serialVersionUID = 1L;
 	
 	// Getters and Setters are defined below for the values in this bean
 	

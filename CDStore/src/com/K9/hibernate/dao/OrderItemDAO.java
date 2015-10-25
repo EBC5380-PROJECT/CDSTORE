@@ -49,9 +49,6 @@ public class OrderItemDAO {
             
             
             transaction.commit();
-            System.out.println("\n\n Details Added \n");
-            
-              
             
             return orderItem.getOrderitemId();
  

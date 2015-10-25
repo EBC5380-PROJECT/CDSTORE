@@ -48,9 +48,7 @@ public class AddressDAO {
             
             
             transaction.commit();
-            System.out.println("\n\n Details Added \n");
-            
-              
+             
             
             return addressInfo.getAddressId();
  
