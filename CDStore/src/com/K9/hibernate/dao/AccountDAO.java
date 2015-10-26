@@ -34,7 +34,7 @@ public class AccountDAO {
         try {
             
         	
-        	/*// 1. configuring hibernate
+        	// 1. configuring hibernate
         	Configuration  configuration = new Configuration ().configure();
         	
             // 2. create sessionfactory
@@ -43,9 +43,9 @@ public class AccountDAO {
  
             // 3. Get Session object
             Session session = sessionFactory.openSession();
- */
+ 
         	
-        	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         	 
         	 
         	//Starting Transaction
@@ -115,7 +115,7 @@ public class AccountDAO {
     }
 	
 
-    public boolean areCredentialsValid(String userName, String password1) throws NoSuchAlgorithmException, InvalidKeySpecException, JSONException {
+    public boolean areCredentialsValid(String userName, String password1) throws NoSuchAlgorithmException, InvalidKeySpecException {
         try {
         	
         	boolean validPassword = false;

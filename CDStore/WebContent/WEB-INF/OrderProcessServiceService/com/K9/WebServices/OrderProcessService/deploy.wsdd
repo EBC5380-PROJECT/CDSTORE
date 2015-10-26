@@ -5,7 +5,7 @@
   <service name="OrderProcessService" provider="java:RPC" style="wrapped" use="literal">
       <parameter name="wsdlTargetNamespace" value="http://OrderProcessService.WebServices.K9.com"/>
       <parameter name="wsdlServiceElement" value="OrderProcessServiceService"/>
-      <parameter name="schemaQualified" value="http://json.org,http://OrderProcessService.WebServices.K9.com"/>
+      <parameter name="schemaQualified" value="http://OrderProcessService.WebServices.K9.com"/>
       <parameter name="wsdlServicePort" value="OrderProcessService"/>
       <parameter name="className" value="com.K9.WebServices.OrderProcessService.OrderProcessService"/>
       <parameter name="wsdlPortType" value="OrderProcessService"/>
@@ -13,7 +13,6 @@
       <operation xmlns:operNS="http://OrderProcessService.WebServices.K9.com" name="createOrder" qname="operNS:createOrder" soapAction="">
         <parameter xmlns:pns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:shoppingCartInfo" type="tns:string"/>
         <parameter xmlns:pns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:shippingInfo" type="tns:string"/>
-        <fault xmlns:fns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://json.org" name="JSONException" qname="fns:fault" class="org.json.JSONException" type="tns:JSONException"/>
       </operation>
       <operation xmlns:operNS="http://OrderProcessService.WebServices.K9.com" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="creatAccount" qname="operNS:creatAccount" returnQName="retNS:creatAccountReturn" returnType="rtns:string" soapAction="">
         <parameter xmlns:pns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:accountName" type="tns:string"/>
@@ -22,7 +21,6 @@
       <operation xmlns:operNS="http://OrderProcessService.WebServices.K9.com" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getAccount" qname="operNS:getAccount" returnQName="retNS:getAccountReturn" returnType="rtns:string" soapAction="">
         <parameter xmlns:pns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:accountName" type="tns:string"/>
         <parameter xmlns:pns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
-        <fault xmlns:fns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://json.org" name="JSONException" qname="fns:fault" class="org.json.JSONException" type="tns:JSONException"/>
       </operation>
       <operation xmlns:operNS="http://OrderProcessService.WebServices.K9.com" name="confirmOrder" qname="operNS:confirmOrder" soapAction="">
         <parameter xmlns:pns="http://OrderProcessService.WebServices.K9.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:purchaseOrder" type="tns:string"/>
@@ -31,14 +29,5 @@
       </operation>
       <parameter name="allowedMethods" value="confirmOrder getAccount creatAccount createOrder"/>
 
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;createOrderResponse" type="java:com.K9.WebServices.OrderProcessService.CreateOrderResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;getAccount" type="java:com.K9.WebServices.OrderProcessService.GetAccount" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;getAccountResponse" type="java:com.K9.WebServices.OrderProcessService.GetAccountResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;creatAccountResponse" type="java:com.K9.WebServices.OrderProcessService.CreatAccountResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://json.org" qname="ns:JSONException" type="java:org.json.JSONException" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;confirmOrderResponse" type="java:com.K9.WebServices.OrderProcessService.ConfirmOrderResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;confirmOrder" type="java:com.K9.WebServices.OrderProcessService.ConfirmOrder" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;creatAccount" type="java:com.K9.WebServices.OrderProcessService.CreatAccount" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
-      <typeMapping xmlns:ns="http://OrderProcessService.WebServices.K9.com" qname="ns:&gt;createOrder" type="java:com.K9.WebServices.OrderProcessService.CreateOrder" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
   </service>
 </deployment>

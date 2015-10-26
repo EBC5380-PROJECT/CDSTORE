@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://OrderProcessService.WebServices.K9.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://OrderProcessService.WebServices.K9.com" xmlns:intf="http://OrderProcessService.WebServices.K9.com" xmlns:tns1="http://json.org" xmlns:tns2="http://lang.java" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://OrderProcessService.WebServices.K9.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://OrderProcessService.WebServices.K9.com" xmlns:intf="http://OrderProcessService.WebServices.K9.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://OrderProcessService.WebServices.K9.com" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://json.org"/>
-   <import namespace="http://lang.java"/>
    <element name="createOrder">
     <complexType>
      <sequence>
@@ -17,7 +15,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="createOrderResponse">
     <complexType/>
    </element>
-   <element name="fault" type="tns1:JSONException"/>
    <element name="creatAccount">
     <complexType>
      <sequence>
@@ -61,14 +58,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType/>
    </element>
   </schema>
-  <schema elementFormDefault="qualified" targetNamespace="http://json.org" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://lang.java"/>
-   <complexType name="JSONException">
-    <sequence>
-     <element name="cause" nillable="true" type="xsd:anyType"/>
-    </sequence>
-   </complexType>
-  </schema>
  </wsdl:types>
 
    <wsdl:message name="createOrderRequest">
@@ -111,14 +100,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="JSONException">
-
-      <wsdl:part element="impl:fault" name="fault">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="confirmOrderResponse">
 
       <wsdl:part element="impl:confirmOrderResponse" name="parameters">
@@ -155,10 +136,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
        </wsdl:output>
 
-         <wsdl:fault message="impl:JSONException" name="JSONException">
-
-       </wsdl:fault>
-
       </wsdl:operation>
 
       <wsdl:operation name="creatAccount">
@@ -182,10 +159,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          <wsdl:output message="impl:getAccountResponse" name="getAccountResponse">
 
        </wsdl:output>
-
-         <wsdl:fault message="impl:JSONException" name="JSONException">
-
-       </wsdl:fault>
 
       </wsdl:operation>
 
@@ -223,12 +196,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
          </wsdl:output>
 
-         <wsdl:fault name="JSONException">
-
-            <wsdlsoap:fault name="JSONException" use="literal"/>
-
-         </wsdl:fault>
-
       </wsdl:operation>
 
       <wsdl:operation name="creatAccount">
@@ -264,12 +231,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
             <wsdlsoap:body use="literal"/>
 
          </wsdl:output>
-
-         <wsdl:fault name="JSONException">
-
-            <wsdlsoap:fault name="JSONException" use="literal"/>
-
-         </wsdl:fault>
 
       </wsdl:operation>
 

@@ -15,6 +15,7 @@ import com.K9.hibernate.bean.Orders;
 import com.K9.hibernate.bean.OrderItem;
 import com.google.gson.Gson;
 import com.K9.session.bean.*;
+import com.K9.util.CreateOrderFactory;
 import com.K9.util.PasswordHash;
 
 
@@ -79,7 +80,7 @@ public class OrderProcessService {
 
 	 
 @SuppressWarnings("rawtypes") 	 
-public String getAccount(String accountName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, JSONException {
+public String getAccount(String accountName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
     
 	
 	 String accountName1;
@@ -88,14 +89,15 @@ public String getAccount(String accountName, String password) throws NoSuchAlgor
 	 
 	 try {
 			 
-		 	 
+		
 		 
          Map jsonJavaRootObject = new Gson().fromJson(accountName, Map.class);
          accountName1=(String) jsonJavaRootObject.get("accountName");
          
          Map jsonJavaRootObject2 = new Gson().fromJson(password, Map.class);
          password1=(String) jsonJavaRootObject2.get("password");
-		 
+         
+          
 		 AccountDAO accntDAO = new AccountDAO();
 		 //determine whether the user credentials are valid
 		 boolean validUserCredentials = accntDAO.areCredentialsValid(accountName1, password1);
@@ -110,20 +112,32 @@ public String getAccount(String accountName, String password) throws NoSuchAlgor
 		 
 			return acctInfo;
 		 
-		   
-		 
-	   } catch (HibernateException e) {
+	 	} catch (HibernateException e) {
            System.out.println(e.getMessage());
            System.out.println("error");
            throw e;
+       } 
+       
        }
-  }        	
+     	
 
 
 
-public void createOrder(String shoppingCartInfo, String shippingInfo) throws JSONException {
+public void createOrder(String shoppingCartInfo, String shippingInfo)  {
 	
-	ResourceBundle rb = ResourceBundle.getBundle("com.K9.enums"); // prop.properties
+	
+	try {
+		
+		CreateOrderFactory orderFactory = new CreateOrderFactory();
+		orderFactory.createOrder(shippingInfo, shoppingCartInfo);
+		
+	} catch (Exception e) {
+		throw e;
+	}
+	
+	
+	
+	/*ResourceBundle rb = ResourceBundle.getBundle("com.K9.enums"); // prop.properties
 
 	
 	 
@@ -149,16 +163,12 @@ public void createOrder(String shoppingCartInfo, String shippingInfo) throws JSO
 			  orderItem.addOrderItem(orderId, shippingInfo2.getCdId(), shippingInfo2.getQuantity()); 	 
 			}
 		
-		 } catch (JSONException f) {
-	   	  	System.out.println(f.getMessage());
-	        System.out.println("error");
-	   	  throw f;
 	     } catch (Exception f) {
 	    	 System.out.println(f.getMessage());
 		     System.out.println("error");
 		   	  throw f;
 	     }
-     
+     */
 	
  }        	
 
