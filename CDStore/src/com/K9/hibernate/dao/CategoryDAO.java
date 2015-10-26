@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
+import com.K9.util.HibernateUtil;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 
@@ -33,19 +35,19 @@ public class CategoryDAO {
         	 * The following steps 1-4 are specific to Hibernate and are used to establish connectivity and a session with the database
         	 * 
         	 */
-            // 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure();
         	
-            // 2. create sessionfactory
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
- 
-            // 3. Get Session object
+        	//Configure Hibernate and get the sessionFactory
+        	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        	
+        	
+        	// Get Session object
             Session session = sessionFactory.openSession();
  
-            // 4. Starting Transaction
-            Transaction transaction = session.beginTransaction();
-            
+                  	
+        	//Starting Transaction
+        	 Transaction transaction=session.beginTransaction();
+ 
+                        
             /**
              * The following method session.getNamedQuery calls a stored procedure which is defined in the Category bean.
              */

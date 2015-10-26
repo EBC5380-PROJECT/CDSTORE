@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.json.JSONException;
 
 import com.K9.hibernate.bean.Account;
+import com.K9.util.HibernateUtil;
 import com.K9.util.PasswordHash;
 import com.google.gson.Gson;
 
@@ -31,7 +32,9 @@ public class AccountDAO {
  
     public boolean addAccountDetails(String accountName, String password1,String fName, String lName, int billingAddressId, int shippingAddressId, String email) {
         try {
-            // 1. configuring hibernate
+            
+        	
+        	/*// 1. configuring hibernate
         	Configuration  configuration = new Configuration ().configure();
         	
             // 2. create sessionfactory
@@ -40,10 +43,15 @@ public class AccountDAO {
  
             // 3. Get Session object
             Session session = sessionFactory.openSession();
- 
-            // 4. Starting Transaction
-            Transaction transaction = session.beginTransaction();
-            
+ */
+        	
+        	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        	 
+        	 
+        	//Starting Transaction
+        	 Transaction transaction=session.beginTransaction();
+     
+                        
             Account accountInfo = new Account();
             
             accountInfo.setAccountName(accountName);
@@ -55,6 +63,7 @@ public class AccountDAO {
             accountInfo.setEmail(email);
             
             session.save(accountInfo);
+
             transaction.commit();
                        
             return true;

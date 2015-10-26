@@ -1,5 +1,7 @@
 package com.K9.session.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -12,7 +14,9 @@ import javax.persistence.*;
 
 
 @Entity
-public class AccountInfo {
+public class AccountInfo implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	// Getters and Setters are defined below for the values in this bean
 	

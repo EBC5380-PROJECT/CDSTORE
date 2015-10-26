@@ -1,6 +1,6 @@
 package com.K9.session.bean;
 
-
+import java.io.Serializable;
 
 /**
  * Orders Bean - contains order information 
@@ -9,8 +9,9 @@ package com.K9.session.bean;
  */
  
 
-public class ShippingInfo {
+public class ShippingInfo implements Serializable{
 		
+	private static final long serialVersionUID = 1L;
 	// Getters and Setters are defined below for the values in this bean
 	
 	// This bean is not persisted in the database.  Simply used to transfer information from the View to the Model.

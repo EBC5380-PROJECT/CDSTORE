@@ -1,6 +1,10 @@
 package com.K9.hibernate.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
+
+
 
 /**
  * Account Bean - contains CD Store client account information
@@ -27,8 +31,9 @@ import javax.persistence.*;
 	})
 
 @Entity
-public class Account{
-		
+public class Account implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	// Getters and Setters are defined below for the values in this bean
 	
 	// accountId is the primary key for this class and is auto-generated in the database

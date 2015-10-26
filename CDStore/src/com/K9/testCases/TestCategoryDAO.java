@@ -36,7 +36,7 @@ public class TestCategoryDAO {
         	//creating expected result json string
     		//JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp3\"}");
     		//String accountName = jsonObj.toString();
-        	try {
+       /* 	try {
         	boolean pass = false;
         
     		JSONArray jsonObj = new JSONArray("[{\"categoryId\":\''1\'',\"categoryName\":\"COUNTRY\"},{\"categoryId\":\'2\',\"categoryName\":\"ROCK\"},{\"categoryId\":\'3\',\"categoryName\":\"POP\"}]");
@@ -46,7 +46,7 @@ public class TestCategoryDAO {
   	   } catch (Exception e){
   		   System.out.println("error:" + e);
   	   }
-      
+      */
         //String jsonData="[{\"accountName\":\"mbp2\",\"cdid\":\"1\",\"quantity\":\"3\"},{\"accountName\":\"mbp2\",\"cdid\":\"2\",\"quantity\":\"2\"}]";
         }	  
 

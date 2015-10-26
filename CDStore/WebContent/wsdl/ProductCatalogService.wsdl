@@ -18,26 +18,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="getProductList">
-    <complexType/>
-   </element>
-   <element name="getProductListResponse">
-    <complexType>
-     <sequence>
-      <element name="getProductListReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getCategoryList">
-    <complexType/>
-   </element>
-   <element name="getCategoryListResponse">
-    <complexType>
-     <sequence>
-      <element name="getCategoryListReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="getProductListByCategory">
     <complexType>
      <sequence>
@@ -52,20 +32,48 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="getCategoryList">
+    <complexType/>
+   </element>
+   <element name="getCategoryListResponse">
+    <complexType>
+     <sequence>
+      <element name="getCategoryListReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductList">
+    <complexType/>
+   </element>
+   <element name="getProductListResponse">
+    <complexType>
+     <sequence>
+      <element name="getProductListReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="getProductListRequest">
+   <wsdl:message name="getProductListByCategoryRequest">
 
-      <wsdl:part element="impl:getProductList" name="parameters">
+      <wsdl:part element="impl:getProductListByCategory" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="getCategoryListRequest">
+   <wsdl:message name="getProductListResponse">
 
-      <wsdl:part element="impl:getCategoryList" name="parameters">
+      <wsdl:part element="impl:getProductListResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductListRequest">
+
+      <wsdl:part element="impl:getProductList" name="parameters">
 
       </wsdl:part>
 
@@ -79,25 +87,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getProductListByCategoryRequest">
+   <wsdl:message name="getCategoryListRequest">
 
-      <wsdl:part element="impl:getProductListByCategory" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getCategoryListResponse">
-
-      <wsdl:part element="impl:getCategoryListResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getProductListResponse">
-
-      <wsdl:part element="impl:getProductListResponse" name="parameters">
+      <wsdl:part element="impl:getCategoryList" name="parameters">
 
       </wsdl:part>
 
@@ -119,6 +111,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getCategoryListResponse">
+
+      <wsdl:part element="impl:getCategoryListResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:portType name="ProductCatalogService">
 
       <wsdl:operation name="getProductInfo">
@@ -133,13 +133,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getProductList">
+      <wsdl:operation name="getProductListByCategory">
 
-         <wsdl:input message="impl:getProductListRequest" name="getProductListRequest">
+         <wsdl:input message="impl:getProductListByCategoryRequest" name="getProductListByCategoryRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getProductListResponse" name="getProductListResponse">
+         <wsdl:output message="impl:getProductListByCategoryResponse" name="getProductListByCategoryResponse">
 
        </wsdl:output>
 
@@ -157,13 +157,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getProductListByCategory">
+      <wsdl:operation name="getProductList">
 
-         <wsdl:input message="impl:getProductListByCategoryRequest" name="getProductListByCategoryRequest">
+         <wsdl:input message="impl:getProductListRequest" name="getProductListRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getProductListByCategoryResponse" name="getProductListByCategoryResponse">
+         <wsdl:output message="impl:getProductListResponse" name="getProductListResponse">
 
        </wsdl:output>
 
@@ -193,17 +193,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getProductList">
+      <wsdl:operation name="getProductListByCategory">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getProductListRequest">
+         <wsdl:input name="getProductListByCategoryRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getProductListResponse">
+         <wsdl:output name="getProductListByCategoryResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -229,17 +229,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getProductListByCategory">
+      <wsdl:operation name="getProductList">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getProductListByCategoryRequest">
+         <wsdl:input name="getProductListRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getProductListByCategoryResponse">
+         <wsdl:output name="getProductListResponse">
 
             <wsdlsoap:body use="literal"/>
 

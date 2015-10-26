@@ -3,6 +3,9 @@ package com.K9.hibernate.bean;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 
 
@@ -13,7 +16,9 @@ import javax.persistence.Column;
  */
  
 @Entity
-public class OrderItem {
+public class OrderItem implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 		
 	// Getters and Setters are defined below for the values in this bean
 	
