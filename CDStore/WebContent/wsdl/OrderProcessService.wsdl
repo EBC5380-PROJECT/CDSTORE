@@ -6,20 +6,16 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <schema elementFormDefault="qualified" targetNamespace="http://OrderProcessService.WebServices.K9.com" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://json.org"/>
    <import namespace="http://lang.java"/>
-   <element name="getAccount">
+   <element name="createOrder">
     <complexType>
      <sequence>
-      <element name="accountName" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
+      <element name="shoppingCartInfo" type="xsd:string"/>
+      <element name="shippingInfo" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="getAccountResponse">
-    <complexType>
-     <sequence>
-      <element name="getAccountReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
+   <element name="createOrderResponse">
+    <complexType/>
    </element>
    <element name="fault" type="tns1:JSONException"/>
    <element name="creatAccount">
@@ -37,16 +33,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createOrder">
+   <element name="getAccount">
     <complexType>
      <sequence>
-      <element name="shoppingCartInfo" type="xsd:string"/>
-      <element name="shippingInfo" type="xsd:string"/>
+      <element name="accountName" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="createOrderResponse">
-    <complexType/>
+   <element name="getAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="getAccountReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
    </element>
    <element name="confirmOrder">
     <complexType>
@@ -145,13 +145,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="OrderProcessService">
 
-      <wsdl:operation name="getAccount">
+      <wsdl:operation name="createOrder">
 
-         <wsdl:input message="impl:getAccountRequest" name="getAccountRequest">
+         <wsdl:input message="impl:createOrderRequest" name="createOrderRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getAccountResponse" name="getAccountResponse">
+         <wsdl:output message="impl:createOrderResponse" name="createOrderResponse">
 
        </wsdl:output>
 
@@ -173,13 +173,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createOrder">
+      <wsdl:operation name="getAccount">
 
-         <wsdl:input message="impl:createOrderRequest" name="createOrderRequest">
+         <wsdl:input message="impl:getAccountRequest" name="getAccountRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:createOrderResponse" name="createOrderResponse">
+         <wsdl:output message="impl:getAccountResponse" name="getAccountResponse">
 
        </wsdl:output>
 
@@ -207,17 +207,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="getAccount">
+      <wsdl:operation name="createOrder">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getAccountRequest">
+         <wsdl:input name="createOrderRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getAccountResponse">
+         <wsdl:output name="createOrderResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -249,17 +249,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createOrder">
+      <wsdl:operation name="getAccount">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="createOrderRequest">
+         <wsdl:input name="getAccountRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="createOrderResponse">
+         <wsdl:output name="getAccountResponse">
 
             <wsdlsoap:body use="literal"/>
 

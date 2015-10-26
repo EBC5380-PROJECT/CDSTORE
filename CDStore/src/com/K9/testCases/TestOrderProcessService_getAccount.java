@@ -62,7 +62,7 @@ public class TestOrderProcessService_getAccount {
 		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp\"}");
 		accountName = jsonObj.toString();
 		
-		JSONObject jsonObj2 = new JSONObject("{\"password\":\"password1\"}");
+		JSONObject jsonObj2 = new JSONObject("{\"password\":\"password\"}");
 		password1 = jsonObj2.toString();
 		
 			
