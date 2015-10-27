@@ -37,13 +37,13 @@ public class CategoryDAO {
         	 */
         	
         	//Configure Hibernate and get the sessionFactory
-        	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        	
+        	//SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        	Session session = HibernateUtil.getSessionFactory().openSession();
         	
         	// Get Session object
-            Session session = sessionFactory.openSession();
+            //Session session = sessionFactory.openSession();
  
-                  	
+            
         	//Starting Transaction
         	 Transaction transaction=session.beginTransaction();
  

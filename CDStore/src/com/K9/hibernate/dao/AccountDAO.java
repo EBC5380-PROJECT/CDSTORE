@@ -121,7 +121,7 @@ public class AccountDAO {
         	boolean validPassword = false;
         	
             // 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure();
+        	Configuration  configuration = new Configuration ().configure("hibernate.cfg.xml");
         	
             // 2. create sessionfactory
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
@@ -167,7 +167,7 @@ public class AccountDAO {
    		 	String json = "";
    		 	
             // 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure();
+        	Configuration  configuration = new Configuration ().configure("hibernate.cfg.xml");
         	
             // 2. create sessionfactory
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());

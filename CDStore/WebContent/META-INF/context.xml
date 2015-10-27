@@ -26,9 +26,4 @@
           password="password"
           driverClassName="com.mysql.jdbc.Driver"
           url="jdbc:mysql://localhost:3306/mysql"/>
-          
-          
-           <ResourceLink name="jdbc/cd_db"
-            global="jdbc/cd_db"
-            type="javax.sql.DataSource" />
  </Context>
