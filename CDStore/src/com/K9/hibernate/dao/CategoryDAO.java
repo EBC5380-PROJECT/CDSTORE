@@ -4,11 +4,7 @@ package com.K9.hibernate.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-
 import com.K9.util.HibernateUtil;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -23,27 +19,26 @@ import java.util.ArrayList;
 
 public class CategoryDAO {
 	
+	
 	/**
 	 * The getCategoryList method retrieves all categories from the category database table.
 	 * 
+	 * @return
 	 */
 	
 	@SuppressWarnings("rawtypes")
 	public String getCategoryList() {
         try {
         	/**
-        	 * The following steps 1-4 are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
         	 * 
         	 */
         	
-        	//Configure Hibernate and get the sessionFactory
-        	//SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        	//Configure Hibernate and get the sessionFactory and get a session object
+        	
         	Session session = HibernateUtil.getSessionFactory().openSession();
         	
-        	// Get Session object
-            //Session session = sessionFactory.openSession();
- 
-            
+        	            
         	//Starting Transaction
         	 Transaction transaction=session.beginTransaction();
  
@@ -76,7 +71,7 @@ public class CategoryDAO {
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error");
+            e.printStackTrace();
             throw e;
         }
  

@@ -16,6 +16,11 @@ import javax.persistence.Column;
  *
  */
  
+/**
+ * @NamedNativeQuery references a stored procedure that is called to update the order status in the order table once the credit information is validated. 
+ * Hibernate annotation is used to call the stored procedure sp_updateOrderStatus.
+ *
+ */
 @NamedNativeQuery(
 		name = "callUpdateStatusProcedure",
 		query = "CALL sp_updateOrderStatus(:orderId, :orderStatus, :accountId)",
@@ -28,7 +33,7 @@ public class Orders implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 		
-	// Getters and Setters are defined below for the values in this bean
+		// Getters and Setters are defined below for the values in this bean
 	
 		// orderId is the primary key for this class and is auto-generated in the database
 		// Hibernate annotations used to define the primary key for table Orders.

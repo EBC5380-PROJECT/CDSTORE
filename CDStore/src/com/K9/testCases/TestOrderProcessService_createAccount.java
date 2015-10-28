@@ -15,10 +15,6 @@ import com.K9.session.bean.AccountInfo;
 
 
 //import org.skyscreamer.jsonassert.*;
-import com.K9.util.*;
-
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 
 import org.json.*;
 import com.google.gson.*;
@@ -82,13 +78,7 @@ public class TestOrderProcessService_createAccount {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		//throw e;
-	} catch (NoSuchAlgorithmException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InvalidKeySpecException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	} 
 	
 		
 	

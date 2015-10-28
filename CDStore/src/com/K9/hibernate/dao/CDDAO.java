@@ -3,12 +3,9 @@ package com.K9.hibernate.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-
 import com.K9.hibernate.bean.CD;
+import com.K9.util.HibernateUtil;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 
@@ -23,34 +20,28 @@ import java.util.ArrayList;
 
 public class CDDAO {
 	
-	
 	/**
 	 * The getProductList method retrieves all products from the CD database table.
 	 * 
+	 * @return
 	 */
-    
-	
 	 @SuppressWarnings("rawtypes")
 	public String getProductList() {
 	        try {
 	        	/**
-	        	 * The following steps 1-4 are specific to Hibernate and are used to establish connectivity and a session with the database
+	        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
 	        	 * 
 	        	 */
-	            
-	            // 1. configuring hibernate
-	        	Configuration  configuration = new Configuration ().configure();
 	        	
-	            // 2. create sessionfactory
-	            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-	            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-	 
-	            // 3. Get Session object
-	            Session session = sessionFactory.openSession();
-	 
-	            // 4. Starting Transaction
-	            Transaction transaction = session.beginTransaction();
-	            
+	        	//Configure Hibernate and get the sessionFactory and get a session object
+	        	
+	        	Session session = HibernateUtil.getSessionFactory().openSession();
+	        	
+	        	            
+	        	//Starting Transaction
+	        	 Transaction transaction=session.beginTransaction();
+	        	 
+	        	 
 	            
 	            /**
 	             * The following method session.getNamedQuery calls a stored procedure which is defined in the CD bean.
@@ -83,37 +74,35 @@ public class CDDAO {
 	 
 	        } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
-	            System.out.println("error");
+	            e.printStackTrace();
 	            throw e;
 	        }
 	 
 	    }
 	 
-	 	/**
-		 * The getProductListByCategory method retrieves all products from the CD database table that are of the categoryId type.
-		 * 
-		 */
+	 	
 	 
+	 /**
+	  * The getProductListByCategory method retrieves all products from the CD database table that are of the categoryId type.
+	  * 
+	  * @param categoryId
+	  * @return
+	  */
 	 @SuppressWarnings("rawtypes")
 		public String getProductListByCategory(int categoryId) {
 		        try {
 		        	/**
-		        	 * The following steps 1-4 are specific to Hibernate and are used to establish connectivity and a session with the database
+		        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
 		        	 * 
 		        	 */
-		            // 1. configuring hibernate
-		        	Configuration  configuration = new Configuration ().configure();
 		        	
-		            // 2. create sessionfactory
-		            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-		            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-		 
-		            // 3. Get Session object
-		            Session session = sessionFactory.openSession();
-		 
-		            // 4. Starting Transaction
-		            Transaction transaction = session.beginTransaction();
-		            
+		        	//Configure Hibernate and get the sessionFactory and get a session object
+		        	
+		        	Session session = HibernateUtil.getSessionFactory().openSession();
+		        	
+		        	            
+		        	//Starting Transaction
+		        	 Transaction transaction=session.beginTransaction();           
 		            		            
 		            /**
 		             * The following method session.getNamedQuery calls a stored procedure which is defined in the CD bean.
@@ -150,39 +139,38 @@ public class CDDAO {
 		 
 		        } catch (HibernateException e) {
 		            System.out.println(e.getMessage());
-		            System.out.println("error");
+		            e.printStackTrace();
 		            throw e;
 		        }
 		 
 		    }
 	 
-	 
-	 	/**
-		 * The getProductInfo method retrieves detailed information for a specific product (productId) in the CD database table.
-		 * 
-		 */
 	
+	 /**
+	  * 
+	  *  The getProductInfo method retrieves detailed information for a specific product (productId) in the CD database table.
+	  * 
+	  * @param productId
+	  * @return
+	  */
 		public String getProductInfo(int productId) {
 		        try {
 		        	
 		        	CD CDQueryResult = new CD();
+		        	
 		        	/**
-		        	 * The following steps 1-4 are specific to Hibernate and are used to establish connectivity and a session with the database
+		        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
 		        	 * 
 		        	 */
-		            // 1. configuring hibernate
-		        	Configuration  configuration = new Configuration ().configure();
 		        	
-		            // 2. create sessionfactory
-		            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-		            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-		 
-		            // 3. Get Session object
-		            Session session = sessionFactory.openSession();
-		 
-		            // 4. Starting Transaction
-		            Transaction transaction = session.beginTransaction();
-		            
+		        	//Configure Hibernate and get the sessionFactory and get a session object
+		        	
+		        	Session session = HibernateUtil.getSessionFactory().openSession();
+		        	
+		        	            
+		        	//Starting Transaction
+		        	 Transaction transaction=session.beginTransaction();
+		        	 
 		            /**
 		             * The following method session.getNamedQuery calls a stored procedure which is defined in the CD bean.
 		             */
@@ -224,7 +212,7 @@ public class CDDAO {
 		 
 		        } catch (HibernateException e) {
 		            System.out.println(e.getMessage());
-		            System.out.println("error");
+		            e.printStackTrace();
 		            throw e;
 		        }
 		 

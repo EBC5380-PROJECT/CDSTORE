@@ -3,24 +3,18 @@ package com.K9.hibernate.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.json.JSONException;
-
 import com.K9.hibernate.bean.Account;
 import com.K9.util.HibernateUtil;
 import com.K9.util.PasswordHash;
+import com.K9.util.ResponseFactory;
 import com.google.gson.Gson;
-
-
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 
 /**
- * This Data Access Object class is used to access the category table in the database.  The hibernate framework is used to manage the interaction with the database.
+ * This Data Access Object class is used to access the account table in the database.  The hibernate framework is used to manage the interaction with the database.
 
  * 
  * @author MBP
@@ -30,27 +24,35 @@ import java.util.ArrayList;
  
 public class AccountDAO {
  
+	/**
+	 * 
+	 * The addAccountDetails method is used to insert a new account into the database.
+	 * 
+	 * @param accountName
+	 * @param password1
+	 * @param fName
+	 * @param lName
+	 * @param billingAddressId
+	 * @param shippingAddressId
+	 * @param email
+	 * @return
+	 */
     public boolean addAccountDetails(String accountName, String password1,String fName, String lName, int billingAddressId, int shippingAddressId, String email) {
         try {
-            
+        	/**
+        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 * 
+        	 */
         	
-        	// 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure();
+        	//Configure Hibernate and get the sessionFactory and get a session object
         	
-            // 2. create sessionfactory
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
- 
-            // 3. Get Session object
-            Session session = sessionFactory.openSession();
- 
+        	Session session = HibernateUtil.getSessionFactory().openSession();
         	
-        	//Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        	 
-        	 
+        	            
         	//Starting Transaction
-        	 Transaction transaction=session.beginTransaction();
-     
+        	 Transaction transaction=session.beginTransaction();    
+        	 
+        	//Instantiating a new Account class and setting the values to be stored in the account table.
                         
             Account accountInfo = new Account();
             
@@ -62,123 +64,149 @@ public class AccountDAO {
             accountInfo.setShippingAddressId(shippingAddressId);
             accountInfo.setEmail(email);
             
+           // Saving the account information in the account table.
             session.save(accountInfo);
+            
+            //Committing the transaction in the database.
 
             transaction.commit();
+            
                        
             return true;
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error");
-            throw e;
+            e.printStackTrace();
+            return false;
         }
  
     }
     
+    
+    /**
+     * The isUserNameUnique method serves to check whether a userName is unique or not.  Upon registering, the user must provide a userName that is unique.
+     * 
+     * @param userName
+     * @return
+     */
 	@SuppressWarnings("rawtypes")
     public boolean isUserNameUnique(String userName) {
     	 try {
-             // 1. configuring hibernate
-         	Configuration  configuration = new Configuration ().configure();
+    		 /**
+         	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+         	 * 
+         	 */
          	
-             // 2. create sessionfactory
-             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-             SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-  
-             // 3. Get Session object
-             Session session = sessionFactory.openSession();
-  
-             // 4. Starting Transaction
-             Transaction transaction = session.beginTransaction();
-             
+         	//Configure Hibernate and get the sessionFactory and get a session object
+         	
+         	Session session = HibernateUtil.getSessionFactory().openSession();
+         	
+         	            
+         	//Starting Transaction
+         	 Transaction transaction=session.beginTransaction();
+         	 
+         	 //Query is executed in order to verify whether the userName is unique or not.
              Query query = session.getNamedQuery("callRetrieveAccountInfo")
             		 .setParameter("userName", userName);
              
              ArrayList accountList = (ArrayList) query.list();
              
+             //commit transaction
              transaction.commit();
                          		 
              if (accountList.isEmpty())
-             	return true;
+             	return true; //userName is unique
              else
-            	 return false;
+            	 return false;  //userName was found in the database therefore it is not unique
              
              
              
     	 } catch (HibernateException e) {
              System.out.println(e.getMessage());
-             System.out.println("error");
-             throw e;
+             e.printStackTrace();
+             return false;
          }
     
     }
 	
 
-    public boolean areCredentialsValid(String userName, String password1) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	/**
+	 * 
+	 * The areCredentialsValid method is called in order to validate if the user credentials the user provided while logging in are valid.
+	 * 
+	 * 
+	 * @param userName
+	 * @param password1
+	 * @return
+	 * 
+	 */
+    public boolean areCredentialsValid(String userName, String password1) {
         try {
-        	
+        	//Define local variable
         	boolean validPassword = false;
         	
-            // 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure("hibernate.cfg.xml");
+        	/**
+        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 * 
+        	 */
         	
-            // 2. create sessionfactory
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
- 
-            // 3. Get Session object
-            Session session = sessionFactory.openSession();
- 
-            // 4. Starting Transaction
-            Transaction transaction = session.beginTransaction();
-            
+        	//Configure Hibernate and get the sessionFactory and get a session object
+        	
+        	Session session = HibernateUtil.getSessionFactory().openSession();
+        	
+        	            
+        	//Starting Transaction
+        	 Transaction transaction=session.beginTransaction();
+        	 
+        	//Query executed in order to retrieve the account information for the userName provided by user
             Query query = session.getNamedQuery("callRetrieveAccountInfo")
               		 .setParameter("userName", userName);
           
+            //if the userName was found in the database, the following is performed
             if (query.list().isEmpty() != true) {
-	            Account accountQueryResult = (Account) query.uniqueResult();
+	            Account accountQueryResult = (Account) query.uniqueResult();  //Map the information returned in the query to an instance of Account
 	            
-	            //validate password
+	            //validate password by sending the password provided by the user in clear text and the password hash returned in the query.
 	            validPassword = PasswordHash.validatePassword(password1, accountQueryResult.getPassword1());
 	            
-	           
-	            System.out.println("password: "+ accountQueryResult.getPassword1());
             } 
-            
+           //commit the transaction
             transaction.commit();
             
                              	
             if (validPassword)
-            	return true;
+            	return true;  //return true if the credentials pass validation
             else
-           	 return false;
+           	 return false;  // return false if the credentials fail validation
             
-        } catch (HibernateException e) {
-            System.out.println(e.getMessage());
-            System.out.println("error");
-            throw e;
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        	System.out.println(e.getMessage());
+        	e.printStackTrace();
+            return false;
         }
  
     }
  
     public String getAccountInfo(String userName) {
    	 try {
+   		 //Declare local variable
    		 	String json = "";
    		 	
-            // 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure("hibernate.cfg.xml");
+   		 /**
+        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 * 
+        	 */
         	
-            // 2. create sessionfactory
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
- 
-            // 3. Get Session object
-            Session session = sessionFactory.openSession();
- 
-            // 4. Starting Transaction
-            Transaction transaction = session.beginTransaction();
-            
+        	//Configure Hibernate and get the sessionFactory and get a session object
+        	
+        	Session session = HibernateUtil.getSessionFactory().openSession();
+        	
+        	            
+        	//Starting Transaction
+        	 Transaction transaction=session.beginTransaction();
+        	 
+        	 
+        	 
             /**
              * The following method session.getNamedQuery calls a stored procedure which is defined in the Account bean.
              */
@@ -196,7 +224,6 @@ public class AccountDAO {
 	             * The accountQueryResult is transformed into a Json string.
 	             */
 	        	json = new Gson().toJson(accountQueryResult);
-	        	System.out.println(json); 
 	            
             } 
             
@@ -213,7 +240,8 @@ public class AccountDAO {
             
    	 } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            throw e;
+            e.printStackTrace();
+            return ResponseFactory.create(1000);  //returning system level error alert
         }
    
    }

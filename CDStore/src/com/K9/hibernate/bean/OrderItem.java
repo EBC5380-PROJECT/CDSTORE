@@ -20,7 +20,7 @@ public class OrderItem implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 		
-	// Getters and Setters are defined below for the values in this bean
+		// Getters and Setters are defined below for the values in this bean
 	
 		// orderitemId is the primary key for this class and is auto-generated in the database
 		// Hibernate annotations used to define the primary key for table Orderitem.

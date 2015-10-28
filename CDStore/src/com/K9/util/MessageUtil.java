@@ -5,6 +5,8 @@
 package com.K9.util;
 
 /**
+ * Util used to print out messages
+ * 
  * @author MBP
  *
  */

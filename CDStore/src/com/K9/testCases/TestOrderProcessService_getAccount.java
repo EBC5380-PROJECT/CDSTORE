@@ -47,16 +47,7 @@ public class TestOrderProcessService_getAccount {
 	
 	OrderProcessService service = new OrderProcessService();
 	
-	/*Account accnt = new Account();
-	accnt.setAccountId(1);
-	accnt.setAccountName("mbp");
-	accnt.setbillingAddressId(1);
-	accnt.setEmail("mbp@gmail.com");
-	accnt.setShippingAddressId(1);
-	accnt.setPassword1("password");*/
-	
-	
-	 
+		 
 	 try {
 		 
 		JSONObject jsonObj = new JSONObject("{\"accountName\":\"mbp\"}");
@@ -74,12 +65,6 @@ public class TestOrderProcessService_getAccount {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		//throw e;
-	} catch (NoSuchAlgorithmException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InvalidKeySpecException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
 	}
 	 
 	 

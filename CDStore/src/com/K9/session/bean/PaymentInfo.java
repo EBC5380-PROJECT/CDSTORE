@@ -3,7 +3,7 @@ package com.K9.session.bean;
 import java.io.Serializable;
 
 /**
- * Orders Bean - contains order information 
+ * PaymentInfo Bean - contains payment information 
  * @author MBP
  *
  */

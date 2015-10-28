@@ -45,4 +45,11 @@
 		<nature>com.boothen.jsonedit.validation.nature</nature>
 		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>lib</name>
+			<type>2</type>
+			<location>C:/Users/Michele/Documents/CSI5380/code/CDSTORE/CDStore/WebContent/WEB-INF/lib</location>
+		</link>
+	</linkedResources>
 </projectDescription>

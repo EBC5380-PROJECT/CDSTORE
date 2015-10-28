@@ -3,15 +3,13 @@ package com.K9.hibernate.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import com.K9.hibernate.bean.Orders;
+import com.K9.util.HibernateUtil;
 
 
 /**
- * This Data Access Object class is used to access the cd table in the database.  The hibernate framework is used to manage the interaction with the database.
+ * This Data Access Object class is used to access the Order table in the database.  The hibernate framework is used to manage the interaction with the database.
 
  * 
  * @author MBP
@@ -21,23 +19,34 @@ import com.K9.hibernate.bean.Orders;
 
 public class OrdersDAO {
 	
- 
+ /**
+  * 
+  * The addOrder method is called when an order is to be saved in the database.
+  * 
+  * @param accountId
+  * @param status
+  * @param shippingCharge
+  * @param taxes
+  * @param totalCost
+  * @return
+  */
     public int addOrder(int accountId, String status, Double shippingCharge, Double taxes, Double totalCost) {
         try {
-            // 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure();
+        	/**
+        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 * 
+        	 */
         	
-            // 2. create sessionfactory
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
- 
-            // 3. Get Session object
-            Session session = sessionFactory.openSession();
- 
-            // 4. Starting Transaction
-            Transaction transaction = session.beginTransaction();
+        	//Configure Hibernate and get the sessionFactory and get a session object
+        	
+        	Session session = HibernateUtil.getSessionFactory().openSession();
+        	
+        	            
+        	//Starting Transaction
+        	 Transaction transaction=session.beginTransaction();           
             
-            
+        	 
+        	//An instance of the Orders bean is created in order to store the data in the database.
             Orders ordersInfo = new Orders();
         	
                      
@@ -47,42 +56,52 @@ public class OrdersDAO {
             ordersInfo.setTaxes(taxes);
             ordersInfo.setTotalCost(totalCost);
            
-            
+            //saving the ordersInfo to the database
             session.save(ordersInfo);
             
-            
+            //committing the transaction
             transaction.commit();
             
+            //the unique Id of the row just created in the Order table is returned to the calling class
             return ordersInfo.getOrderId();
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error");
+            e.printStackTrace();
             throw e;
         }
  
     }
     
+    
+    /**
+     * 
+     * The updateOrderStatus method is used to update the order status in the order table after the credit card information is validated.
+     * 
+     * 
+     * @param orderId
+     * @param orderStatus
+     * @param accountId
+     */
     public void updateOrderStatus(int orderId, String orderStatus, int accountId) {
         try {
-            // 1. configuring hibernate
-        	Configuration  configuration = new Configuration ().configure();
+        	/**
+        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 * 
+        	 */
         	
-            // 2. create sessionfactory
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
- 
-            // 3. Get Session object
-            Session session = sessionFactory.openSession();
- 
-            // 4. Starting Transaction
-            Transaction transaction = session.beginTransaction();
-            
+        	//Configure Hibernate and get the sessionFactory and get a session object
+        	
+        	Session session = HibernateUtil.getSessionFactory().openSession();
+        	
+        	            
+        	//Starting Transaction
+        	 Transaction transaction=session.beginTransaction();           
             
             //Orders ordersStatus = new Orders();
         	
             /**
-             * The following method session.getNamedQuery calls a stored procedure which is defined in the CD bean.
+             * The following method session.getNamedQuery calls a stored procedure which is defined in the Orders bean.
              */   
             
                         
@@ -91,21 +110,18 @@ public class OrdersDAO {
             		 .setParameter("orderStatus", orderStatus)
             		 .setParameter("accountId", accountId);
             
+            //the update query is executed
             query.executeUpdate();
                       
                      
-            /**
-             * The transaction is finalised by calling the commit method.
-             */  
-
-            transaction.commit();
+           
+             //The transaction is finalised by calling the commit method.
+             transaction.commit();
             
-                        
-              
- 
+             
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
-            System.out.println("error");
+            e.printStackTrace();
             throw e;
         }
  
