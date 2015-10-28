@@ -9,7 +9,7 @@ package com.K9.WebServices.ProductCatalogService;
 
 public interface ProductCatalogService extends java.rmi.Remote {
     public java.lang.String getProductInfo(int productId) throws java.rmi.RemoteException;
-    public java.lang.String getProductListByCategory(int categoryId) throws java.rmi.RemoteException;
     public java.lang.String getProductList() throws java.rmi.RemoteException;
     public java.lang.String getCategoryList() throws java.rmi.RemoteException;
+    public java.lang.String getProductListByCategory(int categoryId) throws java.rmi.RemoteException;
 }

@@ -4,17 +4,6 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://OrderProcessService.WebServices.K9.com" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="createOrder">
-    <complexType>
-     <sequence>
-      <element name="shoppingCartInfo" type="xsd:string"/>
-      <element name="shippingInfo" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createOrderResponse">
-    <complexType/>
-   </element>
    <element name="creatAccount">
     <complexType>
      <sequence>
@@ -27,6 +16,37 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="creatAccountReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrder">
+    <complexType>
+     <sequence>
+      <element name="shoppingCartInfo" type="xsd:string"/>
+      <element name="shippingInfo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrderResponse">
+    <complexType>
+     <sequence>
+      <element name="createOrderReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="confirmOrder">
+    <complexType>
+     <sequence>
+      <element name="purchaseOrder" type="xsd:string"/>
+      <element name="shippingInfo" type="xsd:string"/>
+      <element name="paymentInfo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="confirmOrderResponse">
+    <complexType>
+     <sequence>
+      <element name="confirmOrderReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
@@ -44,18 +64,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
       <element name="getAccountReturn" type="xsd:string"/>
      </sequence>
     </complexType>
-   </element>
-   <element name="confirmOrder">
-    <complexType>
-     <sequence>
-      <element name="purchaseOrder" type="xsd:string"/>
-      <element name="shippingInfo" type="xsd:string"/>
-      <element name="paymentInfo" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="confirmOrderResponse">
-    <complexType/>
    </element>
   </schema>
  </wsdl:types>
@@ -126,18 +134,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="OrderProcessService">
 
-      <wsdl:operation name="createOrder">
-
-         <wsdl:input message="impl:createOrderRequest" name="createOrderRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createOrderResponse" name="createOrderResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="creatAccount">
 
          <wsdl:input message="impl:creatAccountRequest" name="creatAccountRequest">
@@ -150,13 +146,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getAccount">
+      <wsdl:operation name="createOrder">
 
-         <wsdl:input message="impl:getAccountRequest" name="getAccountRequest">
+         <wsdl:input message="impl:createOrderRequest" name="createOrderRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getAccountResponse" name="getAccountResponse">
+         <wsdl:output message="impl:createOrderResponse" name="createOrderResponse">
 
        </wsdl:output>
 
@@ -174,29 +170,23 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getAccount">
+
+         <wsdl:input message="impl:getAccountRequest" name="getAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAccountResponse" name="getAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="OrderProcessServiceSoapBinding" type="impl:OrderProcessService">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-
-      <wsdl:operation name="createOrder">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createOrderRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createOrderResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="creatAccount">
 
@@ -216,17 +206,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getAccount">
+      <wsdl:operation name="createOrder">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getAccountRequest">
+         <wsdl:input name="createOrderRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getAccountResponse">
+         <wsdl:output name="createOrderResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -245,6 +235,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="confirmOrderResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAccountResponse">
 
             <wsdlsoap:body use="literal"/>
 

@@ -44,28 +44,28 @@ public class OrderProcessServiceProxy implements com.K9.WebServices.OrderProcess
     return orderProcessService;
   }
   
-  public void createOrder(java.lang.String shoppingCartInfo, java.lang.String shippingInfo) throws java.rmi.RemoteException{
-    if (orderProcessService == null)
-      _initOrderProcessServiceProxy();
-    orderProcessService.createOrder(shoppingCartInfo, shippingInfo);
-  }
-  
   public java.lang.String creatAccount(java.lang.String accountName, java.lang.String accountInfo) throws java.rmi.RemoteException{
     if (orderProcessService == null)
       _initOrderProcessServiceProxy();
     return orderProcessService.creatAccount(accountName, accountInfo);
   }
   
+  public java.lang.String createOrder(java.lang.String shoppingCartInfo, java.lang.String shippingInfo) throws java.rmi.RemoteException{
+    if (orderProcessService == null)
+      _initOrderProcessServiceProxy();
+    return orderProcessService.createOrder(shoppingCartInfo, shippingInfo);
+  }
+  
+  public java.lang.String confirmOrder(java.lang.String purchaseOrder, java.lang.String shippingInfo, java.lang.String paymentInfo) throws java.rmi.RemoteException{
+    if (orderProcessService == null)
+      _initOrderProcessServiceProxy();
+    return orderProcessService.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
+  }
+  
   public java.lang.String getAccount(java.lang.String accountName, java.lang.String password) throws java.rmi.RemoteException{
     if (orderProcessService == null)
       _initOrderProcessServiceProxy();
     return orderProcessService.getAccount(accountName, password);
-  }
-  
-  public void confirmOrder(java.lang.String purchaseOrder, java.lang.String shippingInfo, java.lang.String paymentInfo) throws java.rmi.RemoteException{
-    if (orderProcessService == null)
-      _initOrderProcessServiceProxy();
-    orderProcessService.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
   }
   
   
