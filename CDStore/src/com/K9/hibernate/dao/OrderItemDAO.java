@@ -29,11 +29,9 @@ public class OrderItemDAO {
   */
     public int addOrderItem(int orderId, int cdid, int quantity) {
         try {
-        	/**
-        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
-        	 * 
-        	 */
         	
+        	//The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	         	
         	//Configure Hibernate and get the sessionFactory and get a session object
         	
         	Session session = HibernateUtil.getSessionFactory().openSession();

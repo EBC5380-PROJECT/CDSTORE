@@ -10,8 +10,8 @@ import com.K9.hibernate.dao.*;
 import com.K9.hibernate.bean.Orders;
 import com.google.gson.Gson;
 import com.K9.session.bean.*;
+import com.K9.util.AvailableCreditValidationUtil;
 import com.K9.util.CreateOrderFactory;
-import com.K9.util.CreditValidationUtil;
 import com.K9.util.PasswordHash;
 import com.K9.util.ResponseFactory;
 
@@ -208,28 +208,33 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
 	ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.enums"); 
 	 
 	 try {
-
-		 //call to Authorisation Service.  Returns whether the credit card purchase is authorised or not.
-		 //TODO -  Talk with Kaifan
-		 
+	 
 		 //declaring local variables
-		 boolean authorisedPurchase;
+		// boolean authorisedPurchase;
 		 String status="";
 		
 		 //Converting Json string received by calling servlet into an instance of Orders class.
 		 Gson gson = new Gson();
-         Orders orders = gson.fromJson(purchaseOrder, Orders.class);	
+         Orders orders = gson.fromJson(purchaseOrder, Orders.class);        
+         
+         double x = orders.getAccountId()/5;
+         int t = (int)(orders.getAccountId()/5);
+         
+         if (orders.getAccountId()/5 == (int)(orders.getAccountId()/5)) 
+        	 status=rb.getString("DENIED");	 
+         else
+        	 status= rb.getString("PROCESSED");	
 		 
          //Simulate a call to a credit card validation service in order to validate the credit information and available credit
          
-		 authorisedPurchase = CreditValidationUtil.isCreditAvailable(orders.getTotalCost());
+		 //authorisedPurchase = AvailableCreditValidationUtil.isCreditAvailable(orders.getTotalCost());
 		 
 		 //Setting the order status depending on the result received from the simulated credit card validation service
-		 if (authorisedPurchase)
+		/* if (authorisedPurchase)
 			 status= rb.getString("PROCESSED");		//successful credit validation
 		 else 
 			 status=rb.getString("DENIED");	 		//credit validation failed
-		
+		*/
 		 //Create a new instance of OrdersDAO in order to update the order information with the order status, shipping address and update the timestamp (automatically done when row is updated).
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 		 

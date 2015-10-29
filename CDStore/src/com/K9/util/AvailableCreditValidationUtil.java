@@ -1,7 +1,7 @@
 package com.K9.util;
 
 
-public class CreditValidationUtil {
+public class AvailableCreditValidationUtil {
 	
 	/**
 	 * The isCreditAvailable method is just a simulation of a service checking to see if there is enough available credit to cover the order amount.
@@ -29,3 +29,19 @@ public class CreditValidationUtil {
 	    }
 	  }
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -34,7 +34,7 @@ public class TestProductCatalogService {
 	
 	
 	ProductCatalogService service = new ProductCatalogService();
-		 
+	/*	 
 		String j = service.getCategoryList();
 		MessageUtil messageUtil = new MessageUtil(j);
         String msg = messageUtil.printMessage("getCategoryList:");
@@ -53,7 +53,7 @@ public class TestProductCatalogService {
         String msg3 = messageUtil3.printMessage("getProductListByCategory:");
         
         
-        
+        */
 	  
 	   
         @Test

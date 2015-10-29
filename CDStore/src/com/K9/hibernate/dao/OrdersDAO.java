@@ -32,11 +32,9 @@ public class OrdersDAO {
   */
     public int addOrder(int accountId, String status, Double shippingCharge, Double taxes, Double totalCost) {
         try {
-        	/**
-        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
-        	 * 
-        	 */
         	
+        	 //The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 
         	//Configure Hibernate and get the sessionFactory and get a session object
         	
         	Session session = HibernateUtil.getSessionFactory().openSession();
@@ -85,11 +83,9 @@ public class OrdersDAO {
      */
     public void updateOrderStatus(int orderId, String orderStatus, int accountId) {
         try {
-        	/**
-        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
-        	 * 
-        	 */
         	
+        	//The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	         	
         	//Configure Hibernate and get the sessionFactory and get a session object
         	
         	Session session = HibernateUtil.getSessionFactory().openSession();
@@ -100,10 +96,9 @@ public class OrdersDAO {
             
             //Orders ordersStatus = new Orders();
         	
-            /**
-             * The following method session.getNamedQuery calls a stored procedure which is defined in the Orders bean.
-             */   
             
+            //The following method session.getNamedQuery calls a stored procedure which is defined in the Orders bean.
+             
                         
             Query query = session.getNamedQuery("callUpdateStatusProcedure")
             		 .setParameter("orderId", orderId)

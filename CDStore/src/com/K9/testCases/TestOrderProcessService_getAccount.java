@@ -59,8 +59,8 @@ public class TestOrderProcessService_getAccount {
 			
 		String result = service.getAccount(accountName, password1);
 		
-		MessageUtil messageUtil = new MessageUtil(result);
-	    String msg = messageUtil.printMessage("TestCategoryDAO:");
+		//MessageUtil messageUtil = new MessageUtil(result);
+	   // String msg = messageUtil.printMessage("TestCategoryDAO:");
 	} catch (JSONException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

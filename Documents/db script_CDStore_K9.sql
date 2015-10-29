@@ -3,17 +3,19 @@
  * Category
  * categoryId:		category id
  * categoryName:	name of category
+ * imageName		name of image for a specific category
  */
 
 DROP TABLE IF EXISTS category;
 CREATE TABLE category (
  categoryId INT UNSIGNED NOT NULL AUTO_INCREMENT,
  categoryName VARCHAR(40) NOT NULL,
+ imageName VARCHAR(60) NOT NULL,
  PRIMARY KEY(categoryId)
 );
-INSERT INTO category(categoryId,categoryName) VALUES (1,'COUNTRY');
-INSERT INTO category(categoryId,categoryName) VALUES (2,'ROCK');
-INSERT INTO category(categoryId,categoryName) VALUES (3,'POP');
+INSERT INTO category(categoryId,categoryName,imageName) VALUES (1,'COUNTRY','countryImage.jpg');
+INSERT INTO category(categoryId,categoryName,imageName) VALUES (2,'ROCK', 'rockImage.jpg');
+INSERT INTO category(categoryId,categoryName,imageName) VALUES (3,'POP','popImage.jpg');
 
 
 
@@ -128,7 +130,7 @@ CREATE TABLE CD (
 # Dumping data for table 'CD'
 #
 
-INSERT INTO CD (cdid, title, artistName, description, categoryId,price, image) VALUES (1, 'Johnny Cash Greatest Hits', 'Johnny Cash', "Greatest Hits, Vol. 1 is a compilation album by country singer Johnny Cash, released in 1967 on Columbia Records. It is notable in that it marks the first appearance of 'Jackson', Cash's famous duet with his future wife, June Carter",1,16.25,'image1');
+INSERT INTO CD (cdid, title, artistName, description, categoryId,price, image) VALUES (1, 'Johnny Cash Greatest Hits', 'Johnny Cash', "Greatest Hits, Vol. 1 is a compilation album by country singer Johnny Cash, released in 1967 on Columbia Records. It is notable in that it marks the first appearance of Jackson, Cash's famous duet with his future wife, June Carter",1,16.25,'image1');
 INSERT INTO CD (cdid, title, artistName, description, categoryId,price, image) VALUES (2,'16 Biggest Hits', 'Various artists', "16 Biggest Hits is a compilation album by country singer Willie Nelson. It was released on July 14, 1998",1,15.99,'image2');
 INSERT INTO CD (cdid, title, artistName, description, categoryId,price, image) VALUES (3,'Patsy Cline Im So Lonely','Patsy Cline',"", 1,15.99,"image3");
 INSERT INTO CD (cdid, title, artistName, description, categoryId,price, image) VALUES (4, 'Tragically Hip Fully Completely', 'Tragically Hip', "", 2,15.99,"image4");

@@ -5,8 +5,7 @@ package com.K9.testCases;
  */
 import org.junit.Test;
 
-
-
+import com.K9.WebServices.ProductCatalogService.ProductCatalogService;
 import com.K9.hibernate.dao.CDDAO;
 
 import static org.junit.Assert.assertEquals;
@@ -24,14 +23,20 @@ import com.google.gson.Gson;
 
 public class TestCDDAO_getDetailedProductInfo {
 	   
-		CDDAO cdDAO=new CDDAO();
-        
-		int productId = 2;
-        String cdString = cdDAO.getProductInfo(productId);
-        MessageUtil messageUtil = new MessageUtil(cdString);
-        String msg = messageUtil.printMessage("TestCDDAO_getDetailedProductInfo:");
-       //  [{"cdId":2,"title":"16 Biggest Hits","artistName":"artist","description":"16 Biggest Hits is a compilation album by country singer Willie Nelson. It was released on July 14, 1998","price":1299.0,"image":"image2"}]
-
+		{
+      	  try {
+      		CDDAO cdDAO=new CDDAO();
+            
+    		int productId = 2;
+            String cdString = cdDAO.getProductInfo(productId);
+      	    MessageUtil messageUtil = new MessageUtil();
+      	    messageUtil.printMessage("TestCDDAO_getDetailedProductInfo Test Result: " + cdString);
+              
+      	  } catch (Exception e) {
+      		  
+      	  }
+              
+      	}    
          
         @Test
   	   public void testResult() {	  

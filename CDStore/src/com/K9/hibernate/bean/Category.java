@@ -44,6 +44,7 @@ public class Category implements Serializable{
     private int categoryId;
 	
 	private String categoryName;
+	private String imageName;
      
     public int getCategoryId() {
         return categoryId;
@@ -61,6 +62,13 @@ public class Category implements Serializable{
         this.categoryName = categoryName;
     }
  
+    public String getImageName() {
+        return imageName;
+    }
+ 
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
   
  
 }

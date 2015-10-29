@@ -61,8 +61,8 @@ public class TestAddressDAO_setAddressInfo {
 		       
         addressDAO.addAddressDetails(street, city, province, country, postalCode, phone);
         
-         MessageUtil messageUtil = new MessageUtil("success");
-        String msg = messageUtil.printMessage("TestCategoryDAO:");
+       //  MessageUtil messageUtil = new MessageUtil("success");
+      //  String msg = messageUtil.printMessage("TestCategoryDAO:");
         
       //  String categoryArray = new Gson.fromJson([{"categoryId":1,"categoryName":"COUNTRY"},{"categoryId":2,"categoryName":"ROCK"},{"categoryId":3,"categoryName":"POP"}]);
 	  } catch (Exception e) {
