@@ -217,10 +217,11 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
 		 Gson gson = new Gson();
          Orders orders = gson.fromJson(purchaseOrder, Orders.class);        
          
-         double x = orders.getAccountId()/5;
-         int t = (int)(orders.getAccountId()/5);
+         double x = orders.getOrderId()%5;
+         double x1 = 4 % 5;
+         int x2 = 5 % 5;
          
-         if (orders.getAccountId()/5 == (int)(orders.getAccountId()/5)) 
+         if ((orders.getOrderId() % 5) == 0) 
         	 status=rb.getString("DENIED");	 
          else
         	 status= rb.getString("PROCESSED");	

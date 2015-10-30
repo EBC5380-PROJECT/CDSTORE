@@ -32,7 +32,7 @@ public class TestOrderProcessService_confirmOrder {
 	shippingInfo.setTotalCost(20.36);
 	
 	Orders order = new Orders();
-	order.setOrderId(1);
+	order.setOrderId(5);
 	order.setAccountId(1);
 	order.setShippingCharge(5.2);
 	order.setStatus("ORDERED");
