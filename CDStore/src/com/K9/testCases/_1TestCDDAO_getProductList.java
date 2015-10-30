@@ -8,7 +8,7 @@ import com.K9.hibernate.dao.CDDAO;
 import com.K9.util.*;
 
 
-public class TestCDDAO_getProductList {
+public class _1TestCDDAO_getProductList {
 	   
 	{
       	  try {
@@ -27,8 +27,6 @@ public class TestCDDAO_getProductList {
         @Test
   	   public void testResult() {	  
 
-        	//JSONAssert.assertEquals("ff", categoryString, success);
-        	//assertEquals("ff", cdString);
   	   }
       
         

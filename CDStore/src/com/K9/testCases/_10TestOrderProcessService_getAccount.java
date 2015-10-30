@@ -1,11 +1,5 @@
 package com.K9.testCases;
 
-import com.K9.WebServices.ProductCatalogService.*;
-
-
-import com.K9.hibernate.dao.CDDAO;
-import com.K9.hibernate.bean.Account;
-
 
 /**
  * This is a unit test that tests the CategoryDAO class.
@@ -13,37 +7,15 @@ import com.K9.hibernate.bean.Account;
 import org.junit.Test;
 
 import com.K9.WebServices.OrderProcessService.*;
+import com.K9.util.MessageUtil;
 
-import static org.junit.Assert.assertEquals;
-import org.skyscreamer.jsonassert.*;
-import com.K9.util.*;
-
-import org.hibernate.HibernateException;
 import org.json.*;
-import com.google.gson.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
-
-
-
-import com.google.gson.Gson;
-
-public class TestOrderProcessService_getAccount {
+public class _10TestOrderProcessService_getAccount {
 	{
 	
 	String accountName;
-	String accountInfo = "";
 	String password1;
-	String json = "";
 	
 	OrderProcessService service = new OrderProcessService();
 	
@@ -59,8 +31,9 @@ public class TestOrderProcessService_getAccount {
 			
 		String result = service.getAccount(accountName, password1);
 		
-		//MessageUtil messageUtil = new MessageUtil(result);
-	   // String msg = messageUtil.printMessage("TestCategoryDAO:");
+		MessageUtil messageUtil = new MessageUtil();
+	    messageUtil.printMessage("OrderProcessService_getAccount: " + result);
+	    
 	} catch (JSONException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

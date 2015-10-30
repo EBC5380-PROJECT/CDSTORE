@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.K9.hibernate.bean.CD;
 import com.K9.util.HibernateUtil;
+import com.K9.util.ResponseFactory;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class CDDAO {
 	 @SuppressWarnings("rawtypes")
 	public String getProductList() {
 	        try {
+	  
 	        	// The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
 	        		        	
 	        	//Configure Hibernate and get the sessionFactory and get a session object
@@ -71,7 +73,8 @@ public class CDDAO {
 	        } catch (HibernateException e) {
 	            System.out.println(e.getMessage());
 	            e.printStackTrace();
-	            throw e;
+	            return ResponseFactory.create(1000);  //returning system level error alert
+	            
 	        }
 	 
 	    }
@@ -133,7 +136,7 @@ public class CDDAO {
 		        } catch (HibernateException e) {
 		            System.out.println(e.getMessage());
 		            e.printStackTrace();
-		            throw e;
+		            return ResponseFactory.create(1000);  //returning system level error alert
 		        }
 		 
 		    }
@@ -204,7 +207,7 @@ public class CDDAO {
 		        } catch (HibernateException e) {
 		            System.out.println(e.getMessage());
 		            e.printStackTrace();
-		            throw e;
+		            return ResponseFactory.create(1000);  //returning system level error alert
 		        }
 		 
 		    }

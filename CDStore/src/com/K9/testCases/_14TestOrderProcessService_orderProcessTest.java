@@ -2,27 +2,52 @@ package com.K9.testCases;
 
 
 
+import org.json.JSONObject;
 /**
  * This is a unit test that tests the CategoryDAO class.
  */
 import org.junit.Test;
 
-
 import com.K9.WebServices.OrderProcessService.*;
+import com.K9.hibernate.bean.Orders;
 import com.K9.session.bean.AccountInfo;
+import com.K9.session.bean.PaymentInfo;
+import com.K9.session.bean.ShippingInfo;
+import com.K9.util.MessageUtil;
 
 //import static org.junit.Assert.assertEquals;
 
 
 //import org.skyscreamer.jsonassert.*;
 
-import org.json.*;
 import com.google.gson.*;
 
-public class TestOrderProcessService_createAccount {
+public class _14TestOrderProcessService_orderProcessTest {
 	{
 	
 	OrderProcessService service = new OrderProcessService();
+	
+	ShippingInfo shippingInfo = new ShippingInfo();
+
+	shippingInfo.setAccountId(1);
+	shippingInfo.setShippingCharge(7.25);
+	shippingInfo.setTaxes(5.25);
+	shippingInfo.setTotalCost(60.32);
+	
+	
+	Orders order = new Orders();
+	order.setOrderId(1);
+	order.setAccountId(1);
+	order.setShippingCharge(7.25);
+	order.setStatus("ORDERED");
+	order.setTaxes(5.25);
+	order.setTotalCost(60.32);
+	
+	PaymentInfo paymentInfo = new PaymentInfo();
+	paymentInfo.setCreditCardHolderName("MBP");
+	paymentInfo.setCreditCardNumber("4538452625981254");
+	paymentInfo.setCcv(235);
+	paymentInfo.setExpiryDate("12/2018");
 	
 	AccountInfo accntInfo = new AccountInfo();
 
@@ -51,11 +76,20 @@ public class TestOrderProcessService_createAccount {
 	accntInfo.setBillingAddressPostalCode("K0A 8F9");
 	accntInfo.setBillingAddressPhone("613 235-4875");
 	
+
 	
+	
+	
+		
 	try {
 		 
+		//Reset database manually
+		
+		//TestOrderProcessService_createAccount createAccount = new TestOrderProcessService_createAccount();
+		
 		
 		Gson gson = new Gson();
+		MessageUtil messageUtil = new MessageUtil();
 		String accountInfo = gson.toJson(accntInfo);
 		
 		//creating input json string
@@ -63,22 +97,41 @@ public class TestOrderProcessService_createAccount {
 		String accountName = jsonObj.toString();
 		
 		
-		//mbp3	    
+		//mbp	    
 		String result = service.creatAccount(accountName, accountInfo);
+		messageUtil.printMessage("TestOrderProcessService_orderProcessTest_createAccount Test Result: " + result);
 		
-		if (result.isEmpty()){
-			//success
-		} else {
-			System.out.println(result);
-		}
-	
+				
+		String shippingInfo1 = gson.toJson(shippingInfo);
+		
+		
+		String jsonData="[{\"accountName\":\"mbp\",\"cdid\":\"1\",\"quantity\":\"3\"},{\"accountName\":\"mbp\",\"cdid\":\"2\",\"quantity\":\"2\"}]";
+		
+		String createOrder = service.createOrder(jsonData, shippingInfo1);
+		messageUtil.printMessage("TestOrderProcessService_orderProcessTest_createOrder Test Result: " + createOrder);
+		
+		
+			
+		String paymentInfo1 = gson.toJson(paymentInfo);
+		
+		String order1 = gson.toJson(order);
+		
+				
+			       			
+		String confOrder = service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+			
+		
+        messageUtil.printMessage("TestOrderProcessService_orderProcessTest_confirmOrder Test Result: " + confOrder);
+
+		
 	
 		
-	} catch (JSONException e) {
+			
+	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		//throw e;
-	} 
+	}
 	
 		
 	

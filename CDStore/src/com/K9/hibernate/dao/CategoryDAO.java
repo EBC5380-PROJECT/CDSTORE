@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.K9.util.HibernateUtil;
+import com.K9.util.ResponseFactory;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 
@@ -70,7 +71,7 @@ public class CategoryDAO {
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-            throw e;
+            return ResponseFactory.create(1000);  //returning system level error alert
         }
  
     }

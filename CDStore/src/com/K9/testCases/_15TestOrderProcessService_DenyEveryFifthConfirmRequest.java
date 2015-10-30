@@ -20,26 +20,26 @@ import com.K9.hibernate.bean.Orders;
 import com.google.gson.*;
 
 
-public class TestOrderProcessService_DenyEveryFifthConfirmRequest {
+public class _15TestOrderProcessService_DenyEveryFifthConfirmRequest {
 	{
 	
 	OrderProcessService service = new OrderProcessService();
-	
 	ShippingInfo shippingInfo = new ShippingInfo();
-
+	
 	shippingInfo.setAccountId(1);
-	shippingInfo.setShippingCharge(5.25);
-	shippingInfo.setTaxes(4.25);
-	shippingInfo.setTotalCost(20.36);
+	shippingInfo.setShippingCharge(7.25);
+	shippingInfo.setTaxes(5.25);
+	shippingInfo.setTotalCost(60.32);
+	
 	
 	Orders order = new Orders();
 	order.setOrderId(1);
 	order.setAccountId(1);
-	order.setShippingCharge(5.2);
+	order.setShippingCharge(7.25);
 	order.setStatus("ORDERED");
-	order.setTaxes(6.2);
-	order.setTotalCost(20.36);
-	
+	order.setTaxes(5.25);
+	order.setTotalCost(60.32);
+		
 	PaymentInfo paymentInfo = new PaymentInfo();
 	paymentInfo.setCreditCardHolderName("MBP");
 	paymentInfo.setCreditCardNumber("4538452625981254");
@@ -50,10 +50,10 @@ public class TestOrderProcessService_DenyEveryFifthConfirmRequest {
 	
 	try {
 		 //reset database then execute the following
-		TestOrderProcessService_createAccount createAccount = new TestOrderProcessService_createAccount();
+		_9TestOrderProcessService_createAccount createAccount = new _9TestOrderProcessService_createAccount();
 		
 		Gson gson = new Gson();
-		TestOrderProcessService_createOrder createOrder = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(1);
 		
 		
@@ -70,21 +70,21 @@ public class TestOrderProcessService_DenyEveryFifthConfirmRequest {
 		
 	
 		
-		TestOrderProcessService_createOrder createOrder1 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder1 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(2);
 		order1 = gson.toJson(order);
 		
 				
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
-		TestOrderProcessService_createOrder createOrder2 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder2 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(3);
 		order1 = gson.toJson(order);
 		
 				
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
-		TestOrderProcessService_createOrder createOrder3 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder3 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(4);
 		order1 = gson.toJson(order);
 		
@@ -92,28 +92,28 @@ public class TestOrderProcessService_DenyEveryFifthConfirmRequest {
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
 		
-		TestOrderProcessService_createOrder createOrder4 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder4 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(5);
 		order1 = gson.toJson(order);
 		
 				
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
-		TestOrderProcessService_createOrder createOrder5 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder5 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(6);
 		order1 = gson.toJson(order);
 		
 				
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
-		TestOrderProcessService_createOrder createOrder6 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder6 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(7);
 		order1 = gson.toJson(order);
 		
 				
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
-		TestOrderProcessService_createOrder createOrder8 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder8 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(8);
 		order1 = gson.toJson(order);
 		
@@ -121,7 +121,7 @@ public class TestOrderProcessService_DenyEveryFifthConfirmRequest {
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
 		
-		TestOrderProcessService_createOrder createOrder9 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder9 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(9);
 		order1 = gson.toJson(order);
 		
@@ -129,7 +129,7 @@ public class TestOrderProcessService_DenyEveryFifthConfirmRequest {
 		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 		
 		
-		TestOrderProcessService_createOrder createOrder10 = new TestOrderProcessService_createOrder();
+		_12TestOrderProcessService_createOrder createOrder10 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(10);
 		order1 = gson.toJson(order);
 		

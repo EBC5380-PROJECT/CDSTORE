@@ -217,26 +217,13 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
 		 Gson gson = new Gson();
          Orders orders = gson.fromJson(purchaseOrder, Orders.class);        
          
-         double x = orders.getOrderId()%5;
-         double x1 = 4 % 5;
-         int x2 = 5 % 5;
-         
+                  
          if ((orders.getOrderId() % 5) == 0) 
         	 status=rb.getString("DENIED");	 
          else
         	 status= rb.getString("PROCESSED");	
 		 
-         //Simulate a call to a credit card validation service in order to validate the credit information and available credit
-         
-		 //authorisedPurchase = AvailableCreditValidationUtil.isCreditAvailable(orders.getTotalCost());
-		 
-		 //Setting the order status depending on the result received from the simulated credit card validation service
-		/* if (authorisedPurchase)
-			 status= rb.getString("PROCESSED");		//successful credit validation
-		 else 
-			 status=rb.getString("DENIED");	 		//credit validation failed
-		*/
-		 //Create a new instance of OrdersDAO in order to update the order information with the order status, shipping address and update the timestamp (automatically done when row is updated).
+          //Create a new instance of OrdersDAO in order to update the order information with the order status, shipping address and update the timestamp (automatically done when row is updated).
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 		 
 		 ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
