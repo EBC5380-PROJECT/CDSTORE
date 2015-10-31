@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.K9.hibernate.bean.Address;
 import com.K9.util.HibernateUtil;
+import com.K9.util.ResponseFactory;
 
 
 
@@ -29,7 +30,7 @@ public class AddressDAO {
 	 * @param phone
 	 * @return
 	 */
-    public int addAddressDetails(String street, String city, String province, String country, String postalCode, String phone) {
+    public String addAddressDetails(String street, String city, String province, String country, String postalCode, String phone) {
         try {
         	/**
         	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
@@ -59,14 +60,14 @@ public class AddressDAO {
             
             //committing the transaction
             transaction.commit();
-             
+            
             //the Id of the newly created row in the Address table is returned to the calling class
-            return addressInfo.getAddressId();
+            return Integer.toString(addressInfo.getAddressId());
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-            throw e;
+            return ResponseFactory.create(1000);  //returning system level error alert
         }
  
     }

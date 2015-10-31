@@ -27,7 +27,7 @@ public class CreateOrderFactory {
 	 * @param shoppingCartInfo
 	 */
 	
-	public void createOrder(String shippingInfo, String shoppingCartInfo){
+	public String createOrder(String shippingInfo, String shoppingCartInfo){
 		
 		
 		ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.enums");  //enumerations for the order status 
@@ -46,7 +46,9 @@ public class CreateOrderFactory {
 		 
 		 //An instance of OrdersDAO is created so the the addOrder method can be called to store the order in the database.
 		 OrdersDAO ordersDAO = new OrdersDAO();
-		 int orderId=ordersDAO.addOrder(shippingInfo1.getAccountId(), rb.getString("ORDERED"), shippingInfo1.getShippingCharge(), shippingInfo1.getTaxes(), shippingInfo1.getTotalCost());
+		 String orderId=ordersDAO.addOrder(shippingInfo1.getAccountId(), rb.getString("ORDERED"), shippingInfo1.getShippingCharge(), shippingInfo1.getTaxes(), shippingInfo1.getTotalCost());
+		 
+		 
 		 
 		//A json array is created containing an array of shoppingCartInfo	 		
 		JSONArray jsonList = new JSONArray(shoppingCartInfo);
@@ -58,18 +60,16 @@ public class CreateOrderFactory {
 		 for (int i = 0; i < jsonList.length(); i++) {
 			  shoppingCartInfoInstance=jsonList.get(i).toString();
 			  shippingInfo2 = gson.fromJson(shoppingCartInfoInstance, OrderItem.class);
-			  orderItem.addOrderItem(orderId, shippingInfo2.getCdId(), shippingInfo2.getQuantity()); 	 
+			  orderItem.addOrderItem(Integer.valueOf(orderId), shippingInfo2.getCdId(), shippingInfo2.getQuantity()); 	 
 			}
+		 
+		 return "";
 		
-	     } catch (Exception f) {
-	    	 System.out.println(f.getMessage());
-		     try {
-				throw f;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			}
+	     } catch (Exception e) {
+	    	 System.out.println(e.getMessage());
+	    	 e.printStackTrace();
+	    	 return ResponseFactory.create(1000);  //returning system level error alert
+		  }
 	     }
 	
 	

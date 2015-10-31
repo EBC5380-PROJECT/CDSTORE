@@ -20,7 +20,7 @@ import com.K9.util.MessageUtil;
 import org.json.*;
 import com.google.gson.*;
 
-public class _9TestOrderProcessService_createAccount {
+public class _16TestOrderProcessService_userNameNotUnique {
 	{
 	
 	OrderProcessService service = new OrderProcessService();
@@ -65,8 +65,11 @@ public class _9TestOrderProcessService_createAccount {
 		//mbp3	    
 		String result = service.creatAccount(accountName, accountInfo);
 		
-		MessageUtil messageUtil = new MessageUtil();
-	    messageUtil.printMessage("_9TestOrderProcessService_createAccount Test Result: " + result);
+		
+			System.out.println(result);
+			MessageUtil messageUtil = new MessageUtil();
+    	    messageUtil.printMessage("_16TestOrderProcessService_userNameNotUnique Test Result: " + result);
+		
 	
 	
 		

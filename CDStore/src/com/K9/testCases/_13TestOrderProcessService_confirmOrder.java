@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.K9.WebServices.OrderProcessService.*;
 import com.K9.session.bean.PaymentInfo;
 import com.K9.session.bean.ShippingInfo;
+import com.K9.util.MessageUtil;
 import com.K9.hibernate.bean.Orders;
 
 //import static org.junit.Assert.assertEquals;
@@ -60,8 +61,10 @@ public class _13TestOrderProcessService_confirmOrder {
 		String shippingInfo1 = gson.toJson(shippingInfo);
 	
 		
-		String s=service.confirmOrder(order1, shippingInfo1, paymentInfo1);
-		System.out.println(s);
+		String result=service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		
+		MessageUtil messageUtil = new MessageUtil();
+	    messageUtil.printMessage("_13TestOrderProcessService_confirmOrder: " + result);	
 		
 	
 		

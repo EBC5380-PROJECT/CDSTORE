@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.K9.hibernate.bean.Orders;
 import com.K9.util.HibernateUtil;
+import com.K9.util.ResponseFactory;
 
 
 /**
@@ -30,7 +31,7 @@ public class OrdersDAO {
   * @param totalCost
   * @return
   */
-    public int addOrder(int accountId, String status, Double shippingCharge, Double taxes, Double totalCost) {
+    public String addOrder(int accountId, String status, Double shippingCharge, Double taxes, Double totalCost) {
         try {
         	
         	 //The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
@@ -61,12 +62,12 @@ public class OrdersDAO {
             transaction.commit();
             
             //the unique Id of the row just created in the Order table is returned to the calling class
-            return ordersInfo.getOrderId();
+            return Integer.toString(ordersInfo.getOrderId());
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-            throw e;
+            return ResponseFactory.create(1000);  //returning system level error alert
         }
  
     }
@@ -81,7 +82,7 @@ public class OrdersDAO {
      * @param orderStatus
      * @param accountId
      */
-    public void updateOrderStatus(int orderId, String orderStatus, int accountId) {
+    public String updateOrderStatus(int orderId, String orderStatus, int accountId) {
         try {
         	
         	//The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
@@ -112,12 +113,14 @@ public class OrdersDAO {
            
              //The transaction is finalised by calling the commit method.
              transaction.commit();
+             
+             return "";
             
              
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-            throw e;
+            return ResponseFactory.create(1000);  //returning system level error alert
         }
  
     }

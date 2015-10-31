@@ -22,7 +22,7 @@ public class _11TestOrderItemDAO {
 
 		
         
-        int orderItemId = orderItemDAO.addOrderItem(orderId, cdid, quantity);
+        String orderItemId = orderItemDAO.addOrderItem(orderId, cdid, quantity);
         
        
       

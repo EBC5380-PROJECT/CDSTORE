@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.K9.hibernate.bean.OrderItem;
 import com.K9.util.HibernateUtil;
+import com.K9.util.ResponseFactory;
 
 
 /**
@@ -27,7 +28,7 @@ public class OrderItemDAO {
   * @param quantity
   * @return
   */
-    public int addOrderItem(int orderId, int cdid, int quantity) {
+    public String addOrderItem(int orderId, int cdid, int quantity) {
         try {
         	
         	//The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
@@ -56,12 +57,12 @@ public class OrderItemDAO {
             transaction.commit();
             
             //returning the unique identifier of the orderItem just inserted into the database.
-            return orderItem.getOrderitemId();
+            return Integer.toString(orderItem.getOrderitemId());
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-            throw e;
+            return ResponseFactory.create(1000);  //returning system level error alert
         }
  
     }

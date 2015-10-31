@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.K9.WebServices.OrderProcessService.*;
 import com.K9.session.bean.ShippingInfo;
+import com.K9.util.MessageUtil;
 
 //import static org.junit.Assert.assertEquals;
 
@@ -40,10 +41,10 @@ public class _12TestOrderProcessService_createOrder {
 		String jsonData="[{\"accountName\":\"mbp\",\"cdid\":\"1\",\"quantity\":\"3\"},{\"accountName\":\"mbp\",\"cdid\":\"2\",\"quantity\":\"2\"}]";
 		
 		
-		String s = service.createOrder(jsonData, shippingInfo1);
-		System.out.println(s);
-		
+		String result = service.createOrder(jsonData, shippingInfo1);
 	
+		MessageUtil messageUtil = new MessageUtil();
+	    messageUtil.printMessage("_12TestOrderProcessService_createOrder: " + result);	
 		
 			
 	} catch (Exception e) {

@@ -66,39 +66,49 @@ public class OrderProcessService {
 	         AccountDAO accntDAO = new AccountDAO();
 	         
 			 //determine whether the account name is unique
-			 boolean validAccountName = accntDAO.isUserNameUnique(accountName1);
+			 String validAccountName = accntDAO.isUserNameUnique(accountName1);
 			 
-			 
-			 if (validAccountName) {
+			 			 
+			 if (validAccountName.equals("true")) {
 				 //if the account name is unique, insert the billingAddress, ShippingAddress and account information into the database.
 				 
-				 boolean success = false;
+				 String success = "";
 				 // Need to store both the billing address and shipping address
 				 AddressDAO addressDAO = new AddressDAO();
 				 //billingAddressId will be used when inserting a new account entry.
-				 int billingAddressId = addressDAO.addAddressDetails(accntInfo.getBillingAddressStreet(), accntInfo.getBillingAddressCity(), accntInfo.getBillingAddressProvince(), accntInfo.getBillingAddressCountry(), accntInfo.getBillingAddressPostalCode(), accntInfo.getBillingAddressPhone());
+				 String billingAddressId = addressDAO.addAddressDetails(accntInfo.getBillingAddressStreet(), accntInfo.getBillingAddressCity(), accntInfo.getBillingAddressProvince(), accntInfo.getBillingAddressCountry(), accntInfo.getBillingAddressPostalCode(), accntInfo.getBillingAddressPhone());
 				 
 				 
+				 if (Integer.valueOf(billingAddressId) != (int)Integer.valueOf(billingAddressId))
+				 	return billingAddressId;  
+					 
+					 
 				 AddressDAO addressDAO1 = new AddressDAO();
 				//shippingAddressId will be used when inserting a new account entry.
-				 int shippingAddressId = addressDAO1.addAddressDetails(accntInfo.getShippingAddressStreet(), accntInfo.getShippingAddressCity(), accntInfo.getShippingAddressProvince(), accntInfo.getShippingAddressCountry(), accntInfo.getShippingAddressPostalCode(), accntInfo.getShippingAddressPhone());
+				 String shippingAddressId = addressDAO1.addAddressDetails(accntInfo.getShippingAddressStreet(), accntInfo.getShippingAddressCity(), accntInfo.getShippingAddressProvince(), accntInfo.getShippingAddressCountry(), accntInfo.getShippingAddressPostalCode(), accntInfo.getShippingAddressPhone());
 					
+				 if (Integer.valueOf(shippingAddressId) != (int)Integer.valueOf(shippingAddressId))
+					 	return shippingAddressId;  
+				 
 				 //Calling the utility to hash the password so that it is not stored in clear text in the database.
 				 String password = PasswordHash.createHash(accntInfo.getPassword1()); 
 				 
 				 //Calling the method addAccountDetails to insert a new record in the account table
-				 success = accntDAO.addAccountDetails(accntInfo.getAccountName(), password, accntInfo.getFName(), accntInfo.getLName(), billingAddressId, shippingAddressId, accntInfo.getEmail());
+				 success = accntDAO.addAccountDetails(accntInfo.getAccountName(), password, accntInfo.getFName(), accntInfo.getLName(), Integer.valueOf(billingAddressId), Integer.valueOf(shippingAddressId), accntInfo.getEmail());
 				 
 				 //Returning the appropriate status back to the calling servlet
-				 if (success)
+				 if (success.equals(""))
 					 return ResponseFactory.create(0);  //No processing errors encountered
+				// else if(success.equals("false"))
+					 //return ResponseFactory.create(3);  //Error returned while trying to add accountDetails
 				 else
-					 return ResponseFactory.create(3);  //Error returned while trying to add accountDetails
+					 return success;  //returning system level error alert
 				 
-			 } else {
+			 } else if(validAccountName.equals("false")) {
 				  return ResponseFactory.create(2);  //Error returned since the user name is not unique
 				 
-			 }
+			 } else
+				 return validAccountName;  //returning system level error alert
 			 		 
 			 
 		   } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
@@ -142,16 +152,16 @@ public String getAccount(String accountName, String password){
          //Creating a new instance of AccountDAO so the the userName and password can be validated before returning the account information. 
 		 AccountDAO accntDAO = new AccountDAO();
 		 //determine whether the user credentials are valid
-		 boolean validUserCredentials = accntDAO.areCredentialsValid(accountName1, password1);
+		 String validUserCredentials = accntDAO.areCredentialsValid(accountName1, password1);
 		 
 		 
-		 if (validUserCredentials) 
+		 if (validUserCredentials.equals("true")) 
 			 //If credentials are valid, the account information is retrieved for the given accountName
 			acctInfo = accntDAO.getAccountInfo(accountName1);
-		 else {
-			 return ResponseFactory.create(1);  //Invalid userName or password message
-			 
-		 }
+		 else if (validUserCredentials.equals("false")) {
+			 return ResponseFactory.create(1);  //Invalid userName or password message			 
+		 } else 
+			 return validUserCredentials;  //returning system level error alert
 		 
 			return acctInfo;  //return the account information to the calling servlet.
 		 
@@ -179,9 +189,12 @@ public String createOrder(String shoppingCartInfo, String shippingInfo)  {
 	try {
 		//Create a new instance of CreateOrderFactory in order to process the new order
 		CreateOrderFactory orderFactory = new CreateOrderFactory();
-		orderFactory.createOrder(shippingInfo, shoppingCartInfo);
+		String result = orderFactory.createOrder(shippingInfo, shoppingCartInfo);
 	
-        return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.
+		if (result.equals(""))
+			return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.
+		else
+			return result;  //returning system level error alert
 		
 	} catch (Exception e) {
 		System.out.println(e.getMessage());
@@ -226,10 +239,13 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
           //Create a new instance of OrdersDAO in order to update the order information with the order status, shipping address and update the timestamp (automatically done when row is updated).
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 		 
-		 ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
+		 String result = ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
 		 
-		 return ResponseFactory.create(0);  //no errors encountered.  Order was successfully confirmed.
-		
+		 if (result.equals(""))
+				return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.
+			else
+				return result;  //returning system level error alert
+		 		
 		 
 	   } catch (Exception e) {
 		   System.out.println(e.getMessage());

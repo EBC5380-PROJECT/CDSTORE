@@ -1,0 +1,12 @@
+TestOrderProcessService_orderProcessTest_createAccount Test Result: {"callStatus":1000}
+
+TestOrderProcessService_orderProcessTest_createOrder Test Result: {"callStatus":1000}
+
+TestOrderProcessService_orderProcessTest_confirmOrder Test Result: {"callStatus":1000}
+
+TestOrderProcessService_orderProcessTest_createAccount Test Result: {"callStatus":0}
+
+TestOrderProcessService_orderProcessTest_createOrder Test Result: {"callStatus":0}
+
+TestOrderProcessService_orderProcessTest_confirmOrder Test Result: {"callStatus":0}
+

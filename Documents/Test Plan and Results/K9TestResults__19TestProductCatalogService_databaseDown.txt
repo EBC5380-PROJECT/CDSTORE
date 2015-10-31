@@ -1,0 +1,8 @@
+TestCDDAO_getCategoryList Test Result: {"callStatus":1000}
+
+getProductList:{"callStatus":1000}
+
+getProductInfo:{"callStatus":1000}
+
+getProductListByCategory:{"callStatus":1000}
+

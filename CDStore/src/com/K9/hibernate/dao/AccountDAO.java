@@ -37,7 +37,7 @@ public class AccountDAO {
 	 * @param email
 	 * @return
 	 */
-    public boolean addAccountDetails(String accountName, String password1,String fName, String lName, int billingAddressId, int shippingAddressId, String email) {
+    public String addAccountDetails(String accountName, String password1,String fName, String lName, int billingAddressId, int shippingAddressId, String email) {
         try {
         	/**
         	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
@@ -64,6 +64,7 @@ public class AccountDAO {
             accountInfo.setShippingAddressId(shippingAddressId);
             accountInfo.setEmail(email);
             
+            
            // Saving the account information in the account table.
             session.save(accountInfo);
             
@@ -72,13 +73,12 @@ public class AccountDAO {
             transaction.commit();
             
                        
-            return true;
+            return "";
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-           // return false;
-            throw e;
+            return ResponseFactory.create(1000);  //returning system level error alert
         }
  
     }
@@ -91,7 +91,7 @@ public class AccountDAO {
      * @return
      */
 	@SuppressWarnings("rawtypes")
-    public boolean isUserNameUnique(String userName) {
+    public String isUserNameUnique(String userName) {
     	 try {
     		 /**
          	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
@@ -116,17 +116,16 @@ public class AccountDAO {
              transaction.commit();
                          		 
              if (accountList.isEmpty())
-             	return true; //userName is unique
+             	return "true"; //userName is unique
              else
-            	 return false;  //userName was found in the database therefore it is not unique
+            	 return "false";  //userName was found in the database therefore it is not unique
              
              
              
     	 } catch (HibernateException e) {
              System.out.println(e.getMessage());
              e.printStackTrace();
-             //return false;
-             throw e;
+             return ResponseFactory.create(1000);  //returning system level error alert
          }
     
     }
@@ -142,7 +141,7 @@ public class AccountDAO {
 	 * @return
 	 * 
 	 */
-    public boolean areCredentialsValid(String userName, String password1) {
+    public String areCredentialsValid(String userName, String password1) {
         try {
         	//Define local variable
         	boolean validPassword = false;
@@ -177,15 +176,14 @@ public class AccountDAO {
             
                              	
             if (validPassword)
-            	return true;  //return true if the credentials pass validation
+            	return "true";  //return true if the credentials pass validation
             else
-           	 return false;  // return false if the credentials fail validation
+           	 return "false";  // return false if the credentials fail validation
             
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
         	System.out.println(e.getMessage());
         	e.printStackTrace();
-            return false;
-        	//throw e;
+        	 return ResponseFactory.create(1000);  //returning system level error alert
         }
  
     }
