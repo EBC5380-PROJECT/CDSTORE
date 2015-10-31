@@ -25,7 +25,6 @@ public class ProductDetailAction extends HttpServlet {
      */
     public ProductDetailAction() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

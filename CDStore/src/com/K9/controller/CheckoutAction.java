@@ -38,6 +38,8 @@ public class CheckoutAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String jsonCart = (String) session.getAttribute("cart");
+		String username = (String) session.getAttribute("username");
+		double taxRate = 0.13;
 		Gson gson = new Gson();
 		ArrayList<HashMap> items = gson.fromJson(jsonCart, ArrayList.class);
 		Double totalcost = 0.0;
@@ -45,16 +47,30 @@ public class CheckoutAction extends HttpServlet {
 
 			totalcost += (float)item.get("price")*(int)item.get("price");
 		}
+		totalcost = totalcost*(1+taxRate);
 		
 
 		ShippingInfo shippinginfo = new ShippingInfo();
 		//TODO: shippingInfo not complete
-		shippinginfo.setAccountId(session.getAttribute("username"));
-		shippinginfo.setTaxes(0.13);
+		shippinginfo.setAccountName(session.getAttribute("username"));
+		shippinginfo.setTaxes(taxRate);
 		shippinginfo.setShippingCharge(0.0);
 		shippinginfo.setTotalCost(totalcost);
 
 		String jsonshippinginfo = gson.toJson(shippinginfo);
+		
+		session.setAttribute("finalShippingInfo", jsonshippinginfo);
+		HashMap<String,String> purchaseOrder = new HashMap<String, String>();
+		purchaseOrder.put("orderId", "0");
+		purchaseOrder.put("accountName", username);
+		purchaseOrder.put("status", "ORDERED");
+		purchaseOrder.put("shippingCharge", "0.0");
+		purchaseOrder.put("taxes", String.valueOf(totalcost*taxRate));
+		purchaseOrder.put("totalCost", totalcost.toString());
+		
+		String jsonPurchaseOrder = gson.toJson(purchaseOrder);
+		
+		session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
 		
 		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
 		String result = opService.createOrder(jsonCart, jsonshippinginfo);

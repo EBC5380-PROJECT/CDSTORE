@@ -74,7 +74,7 @@ public class RegistrationAction extends HttpServlet {
 		accountInfo.setShippingAddressPhone(shippingphone);
 		accountInfo.setShippingAddressCountry("Canada");
 		
-		String billingname = (String)request.getAttribute("billing-name");
+
 		String billingaddress = (String)request.getAttribute("billing-address");
 		String billingcity = (String)request.getAttribute("billing-city");
 		String billingprovince = (String)request.getAttribute("billing-province");

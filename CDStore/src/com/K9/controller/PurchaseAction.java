@@ -42,7 +42,7 @@ public class PurchaseAction extends HttpServlet {
 
 		
 		String paymentmethod = (String) request.getAttribute("paymentmethod");
-		String cardname = (String) request.getAttribute("cardname");
+		String cardname = (String) request.getAttribute("cardholdername");
 		String cardnumber = (String) request.getAttribute("cardnumber");
 		String expyear = (String) request.getAttribute("expyear");
 		String expmonth = (String) request.getAttribute("expmonth");
@@ -54,13 +54,15 @@ public class PurchaseAction extends HttpServlet {
 		paymentInfo.setExpiryDate(expmonth+"/"+expyear);
 		paymentInfo.setCcv(securitycode);
 		
+		String finalShippingInfo = (String)session.getAttribute("finalShippingInfo");
+		String finalPurchaseOrder = (String)session.getAttribute("finalPurchaseOrder");
+		String finalPaymentInfo = gson.toJson(paymentInfo);
+		
 		try {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-			String result = opService.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
-			if(result){
-				session.setAttribute("error", "");
-			}
-			response.sendRedirect("confirm.html");
+			String result = opService.confirmOrder(finalPurchaseOrder, finalShippingInfo, finalPaymentInfo);
+
+			response.sendRedirect("finish.html");
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
