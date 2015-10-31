@@ -15,6 +15,7 @@ import javax.xml.rpc.ServiceException;
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
 import com.K9.hibernate.bean.OrderItem;
+import com.K9.session.bean.PaymentInfo;
 import com.K9.session.bean.ShoppingCartInfo;
 import com.google.gson.Gson;
 
@@ -37,23 +38,25 @@ public class PurchaseAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String jsonCart = (String) session.getAttribute("cart");
 		Gson gson = new Gson();
-		ArrayList<OrderItem> orderItems = gson.fromJson(jsonCart, ArrayList<OrderItem>);
-		ShoppingCartInfo cart = new ShoppingCartInfo();
-		cart.setOrderItem(orderItems);
-		ShippingInfo shippinginfo = new ShippingInfo();
+
 		
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		String city = request.getParameter("city");
-		String province = request.getParameter("province");
-		String postalcode = request.getParameter("postalcode");
-		String phone = request.getParameter("phone");
+		String paymentmethod = (String) request.getAttribute("paymentmethod");
+		String cardname = (String) request.getAttribute("cardname");
+		String cardnumber = (String) request.getAttribute("cardnumber");
+		String expyear = (String) request.getAttribute("expyear");
+		String expmonth = (String) request.getAttribute("expmonth");
+		int securitycode = (int) request.getAttribute("securitycode");
+		
+		PaymentInfo paymentInfo = new PaymentInfo();
+		paymentInfo.setCreditCardHolderName(cardname);
+		paymentInfo.setCreditCardNumber(cardnumber);
+		paymentInfo.setExpiryDate(expmonth+"/"+expyear);
+		paymentInfo.setCcv(securitycode);
 		
 		try {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-			String result = opService.createOrder(shoppingCartInfo, shippingInfo);
+			String result = opService.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
 			if(result){
 				session.setAttribute("error", "");
 			}

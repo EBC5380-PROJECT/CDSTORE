@@ -2,6 +2,7 @@ package com.K9.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
+import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
 import com.K9.hibernate.bean.OrderItem;
+import com.K9.session.bean.ShippingInfo;
+import com.K9.session.bean.ShoppingCartInfo;
 import com.google.gson.Gson;
 
 /**
@@ -25,7 +30,6 @@ public class CheckoutAction extends HttpServlet {
      */
     public CheckoutAction() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,25 +39,27 @@ public class CheckoutAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		String jsonCart = (String) session.getAttribute("cart");
 		Gson gson = new Gson();
-		ArrayList<OrderItem> orderItems = gson.fromJson(jsonCart, ArrayList<OrderItem>);
-		ShoppingCartInfo cart = new ShoppingCartInfo();
-		cart.setOrderItem(orderItems);
-		session.setAttribute("finalShoppingCart", cart);
+		ArrayList<HashMap> items = gson.fromJson(jsonCart, ArrayList.class);
+		Double totalcost = 0.0;
+		for(HashMap item: items){
+
+			totalcost += (float)item.get("price")*(int)item.get("price");
+		}
+		
+
 		ShippingInfo shippinginfo = new ShippingInfo();
 		//TODO: shippingInfo not complete
-		shippinginfo.
-		
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
-		String city = request.getParameter("city");
-		String province = request.getParameter("province");
-		String postalcode = request.getParameter("postalcode");
-		String phone = request.getParameter("phone");
+		shippinginfo.setAccountId(session.getAttribute("username"));
+		shippinginfo.setTaxes(0.13);
+		shippinginfo.setShippingCharge(0.0);
+		shippinginfo.setTotalCost(totalcost);
+
+		String jsonshippinginfo = gson.toJson(shippinginfo);
 		
 		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-		String result = opService.createOrder(shoppingCartInfo, shippingInfo);
+		String result = opService.createOrder(jsonCart, jsonshippinginfo);
 		
-		response.sendRedirect("payment.html");
+		response.sendRedirect("Payment.html");
 	}
 
 }

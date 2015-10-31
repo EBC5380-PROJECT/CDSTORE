@@ -40,19 +40,12 @@ public class RegistrationAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userName = "";
-		String firstName = "";  
-		String lastName = "";
-		String email = "";
-		String password = "";
-		String confirmPassword = "";
-		
-		userName = (String)request.getAttribute("username");
-		firstName = (String)request.getAttribute("firstname");
-		lastName = (String)request.getAttribute("lastname");
-		email = (String)request.getAttribute("email");
-		password = (String)request.getAttribute("password");
-		confirmPassword = (String)request.getAttribute("confirmpassword");
+		String userName = (String)request.getAttribute("username");
+		String firstName = (String)request.getAttribute("firstname");
+		String lastName = (String)request.getAttribute("lastname");
+		String email = (String)request.getAttribute("email");
+		String password = (String)request.getAttribute("password");
+		String confirmPassword = (String)request.getAttribute("confirmpassword");
 		
 		if(password == null || confirmPassword == null || !password.equals(confirmPassword)){
 			request.setAttribute("error", "password error");
@@ -66,7 +59,35 @@ public class RegistrationAction extends HttpServlet {
 		accountInfo.setEmail(email);
 		accountInfo.setPassword1(password);
 		
+		String shippingname = (String)request.getAttribute("shipping-name");
+		String shippingaddress = (String)request.getAttribute("shipping-address");
+		String shippingcity = (String)request.getAttribute("shipping-city");
+		String shippingprovince = (String)request.getAttribute("shipping-province");
+		String shippingpostalcode = (String)request.getAttribute("shipping-postalcode");
+		String shippingphone = (String)request.getAttribute("shipping-phone");
 		
+		accountInfo.setShippingAddressId(0);
+		accountInfo.setShippingAddressStreet(shippingaddress);
+		accountInfo.setShippingAddressCity(shippingcity);
+		accountInfo.setShippingAddressProvince(shippingprovince);
+		accountInfo.setShippingAddressPostalCode(shippingpostalcode);
+		accountInfo.setShippingAddressPhone(shippingphone);
+		accountInfo.setShippingAddressCountry("Canada");
+		
+		String billingname = (String)request.getAttribute("billing-name");
+		String billingaddress = (String)request.getAttribute("billing-address");
+		String billingcity = (String)request.getAttribute("billing-city");
+		String billingprovince = (String)request.getAttribute("billing-province");
+		String billingpostalcode = (String)request.getAttribute("billing-postalcode");
+		String billingphone = (String)request.getAttribute("billing-phone");
+		
+		accountInfo.setbillingAddressId(0);
+		accountInfo.setBillingAddressStreet(billingaddress);
+		accountInfo.setBillingAddressCity(billingcity);
+		accountInfo.setBillingAddressProvince(billingprovince);
+		accountInfo.setBillingAddressPostalCode(billingpostalcode);
+		accountInfo.setBillingAddressPhone(billingphone);
+		accountInfo.setBillingAddressCountry("Canada");
 		
 		Gson gson = new Gson();
 		String accountInfoJson = gson.toJson(accountInfo);
@@ -84,8 +105,7 @@ public class RegistrationAction extends HttpServlet {
 			Date date = new Date();
 			session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
 			
-			
-			response.sendRedirect("/account.jsp");
+			response.sendRedirect("/index.html");
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

@@ -1,13 +1,9 @@
 package com.K9.controller;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.rpc.ServiceException;
 
-<<<<<<< HEAD
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.K9.WSClient.AuthorisationService.*;
-=======
-//import com.K9.WSClient.AuthorisationService.*;
->>>>>>> origin/master
-import com.K9.WSClient.OrderProcessService.*;
+import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
+import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
 import com.K9.session.bean.AccountInfo;
-import com.K9.util.PasswordHash;
 import com.google.gson.Gson;
 
 /**
