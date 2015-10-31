@@ -112,4 +112,17 @@
     <servlet-name>RegistrationAction</servlet-name>
     <url-pattern>/RegistrationAction</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>com.K9.filter.AuthFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/CheckoutAction</url-pattern>
+    <url-pattern>/PurchaseAction</url-pattern>
+    <url-pattern>/OrderDetailAction</url-pattern>
+    <url-pattern>/AccountAction</url-pattern>
+</filter-mapping>
 </web-app>
