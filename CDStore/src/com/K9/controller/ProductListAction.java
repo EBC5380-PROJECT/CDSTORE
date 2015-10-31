@@ -15,7 +15,7 @@ import com.K9.WSClient.ProductCatalogService.*;
 /**
  * Servlet implementation class ItemListAction
  */
-@WebServlet("/ProductListAction")
+//mbp@WebServlet("/ProductListAction")
 public class ProductListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,9 @@ public class ProductListAction extends HttpServlet {
 		int categoryId = 0;
 		String jsonProductList = "";
 
-		categoryId = Integer.getInteger(request.getParameter("category") != null?request.getParameter("category"):"0");
+		categoryId = Integer.getInteger(null != request.getParameter("category")?request.getParameter("category"):"0");
+		
+		System.out.println(categoryId);
 		
 		try {
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();

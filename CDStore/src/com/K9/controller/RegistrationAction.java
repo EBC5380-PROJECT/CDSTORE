@@ -23,7 +23,7 @@ import com.google.gson.Gson;;
 /**
  * Servlet implementation class RegistrationAction
  */
-@WebServlet("/RegistrationAction")
+//mbp@WebServlet("/RegistrationAction")
 public class RegistrationAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

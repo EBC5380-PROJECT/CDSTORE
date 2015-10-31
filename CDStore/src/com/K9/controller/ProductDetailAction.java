@@ -16,7 +16,7 @@ import com.K9.WSClient.ProductCatalogService.ProductCatalogServiceSoapBindingStu
 /**
  * Servlet implementation class ItemDetailAction
  */
-@WebServlet("/ProductDetailAction")
+//mbp@WebServlet("/ProductDetailAction")
 public class ProductDetailAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -69,11 +69,11 @@ var Client = {
 //To change service location or parameter names, change this object
 var Service = {
 	//GET
-	"categoryListService": new ServiceObject("Test/CategoryList", ""),
+	"categoryListService": new ServiceObject("CDStore/CategoryAction", ""),
 
-	"productListByCategoryService": new ServiceObject("Test/ProductListByCategory", "category"),
+	"productListByCategoryService": new ServiceObject("CDStore/ProductListAction", "category"),
 
-	"productInfoService": new ServiceObject("Test/ProductInfo", "productid"),
+	"productInfoService": new ServiceObject("CDStore/ProductDetailAction", "productid"),
 
 
 };

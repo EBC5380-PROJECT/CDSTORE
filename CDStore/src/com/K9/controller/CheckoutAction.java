@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class CheckoutAction
  */
-@WebServlet("/CheckoutAction")
+//mbp@WebServlet("/CheckoutAction")
 public class CheckoutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,7 +52,7 @@ public class CheckoutAction extends HttpServlet {
 
 		ShippingInfo shippinginfo = new ShippingInfo();
 		//TODO: shippingInfo not complete
-		shippinginfo.setAccountName(session.getAttribute("username"));
+		//mbp shippinginfo.setAccountName(session.getAttribute("username"));
 		shippinginfo.setTaxes(taxRate);
 		shippinginfo.setShippingCharge(0.0);
 		shippinginfo.setTotalCost(totalcost);
@@ -72,8 +72,8 @@ public class CheckoutAction extends HttpServlet {
 		
 		session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
 		
-		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-		String result = opService.createOrder(jsonCart, jsonshippinginfo);
+		//mbpOrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
+		//mbpString result = opService.createOrder(jsonCart, jsonshippinginfo);
 		
 		response.sendRedirect("Payment.html");
 	}
