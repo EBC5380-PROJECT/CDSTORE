@@ -188,6 +188,7 @@ public String createOrder(String shoppingCartInfo, String shippingInfo)  {
 	
 	try {
 		//Create a new instance of CreateOrderFactory in order to process the new order
+		
 		CreateOrderFactory orderFactory = new CreateOrderFactory();
 		String result = orderFactory.createOrder(shippingInfo, shoppingCartInfo);
 	
@@ -239,7 +240,8 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
           //Create a new instance of OrdersDAO in order to update the order information with the order status, shipping address and update the timestamp (automatically done when row is updated).
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 		 
-		 String result = ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
+		 //String result = ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
+		 String result = ordersDAO.updateOrderStatus(1, status, 1);
 		 
 		 if (result.equals(""))
 				return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.

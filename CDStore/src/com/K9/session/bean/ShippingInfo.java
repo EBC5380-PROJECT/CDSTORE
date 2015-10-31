@@ -16,18 +16,18 @@ public class ShippingInfo implements Serializable{
 	
 	// This bean is not persisted in the database.  Simply used to transfer information from the View to the Model.
 	
-	private int accountId;
+	private String accountName;
     private Double shippingCharge;
     private Double taxes;
     private Double totalCost;
    
     //{"accountId":1,"shippingCharge":5.25,"taxes":4.25,"totalCost":50.32}
-    public int getAccountId() {
-        return accountId;
+    public String getAccountName() {
+        return accountName;
     }
      
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
     public Double getShippingCharge() {
         return shippingCharge;

@@ -25,7 +25,7 @@ public class _12TestOrderProcessService_createOrder {
 	
 	ShippingInfo shippingInfo = new ShippingInfo();
 
-	shippingInfo.setAccountId(1);
+	shippingInfo.setAccountName("mbp");
 	shippingInfo.setShippingCharge(7.25);
 	shippingInfo.setTaxes(5.25);
 	shippingInfo.setTotalCost(60.32);
