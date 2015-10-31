@@ -60,9 +60,10 @@ public class OrdersDAO {
             
             //committing the transaction
             transaction.commit();
+            String orderId = Integer.toString(ordersInfo.getOrderId());
             
             //the unique Id of the row just created in the Order table is returned to the calling class
-            return Integer.toString(ordersInfo.getOrderId());
+            return orderId;
  
         } catch (HibernateException e) {
             System.out.println(e.getMessage());

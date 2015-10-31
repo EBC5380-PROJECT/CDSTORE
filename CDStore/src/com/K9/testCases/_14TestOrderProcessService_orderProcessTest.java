@@ -52,9 +52,7 @@ public class _14TestOrderProcessService_orderProcessTest {
 	AccountInfo accntInfo = new AccountInfo();
 
 	accntInfo.setAccountName("mbp");
-	//accntInfo.setbillingAddressId(1);
 	accntInfo.setEmail("mbp@gmail.com");
-	//accntInfo.setShippingAddressId(1);
 	accntInfo.setPassword1("password");
 	accntInfo.setFName("Michele");
 	accntInfo.setLName("Belanger");

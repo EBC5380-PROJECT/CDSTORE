@@ -16,3 +16,13 @@ _12TestOrderProcessService_createOrder: {"callStatus":0}
 
 _13TestOrderProcessService_confirmOrder: {"callStatus":0}
 
+_12TestOrderProcessService_createOrder: {"callStatus":0}
+
+_12TestOrderProcessService_createOrder: {"orderId":5}
+
+TestOrderProcessService_orderProcessTest_createAccount Test Result: {"callStatus":0}
+
+TestOrderProcessService_orderProcessTest_createOrder Test Result: {"orderId":1}
+
+TestOrderProcessService_orderProcessTest_confirmOrder Test Result: {"callStatus":0}
+

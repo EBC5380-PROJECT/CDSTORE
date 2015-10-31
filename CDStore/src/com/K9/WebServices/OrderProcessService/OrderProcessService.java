@@ -11,7 +11,10 @@ import com.K9.hibernate.bean.Orders;
 import com.google.gson.Gson;
 import com.K9.session.bean.*;
 import com.K9.util.AvailableCreditValidationUtil;
+import com.K9.util.CallStatus;
 import com.K9.util.CreateOrderFactory;
+import com.K9.util.GetAccountIdUtil;
+import com.K9.util.OrderId;
 import com.K9.util.PasswordHash;
 import com.K9.util.ResponseFactory;
 
@@ -181,7 +184,7 @@ public String getAccount(String accountName, String password){
  * 
  * @param shoppingCartInfo
  * @param shippingInfo
- * @return call status
+ * @return orderId or error code
  */
 public String createOrder(String shoppingCartInfo, String shippingInfo)  {
 	
@@ -190,12 +193,10 @@ public String createOrder(String shoppingCartInfo, String shippingInfo)  {
 		//Create a new instance of CreateOrderFactory in order to process the new order
 		
 		CreateOrderFactory orderFactory = new CreateOrderFactory();
-		String result = orderFactory.createOrder(shippingInfo, shoppingCartInfo);
-	
-		if (result.equals(""))
-			return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.
-		else
-			return result;  //returning system level error alert
+		
+		//Call orderFactory to create the order and save it to the database
+		return orderFactory.createOrder(shippingInfo, shoppingCartInfo);
+		
 		
 	} catch (Exception e) {
 		System.out.println(e.getMessage());
@@ -224,7 +225,6 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
 	 try {
 	 
 		 //declaring local variables
-		// boolean authorisedPurchase;
 		 String status="";
 		
 		 //Converting Json string received by calling servlet into an instance of Orders class.
@@ -237,11 +237,17 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
          else
         	 status= rb.getString("PROCESSED");	
 		 
+         
+         //Need to extract accountId from shippingInfo
+		 
+		 GetAccountIdUtil getAcctId = new GetAccountIdUtil();
+		 String accntIdString = getAcctId.getId(shippingInfo);
+		 int accntId = Integer.valueOf(accntIdString);
+		 
           //Create a new instance of OrdersDAO in order to update the order information with the order status, shipping address and update the timestamp (automatically done when row is updated).
 		 
 		 OrdersDAO ordersDAO = new OrdersDAO(); 		 
-		 //String result = ordersDAO.updateOrderStatus(orders.getOrderId(), status, orders.getAccountId());
-		 String result = ordersDAO.updateOrderStatus(1, status, 1);
+		 String result = ordersDAO.updateOrderStatus(orders.getOrderId(), status, accntId);
 		 
 		 if (result.equals(""))
 				return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.
