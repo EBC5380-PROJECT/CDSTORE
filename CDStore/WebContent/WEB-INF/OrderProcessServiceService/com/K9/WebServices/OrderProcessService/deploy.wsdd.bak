@@ -20,24 +20,24 @@
       <parameter name="className" value="com.K9.WebServices.OrderProcessService.OrderProcessServiceSoapBindingImpl"/>
       <parameter name="wsdlPortType" value="OrderProcessService"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="creatAccount" qname="operNS:creatAccount" xmlns:operNS="http://OrderProcessService.WebServices.K9.com" returnQName="retNS:creatAccountReturn" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      <operation name="getAccount" qname="operNS:getAccount" xmlns:operNS="http://OrderProcessService.WebServices.K9.com" returnQName="retNS:getAccountReturn" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:accountName" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:accountInfo" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
       <operation name="createOrder" qname="operNS:createOrder" xmlns:operNS="http://OrderProcessService.WebServices.K9.com" returnQName="retNS:createOrderReturn" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:shoppingCartInfo" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:shippingInfo" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="creatAccount" qname="operNS:creatAccount" xmlns:operNS="http://OrderProcessService.WebServices.K9.com" returnQName="retNS:creatAccountReturn" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:accountName" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:accountInfo" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
       <operation name="confirmOrder" qname="operNS:confirmOrder" xmlns:operNS="http://OrderProcessService.WebServices.K9.com" returnQName="retNS:confirmOrderReturn" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:purchaseOrder" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:shippingInfo" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:paymentInfo" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="getAccount" qname="operNS:getAccount" xmlns:operNS="http://OrderProcessService.WebServices.K9.com" returnQName="retNS:getAccountReturn" xmlns:retNS="http://OrderProcessService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
-        <parameter qname="pns:accountName" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:password" xmlns:pns="http://OrderProcessService.WebServices.K9.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
-      <parameter name="allowedMethods" value="getAccount confirmOrder creatAccount createOrder"/>
+      <parameter name="allowedMethods" value="confirmOrder creatAccount getAccount createOrder"/>
 
   </service>
 </deployment>

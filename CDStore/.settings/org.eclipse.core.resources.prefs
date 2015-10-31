@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/com/K9/WSClient/OrderProcessService/OrderProcessService.java=UTF-8
+encoding//src/com/K9/WSClient/OrderProcessService/OrderProcessServiceService.java=UTF-8
+encoding//src/com/K9/WSClient/OrderProcessService/OrderProcessServiceServiceLocator.java=UTF-8
+encoding//src/com/K9/WSClient/OrderProcessService/OrderProcessServiceSoapBindingStub.java=UTF-8
+encoding//src/com/K9/WSClient/ProductCatalogService/ProductCatalogService.java=UTF-8
+encoding//src/com/K9/WSClient/ProductCatalogService/ProductCatalogServiceService.java=UTF-8
+encoding//src/com/K9/WSClient/ProductCatalogService/ProductCatalogServiceServiceLocator.java=UTF-8
+encoding//src/com/K9/WSClient/ProductCatalogService/ProductCatalogServiceSoapBindingStub.java=UTF-8

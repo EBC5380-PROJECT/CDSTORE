@@ -21,7 +21,7 @@ public class ShippingInfo implements Serializable{
     private Double taxes;
     private Double totalCost;
    
-    
+    //{"accountId":1,"shippingCharge":5.25,"taxes":4.25,"totalCost":50.32}
     public int getAccountId() {
         return accountId;
     }

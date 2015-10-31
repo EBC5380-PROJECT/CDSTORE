@@ -50,10 +50,10 @@ public class ProductCatalogServiceProxy implements com.K9.WSClient.ProductCatalo
     return productCatalogService.getProductInfo(productId);
   }
   
-  public java.lang.String getProductList() throws java.rmi.RemoteException{
+  public java.lang.String getProductListByCategory(int categoryId) throws java.rmi.RemoteException{
     if (productCatalogService == null)
       _initProductCatalogServiceProxy();
-    return productCatalogService.getProductList();
+    return productCatalogService.getProductListByCategory(categoryId);
   }
   
   public java.lang.String getCategoryList() throws java.rmi.RemoteException{
@@ -62,10 +62,10 @@ public class ProductCatalogServiceProxy implements com.K9.WSClient.ProductCatalo
     return productCatalogService.getCategoryList();
   }
   
-  public java.lang.String getProductListByCategory(int categoryId) throws java.rmi.RemoteException{
+  public java.lang.String getProductList() throws java.rmi.RemoteException{
     if (productCatalogService == null)
       _initProductCatalogServiceProxy();
-    return productCatalogService.getProductListByCategory(categoryId);
+    return productCatalogService.getProductList();
   }
   
   

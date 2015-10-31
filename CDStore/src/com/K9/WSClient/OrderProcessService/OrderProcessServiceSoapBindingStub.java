@@ -24,14 +24,14 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("creatAccount");
+        oper.setName("getAccount");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "accountName"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "accountInfo"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "password"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         oper.setReturnClass(java.lang.String.class);
-        oper.setReturnQName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "creatAccountReturn"));
+        oper.setReturnQName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "getAccountReturn"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[0] = oper;
@@ -50,6 +50,19 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
         _operations[1] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("creatAccount");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "accountName"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "accountInfo"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        oper.setReturnClass(java.lang.String.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "creatAccountReturn"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[2] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
         oper.setName("confirmOrder");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "purchaseOrder"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
@@ -60,19 +73,6 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
         oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         oper.setReturnClass(java.lang.String.class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "confirmOrderReturn"));
-        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
-        oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        _operations[2] = oper;
-
-        oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("getAccount");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "accountName"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
-        oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "password"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
-        oper.addParameter(param);
-        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        oper.setReturnClass(java.lang.String.class);
-        oper.setReturnQName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "getAccountReturn"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[3] = oper;
@@ -130,7 +130,7 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
         }
     }
 
-    public java.lang.String creatAccount(java.lang.String accountName, java.lang.String accountInfo) throws java.rmi.RemoteException {
+    public java.lang.String getAccount(java.lang.String accountName, java.lang.String password) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -142,11 +142,11 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "creatAccount"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "getAccount"));
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {accountName, accountInfo});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {accountName, password});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -198,7 +198,7 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
 }
     }
 
-    public java.lang.String confirmOrder(java.lang.String purchaseOrder, java.lang.String shippingInfo, java.lang.String paymentInfo) throws java.rmi.RemoteException {
+    public java.lang.String creatAccount(java.lang.String accountName, java.lang.String accountInfo) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -210,11 +210,11 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "confirmOrder"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "creatAccount"));
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {purchaseOrder, shippingInfo, paymentInfo});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {accountName, accountInfo});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -232,7 +232,7 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
 }
     }
 
-    public java.lang.String getAccount(java.lang.String accountName, java.lang.String password) throws java.rmi.RemoteException {
+    public java.lang.String confirmOrder(java.lang.String purchaseOrder, java.lang.String shippingInfo, java.lang.String paymentInfo) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -244,11 +244,11 @@ public class OrderProcessServiceSoapBindingStub extends org.apache.axis.client.S
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "getAccount"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://OrderProcessService.WebServices.K9.com", "confirmOrder"));
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {accountName, password});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {purchaseOrder, shippingInfo, paymentInfo});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;

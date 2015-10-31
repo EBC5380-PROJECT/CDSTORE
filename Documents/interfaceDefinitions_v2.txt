@@ -77,7 +77,7 @@ Persistence: account bean should be stored in request/session.
 
 public void createOrder(String shoppingCartInfo, String shippingInfo) throws JSONException
 
-input:[{"accountName":"mbp","cdid":"1","quantity":"3"},{"accountName":"mbp","cdid":"2","quantity":"2"}],{"accountId":1,"shippingCharge":5.25,"taxes":4.25,"totalCost":50.32}
+input:[{"orderId":"1","cdid":"1","quantity":"3"},{"orderId":"1","cdid":"2","quantity":"2"}],{"accountId":1,"shippingCharge":5.25,"taxes":4.25,"totalCost":50.32}
 output:
 
 Called: When user hits the checkout button

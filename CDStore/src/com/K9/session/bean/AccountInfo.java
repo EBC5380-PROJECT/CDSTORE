@@ -25,7 +25,6 @@ public class AccountInfo implements Serializable{
 		
 	private String accountName;
 	private String password1;
-	private String salt;
 	private String fName;
 	private String lName;
 	private int billingAddressId;
@@ -66,13 +65,7 @@ public class AccountInfo implements Serializable{
         this.password1 = password1;
     }
     
-    public String getSalt() {
-        return salt;
-    }
- 
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
+   
     public String getFName() {
         return fName;
     }

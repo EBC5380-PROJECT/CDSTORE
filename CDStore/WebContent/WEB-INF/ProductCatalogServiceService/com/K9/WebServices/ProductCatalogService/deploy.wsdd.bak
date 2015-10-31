@@ -23,12 +23,12 @@
       <operation name="getProductInfo" qname="operNS:getProductInfo" xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" returnQName="retNS:getProductInfoReturn" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:productId" xmlns:pns="http://ProductCatalogService.WebServices.K9.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="getProductList" qname="operNS:getProductList" xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" returnQName="retNS:getProductListReturn" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      <operation name="getProductListByCategory" qname="operNS:getProductListByCategory" xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" returnQName="retNS:getProductListByCategoryReturn" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:categoryId" xmlns:pns="http://ProductCatalogService.WebServices.K9.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
       <operation name="getCategoryList" qname="operNS:getCategoryList" xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" returnQName="retNS:getCategoryListReturn" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
       </operation>
-      <operation name="getProductListByCategory" qname="operNS:getProductListByCategory" xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" returnQName="retNS:getProductListByCategoryReturn" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
-        <parameter qname="pns:categoryId" xmlns:pns="http://ProductCatalogService.WebServices.K9.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      <operation name="getProductList" qname="operNS:getProductList" xmlns:operNS="http://ProductCatalogService.WebServices.K9.com" returnQName="retNS:getProductListReturn" xmlns:retNS="http://ProductCatalogService.WebServices.K9.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
       </operation>
       <parameter name="allowedMethods" value="getProductList getProductListByCategory getCategoryList getProductInfo"/>
 
