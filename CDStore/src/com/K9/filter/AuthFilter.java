@@ -1,6 +1,10 @@
 package com.K9.filter;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,6 +15,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * Servlet Filter implementation class AuthFilter
@@ -49,10 +55,11 @@ public class AuthFilter implements Filter {
 		  HttpSession session = httpRequest.getSession();
 		  String loginFlag = (String) session.getAttribute("login");
 		  String username = (String) session.getAttribute("username");
-		  String userId = (String) session.getAttribute("username");
+		  DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		  Date date = new Date();
 		  
 		
-		if((boolean)session.getAttribute("login")){
+		if(loginFlag.equals(DigestUtils.sha256Hex(dateFormat.format(date)+username))){
 			// pass the request along the filter chain
 			chain.doFilter(httpRequest, httpResponse);
 			

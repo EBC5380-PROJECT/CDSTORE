@@ -26,7 +26,7 @@ public class OrderDetailAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int orderId = 0;
-		orderId = Integer.getInteger(request.getParameter("orderId"));
+		orderId = Integer.getInteger(request.getParameter("orderid"));
 		
 	}
 

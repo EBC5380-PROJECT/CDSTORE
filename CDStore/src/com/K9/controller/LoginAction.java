@@ -3,7 +3,10 @@ package com.K9.controller;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -14,9 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.rpc.ServiceException;
 
-//import com.K9.WSClient.AuthorisationService.*;
-import com.K9.WSClient.OrderProcessService.*;
+<<<<<<< HEAD
+import org.apache.commons.codec.digest.DigestUtils;
 
+import com.K9.WSClient.AuthorisationService.*;
+=======
+//import com.K9.WSClient.AuthorisationService.*;
+>>>>>>> origin/master
+import com.K9.WSClient.OrderProcessService.*;
+import com.K9.session.bean.AccountInfo;
 import com.K9.util.PasswordHash;
 import com.google.gson.Gson;
 
@@ -42,7 +51,7 @@ public class LoginAction extends HttpServlet {
 		String userName = "";
 		String password = "";
 		
-		userName = request.getParameter("userName");
+		userName = request.getParameter("username");
 		password = request.getParameter("password");
 		
 		try {
@@ -54,12 +63,14 @@ public class LoginAction extends HttpServlet {
 			
 			if(!jsonAccountInfo.contains("Error Message:")){
 				Gson gson = new Gson();
-				HashMap<String,String> accountInfo = gson.fromJson(jsonAccountInfo, HashMap.class);
-				session.setAttribute("userName", userName);
-				session.setAttribute("login", true);
-				session.setAttribute("userId", accountInfo.get("userId"));
+				AccountInfo accountInfo = gson.fromJson(jsonAccountInfo, AccountInfo.class);
+				session.setAttribute("username", userName);
+
 				session.setAttribute("accountInfo", accountInfo);
 				
+				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+				Date date = new Date();
+				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
 				//TODO change the page path
 				response.sendRedirect("/account.jsp");
 				
