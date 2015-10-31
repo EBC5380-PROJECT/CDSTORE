@@ -3,6 +3,7 @@ package com.K9.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
 import com.K9.hibernate.bean.OrderItem;
 import com.K9.session.bean.ShippingInfo;
 import com.K9.session.bean.ShoppingCartInfo;
+import com.K9.util.CallStatus;
 import com.google.gson.Gson;
 
 /**
@@ -52,7 +54,7 @@ public class CheckoutAction extends HttpServlet {
 
 		ShippingInfo shippinginfo = new ShippingInfo();
 		//TODO: shippingInfo not complete
-		//mbp shippinginfo.setAccountName(session.getAttribute("username"));
+		shippinginfo.setAccountName(session.getAttribute("username"));
 		shippinginfo.setTaxes(taxRate);
 		shippinginfo.setShippingCharge(0.0);
 		shippinginfo.setTotalCost(totalcost);
@@ -72,10 +74,25 @@ public class CheckoutAction extends HttpServlet {
 		
 		session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
 		
-		//mbpOrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-		//mbpString result = opService.createOrder(jsonCart, jsonshippinginfo);
+<<<<<<< HEAD
+		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
+		String result = opService.createOrder(jsonCart, jsonshippinginfo);
+=======
+		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
+		String jsonResult = opService.createOrder(jsonCart, jsonshippinginfo);
+		CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
 		
-		response.sendRedirect("Payment.html");
+		if(result.getCallStatus()!=0){
+			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = rb.getString(String.valueOf(result.getCallStatus()));
+			session.setAttribute("error", error);
+			response.sendRedirect("shipping.html");
+		}else{
+			response.sendRedirect("Payment.html");
+		}
+		
+>>>>>>> origin/master
+		
 	}
 
 }

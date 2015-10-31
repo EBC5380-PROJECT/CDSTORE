@@ -3,6 +3,7 @@ package com.K9.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +18,7 @@ import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
 import com.K9.hibernate.bean.OrderItem;
 import com.K9.session.bean.PaymentInfo;
 import com.K9.session.bean.ShoppingCartInfo;
+import com.K9.util.CallStatus;
 import com.google.gson.Gson;
 
 /**
@@ -60,9 +62,19 @@ public class PurchaseAction extends HttpServlet {
 		
 		try {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-			String result = opService.confirmOrder(finalPurchaseOrder, finalShippingInfo, finalPaymentInfo);
+			String jsonResult = opService.confirmOrder(finalPurchaseOrder, finalShippingInfo, finalPaymentInfo);
 
-			response.sendRedirect("finish.html");
+			CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
+			
+			if(result.getCallStatus()!=0){
+				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+				String error = rb.getString(String.valueOf(result.getCallStatus()));
+				session.setAttribute("error", error);
+				response.sendRedirect("payment.html");
+			}else{
+				response.sendRedirect("finish.html");
+			}
+			
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
