@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
 import com.K9.session.bean.AccountInfo;
+import com.K9.util.CallStatus;
 import com.google.gson.Gson;
 
 /**
@@ -51,13 +53,14 @@ public class LoginAction extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			String jsonAccountInfo = opService.getAccount(userName, password);
+
 			
-			if(!jsonAccountInfo.contains("Error Message:")){
+			if(!jsonAccountInfo.contains("callStatus")){
 				Gson gson = new Gson();
 				AccountInfo accountInfo = gson.fromJson(jsonAccountInfo, AccountInfo.class);
 				session.setAttribute("username", userName);
 
-				session.setAttribute("accountInfo", accountInfo);
+//				session.setAttribute("accountInfo", accountInfo);
 				
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 				Date date = new Date();
@@ -66,9 +69,16 @@ public class LoginAction extends HttpServlet {
 				response.sendRedirect("/account.jsp");
 				
 			}else{
-				session.setAttribute("error", jsonAccountInfo);
-				//TODO change the page path
-				response.sendRedirect("/error.jsp");
+				Gson gson = new Gson();
+				CallStatus result = gson.fromJson(jsonAccountInfo, CallStatus.class);
+				
+				if(result.getCallStatus()!=0){
+					ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+					String error = rb.getString(String.valueOf(result.getCallStatus()));
+					session.setAttribute("error", error);
+					response.sendRedirect("sign.html");
+				}
+
 			}
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block

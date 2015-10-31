@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -91,21 +92,27 @@ public class RegistrationAction extends HttpServlet {
 		
 		Gson gson = new Gson();
 		String accountInfoJson = gson.toJson(accountInfo);
-		
+		HttpSession session = request.getSession();
 		try {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-			String result = opService.creatAccount(userName, accountInfoJson);
-			CallStatus callStatus = gson.fromJson(result, CallStatus.class);
-			if(callStatus.getCallStatus()!=0){
-				
-			}
-			HttpSession session = request.getSession();
-			session.setAttribute("username", accountInfo.getAccountName());
-			DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-			Date date = new Date();
-			session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
+			String jsonResult = opService.creatAccount(userName, accountInfoJson);
+			CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
 			
-			response.sendRedirect("/index.html");
+			if(result.getCallStatus()!=0){
+				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+				String error = rb.getString(String.valueOf(result.getCallStatus()));
+				session.setAttribute("error", error);
+				response.sendRedirect("register.html");
+			}else{
+				session.setAttribute("username", accountInfo.getAccountName());
+				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+				Date date = new Date();
+				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
+				
+				response.sendRedirect("/index.html");
+			}
+			
+			
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
