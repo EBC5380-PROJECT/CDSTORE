@@ -17,7 +17,7 @@ import javax.xml.rpc.ServiceException;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.K9.WSClient.OrderProcessService.*;
-import com.K9.session.bean.AccountInformation;
+import com.K9.session.bean.AccountInfo;
 import com.K9.util.CallStatus;
 import com.google.gson.Gson;;
 
@@ -53,7 +53,7 @@ public class RegistrationAction extends HttpServlet {
 			response.sendRedirect("/login.jsp");
 		}
 		
-		AccountInformation accountInfo = new AccountInformation();
+		AccountInfo accountInfo = new AccountInfo();
 		accountInfo.setAccountName(userName);
 		accountInfo.setFName(firstName);
 		accountInfo.setLName(lastName);

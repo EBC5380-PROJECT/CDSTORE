@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.rpc.ServiceException;
 
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
@@ -52,7 +53,7 @@ public class CheckoutAction extends HttpServlet {
 
 		ShippingInfo shippinginfo = new ShippingInfo();
 		//TODO: shippingInfo not complete
-		shippinginfo.setAccountName(session.getAttribute("username"));
+		shippinginfo.setAccountName((String)session.getAttribute("username"));
 		shippinginfo.setTaxes(taxRate);
 		shippinginfo.setShippingCharge(0.0);
 		shippinginfo.setTotalCost(totalcost);
@@ -68,24 +69,31 @@ public class CheckoutAction extends HttpServlet {
 		purchaseOrder.put("taxes", String.valueOf(totalcost*taxRate));
 		purchaseOrder.put("totalCost", totalcost.toString());
 
-		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-		String jsonResult = opService.createOrder(jsonCart, jsonshippinginfo);
-		if(jsonResult.contains("callStatus")){
-			CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
-			if(result.getCallStatus()!=0){
-				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
-				String error = rb.getString(String.valueOf(result.getCallStatus()));
-				session.setAttribute("error", error);
-				response.sendRedirect("shipping.html");
+		OrderProcessServiceSoapBindingStub opService;
+		try {
+			opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
+			String jsonResult = opService.createOrder(jsonCart, jsonshippinginfo);
+			if(jsonResult.contains("callStatus")){
+				CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
+				if(result.getCallStatus()!=0){
+					ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+					String error = rb.getString(String.valueOf(result.getCallStatus()));
+					session.setAttribute("error", error);
+					response.sendRedirect("shipping.html");
+				}
+			}else{
+				HashMap<String, Integer> resultMap = gson.fromJson(jsonResult, HashMap.class);
+				purchaseOrder.put("orderId", resultMap.get("orderId").toString());
+				String jsonPurchaseOrder = gson.toJson(purchaseOrder);
+				
+				session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
+				response.sendRedirect("Payment.html");
 			}
-		}else{
-			HashMap<String, Integer> resultMap = gson.fromJson(jsonResult, HashMap.class);
-			purchaseOrder.put("orderId", resultMap.get("orderId").toString());
-			String jsonPurchaseOrder = gson.toJson(purchaseOrder);
-			
-			session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
-			response.sendRedirect("Payment.html");
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		
 		
 	}

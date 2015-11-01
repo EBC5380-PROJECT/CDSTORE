@@ -39,11 +39,11 @@ public class ProductDetailAction extends HttpServlet {
 		
 		String tmpProductId = request.getParameter("productid");
 		productId = (tmpProductId==null||tmpProductId.trim().equals(""))?0:Integer.parseInt(tmpProductId);		
-		HashMap<String,Integer> param = new HashMap<String,Integer>();
-		param.put("categoryId", productId);
-		Gson gson = new Gson();
-		String jsonProductId = gson.toJson(param);
-		productId = Integer.parseInt(request.getParameter("productid") != null?request.getParameter("productid"):"0");
+//		HashMap<String,Integer> param = new HashMap<String,Integer>();
+//		param.put("categoryId", productId);
+//		Gson gson = new Gson();
+//		String jsonProductId = gson.toJson(param);
+//		productId = Integer.parseInt(request.getParameter("productid") != null?request.getParameter("productid"):"0");
 		
 		try {
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
