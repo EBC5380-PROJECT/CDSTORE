@@ -31,7 +31,16 @@
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/servlet/AdminServlet</url-pattern>
   </servlet-mapping>
-
+  
+   <servlet>
+    <servlet-name>AddToCartAction</servlet-name>
+    <servlet-class>com.K9.controller.AddToCartAction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddToCartAction</servlet-name>
+    <url-pattern>/AddToCartAction</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>CategoryAction</servlet-name>
     <servlet-class>com.K9.controller.CategoryAction</servlet-class>
@@ -44,7 +53,7 @@
   <servlet>
     <servlet-name>CheckoutAction</servlet-name>
     <servlet-class>com.K9.controller.CheckoutAction</servlet-class>
-  </servlet>  
+  </servlet>
   <servlet-mapping>
     <servlet-name>CheckoutAction</servlet-name>
     <url-pattern>/CheckoutAction</url-pattern>
@@ -53,7 +62,7 @@
   <servlet>
     <servlet-name>LoginAction</servlet-name>
     <servlet-class>com.K9.controller.LoginAction</servlet-class>
-  </servlet>  
+  </servlet>
   <servlet-mapping>
     <servlet-name>LoginAction</servlet-name>
     <url-pattern>/LoginAction</url-pattern>
@@ -62,7 +71,7 @@
   <servlet>
     <servlet-name>LogoutAction</servlet-name>
     <servlet-class>com.K9.controller.LogoutAction</servlet-class>
-  </servlet>  
+  </servlet>
   <servlet-mapping>
     <servlet-name>LogoutAction</servlet-name>
     <url-pattern>/LogoutAction</url-pattern>
@@ -71,7 +80,7 @@
   <servlet>
     <servlet-name>ProductDetailAction</servlet-name>
     <servlet-class>com.K9.controller.ProductDetailAction</servlet-class>
-  </servlet>  
+  </servlet>
   <servlet-mapping>
     <servlet-name>ProductDetailAction</servlet-name>
     <url-pattern>/ProductDetailAction</url-pattern>
@@ -115,5 +124,4 @@
     <url-pattern>/OrderDetailAction</url-pattern>
     <url-pattern>/AccountAction</url-pattern>
   </filter-mapping>
-  
 </web-app>
