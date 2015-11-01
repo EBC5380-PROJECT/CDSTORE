@@ -44,7 +44,7 @@ public class ProductListAction extends HttpServlet {
 		try {
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
 			if(categoryId != 0){
-				jsonProductList = pcService.getProductListByCategory(jsonCategoryId);
+				jsonProductList = pcService.getProductListByCategory(Integer.valueOf(jsonCategoryId));
 			}else{
 				jsonProductList = pcService.getProductList();
 			}
