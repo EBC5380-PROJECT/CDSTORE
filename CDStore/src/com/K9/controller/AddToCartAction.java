@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +34,7 @@ public class AddToCartAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String jsonCart = (String) session.getAttribute("cart");
-		if(null == request.getParameter("itemId")&&null!=request.getParameter("cart")){
+		if(null == request.getParameter("itemId") && null != request.getParameter("cart")){
 
 			jsonCart = request.getParameter("cart");
 

@@ -50,7 +50,7 @@ public class RegistrationAction extends HttpServlet {
 		
 		if(password == null || confirmPassword == null || !password.equals(confirmPassword)){
 			request.setAttribute("error", "password error");
-			response.sendRedirect("/login.jsp");
+			response.sendRedirect("signin.jsp");
 		}
 		
 		AccountInfo accountInfo = new AccountInfo();
@@ -102,14 +102,14 @@ public class RegistrationAction extends HttpServlet {
 				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 				String error = rb.getString(String.valueOf(result.getCallStatus()));
 				session.setAttribute("error", error);
-				response.sendRedirect("register.html");
+				response.sendRedirect("register.jsp");
 			}else{
 				session.setAttribute("username", accountInfo.getAccountName());
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 				Date date = new Date();
 				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
 				
-				response.sendRedirect("/index.html");
+				response.sendRedirect("index.jsp");
 			}
 			
 			

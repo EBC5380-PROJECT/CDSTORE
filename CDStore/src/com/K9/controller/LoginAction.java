@@ -60,13 +60,11 @@ public class LoginAction extends HttpServlet {
 				AccountInfo accountInfo = gson.fromJson(jsonAccountInfo, AccountInfo.class);
 				session.setAttribute("username", userName);
 
-//				session.setAttribute("accountInfo", accountInfo);
-				
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 				Date date = new Date();
 				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
 				//TODO change the page path
-				response.sendRedirect("/account.jsp");
+				response.sendRedirect("index.jsp");
 				
 			}else{
 				Gson gson = new Gson();
@@ -76,7 +74,7 @@ public class LoginAction extends HttpServlet {
 					ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 					String error = rb.getString(String.valueOf(result.getCallStatus()));
 					session.setAttribute("error", error);
-					response.sendRedirect("sign.html");
+					response.sendRedirect("signin.jsp");
 				}
 
 			}

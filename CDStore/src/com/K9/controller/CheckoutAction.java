@@ -87,7 +87,7 @@ public class CheckoutAction extends HttpServlet {
 				String jsonPurchaseOrder = gson.toJson(purchaseOrder);
 				
 				session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
-				response.sendRedirect("Payment.html");
+				response.sendRedirect("payment.jsp");
 			}
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block

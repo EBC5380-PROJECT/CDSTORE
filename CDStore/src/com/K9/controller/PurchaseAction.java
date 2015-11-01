@@ -70,9 +70,9 @@ public class PurchaseAction extends HttpServlet {
 				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 				String error = rb.getString(String.valueOf(result.getCallStatus()));
 				session.setAttribute("error", error);
-				response.sendRedirect("payment.html");
+				response.sendRedirect("payment.jsp");
 			}else{
-				response.sendRedirect("finish.html");
+				response.sendRedirect("finish.jsp");
 			}
 			
 		} catch (ServiceException e) {
