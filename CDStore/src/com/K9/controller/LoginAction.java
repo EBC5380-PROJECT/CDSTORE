@@ -18,7 +18,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
-import com.K9.session.bean.AccountInfo;
+import com.K9.session.bean.AccountInformation;
 import com.K9.util.CallStatus;
 import com.google.gson.Gson;
 
@@ -57,7 +57,7 @@ public class LoginAction extends HttpServlet {
 			
 			if(!jsonAccountInfo.contains("callStatus")){
 				Gson gson = new Gson();
-				AccountInfo accountInfo = gson.fromJson(jsonAccountInfo, AccountInfo.class);
+				AccountInformation accountInfo = gson.fromJson(jsonAccountInfo, AccountInformation.class);
 				session.setAttribute("username", userName);
 
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
