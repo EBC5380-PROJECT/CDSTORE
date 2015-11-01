@@ -2,6 +2,7 @@ package com.K9.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.rpc.ServiceException;
 
 import com.K9.WSClient.ProductCatalogService.*;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class ItemListAction
  */
-//mbp@WebServlet("/ProductListAction")
+
 public class ProductListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,15 +33,18 @@ public class ProductListAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int categoryId = 0;
 		String jsonProductList = "";
-
-		categoryId = Integer.getInteger(null != request.getParameter("category")?request.getParameter("category"):"0");
 		
-		System.out.println(categoryId);
+		String category = request.getParameter("category");
+		categoryId = (category==null||category.trim().equals(""))?0:Integer.parseInt(category);		
+		HashMap<String,Integer> param = new HashMap<String,Integer>();
+		param.put("categoryId", categoryId);
+		Gson gson = new Gson();
+		String jsonCategoryId = gson.toJson(param);
 		
 		try {
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
 			if(categoryId != 0){
-				jsonProductList = pcService.getProductListByCategory(categoryId);
+				jsonProductList = pcService.getProductListByCategory(jsonCategoryId);
 			}else{
 				jsonProductList = pcService.getProductList();
 			}

@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class CheckoutAction
  */
-//mbp@WebServlet("/CheckoutAction")
+
 public class CheckoutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,11 +46,9 @@ public class CheckoutAction extends HttpServlet {
 		ArrayList<HashMap> items = gson.fromJson(jsonCart, ArrayList.class);
 		Double totalcost = 0.0;
 		for(HashMap item: items){
-
 			totalcost += (float)item.get("price")*(int)item.get("price");
 		}
 		totalcost = totalcost*(1+taxRate);
-		
 
 		ShippingInfo shippinginfo = new ShippingInfo();
 		//TODO: shippingInfo not complete
@@ -69,29 +67,26 @@ public class CheckoutAction extends HttpServlet {
 		purchaseOrder.put("shippingCharge", "0.0");
 		purchaseOrder.put("taxes", String.valueOf(totalcost*taxRate));
 		purchaseOrder.put("totalCost", totalcost.toString());
-		
-		String jsonPurchaseOrder = gson.toJson(purchaseOrder);
-		
-		session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
-		
-<<<<<<< HEAD
-		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-		String result = opService.createOrder(jsonCart, jsonshippinginfo);
-=======
+
 		OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
 		String jsonResult = opService.createOrder(jsonCart, jsonshippinginfo);
-		CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
-		
-		if(result.getCallStatus()!=0){
-			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
-			String error = rb.getString(String.valueOf(result.getCallStatus()));
-			session.setAttribute("error", error);
-			response.sendRedirect("shipping.html");
+		if(jsonResult.contains("callStatus")){
+			CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
+			if(result.getCallStatus()!=0){
+				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+				String error = rb.getString(String.valueOf(result.getCallStatus()));
+				session.setAttribute("error", error);
+				response.sendRedirect("shipping.html");
+			}
 		}else{
+			HashMap<String, Integer> resultMap = gson.fromJson(jsonResult, HashMap.class);
+			purchaseOrder.put("orderId", resultMap.get("orderId").toString());
+			String jsonPurchaseOrder = gson.toJson(purchaseOrder);
+			
+			session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
 			response.sendRedirect("Payment.html");
 		}
 		
->>>>>>> origin/master
 		
 	}
 

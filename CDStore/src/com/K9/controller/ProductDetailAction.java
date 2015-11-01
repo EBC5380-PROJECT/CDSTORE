@@ -2,6 +2,7 @@ package com.K9.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +13,12 @@ import javax.xml.rpc.ServiceException;
 
 import com.K9.WSClient.ProductCatalogService.ProductCatalogServiceServiceLocator;
 import com.K9.WSClient.ProductCatalogService.ProductCatalogServiceSoapBindingStub;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class ItemDetailAction
  */
-//mbp@WebServlet("/ProductDetailAction")
+
 public class ProductDetailAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +37,13 @@ public class ProductDetailAction extends HttpServlet {
 		int productId = 0;
 		String jsonProductInfo = "";
 		
-		productId = Integer.getInteger(request.getParameter("productid") != null?request.getParameter("productid"):"0");
+		String tmpProductId = request.getParameter("productid");
+		productId = (tmpProductId==null||tmpProductId.trim().equals(""))?0:Integer.parseInt(tmpProductId);		
+		HashMap<String,Integer> param = new HashMap<String,Integer>();
+		param.put("categoryId", productId);
+		Gson gson = new Gson();
+		String jsonProductId = gson.toJson(param);
+		productId = Integer.parseInt(request.getParameter("productid") != null?request.getParameter("productid"):"0");
 		
 		try {
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();

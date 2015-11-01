@@ -9,28 +9,34 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AccountAction
+ * Servlet implementation class LogoutAction
  */
-//mbp@WebServlet("/AccountAction")
-public class AccountAction extends HttpServlet {
+
+public class LogoutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccountAction() {
+    public LogoutAction() {
         super();
     }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		session.removeAttribute("login");
+		session.removeAttribute("username");
+		response.sendRedirect("index.html");
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = "";
-		userId = request.getParameter("userId");
-		HttpSession session = request.getSession();
-		userId = (String) session.getAttribute("userId");
-		
+		doGet(request, response);
 	}
 
 }

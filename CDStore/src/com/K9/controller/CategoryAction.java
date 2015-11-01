@@ -16,7 +16,7 @@ import com.K9.WSClient.ProductCatalogService.ProductCatalogServiceSoapBindingStu
 /**
  * Servlet implementation class CategoryAction
  */
-//mbp@WebServlet("/CategoryAction")
+
 public class CategoryAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
