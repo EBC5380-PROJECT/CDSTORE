@@ -1,24 +1,15 @@
 package com.K9.util;
 
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import org.json.JSONArray;
 
 import com.K9.hibernate.bean.Account;
-import com.K9.hibernate.bean.OrderItem;
 import com.K9.hibernate.dao.AccountDAO;
-import com.K9.hibernate.dao.OrderItemDAO;
-import com.K9.hibernate.dao.OrdersDAO;
-import com.K9.session.bean.AccountInformation;
 import com.K9.session.bean.ShippingInfo;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 
 /**
  * 
- * The CreateOrderFactory is used to store an order in the database.
+ * The GetAccountIdUtil is used to retrieve the accountId from the shippingInfo being passed by the calling servlet.
  * 
  * @author Michele
  *
@@ -54,7 +45,7 @@ public class GetAccountIdUtil {
 		 
 		 int accntId = jobj.getAccountId();			 
 		 
-		 	//return the Json String to be returned to the calling servlet
+		 	//return accntId to the caller
 	    	return Integer.toString(accntId);
 		 
 		

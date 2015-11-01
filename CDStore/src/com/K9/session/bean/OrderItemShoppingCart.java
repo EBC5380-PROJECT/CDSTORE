@@ -1,16 +1,13 @@
 package com.K9.session.bean;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 
 
 /**
- * OrderItem Bean - contains the item information that is part of an order
+ * OrderItemShoppingCart Bean - contains the item information that is part of an order
  * @author MBP
  *
  */
@@ -30,8 +27,7 @@ public class OrderItemShoppingCart implements Serializable{
     private int cdid;	
     private int quantity;
     
-	  //[{"orderId":1,"cdid":1,"quantity":3},{"orderId":1,"cdid":2,"quantity":2}]
-        
+       
     public String getAccountName () {
         return accountName;
     }

@@ -10,11 +10,8 @@ import com.K9.hibernate.dao.*;
 import com.K9.hibernate.bean.Orders;
 import com.google.gson.Gson;
 import com.K9.session.bean.*;
-import com.K9.util.AvailableCreditValidationUtil;
-import com.K9.util.CallStatus;
 import com.K9.util.CreateOrderFactory;
 import com.K9.util.GetAccountIdUtil;
-import com.K9.util.OrderId;
 import com.K9.util.PasswordHash;
 import com.K9.util.ResponseFactory;
 
@@ -102,8 +99,6 @@ public class OrderProcessService {
 				 //Returning the appropriate status back to the calling servlet
 				 if (success.equals(""))
 					 return ResponseFactory.create(0);  //No processing errors encountered
-				// else if(success.equals("false"))
-					 //return ResponseFactory.create(3);  //Error returned while trying to add accountDetails
 				 else
 					 return success;  //returning system level error alert
 				 
@@ -268,7 +263,7 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
 		   e.printStackTrace();
 	       return ResponseFactory.create(1000);  //returning system level error alert
       }
- }        	
+   }        	
 
 
 }

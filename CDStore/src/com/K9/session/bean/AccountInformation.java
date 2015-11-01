@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * AccountInfo Bean - contains CD Store client account information
+ * AccountInformation Bean - contains CD Store client account information but the password will be an empty string when the information is returned to the calling servlet.
  * @author MBP
  *
  */

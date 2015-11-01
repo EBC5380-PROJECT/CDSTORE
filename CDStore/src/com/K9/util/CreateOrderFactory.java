@@ -1,19 +1,13 @@
 package com.K9.util;
 
-import java.util.Map;
 import java.util.ResourceBundle;
-
 import org.json.JSONArray;
 
-import com.K9.hibernate.bean.Account;
 import com.K9.hibernate.bean.OrderItem;
-import com.K9.hibernate.dao.AccountDAO;
 import com.K9.hibernate.dao.OrderItemDAO;
 import com.K9.hibernate.dao.OrdersDAO;
-import com.K9.session.bean.AccountInformation;
 import com.K9.session.bean.ShippingInfo;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 
 /**
@@ -38,7 +32,7 @@ public class CreateOrderFactory {
 		
 		ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.enums");  //enumerations for the order status 
 		
-	 try {
+		try {
 		 //declaring local variables
 		 OrderItem shippingInfo2;	
 		 String shoppingCartInfoInstance;

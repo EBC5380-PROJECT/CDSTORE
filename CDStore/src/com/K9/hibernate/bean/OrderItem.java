@@ -33,7 +33,7 @@ public class OrderItem implements Serializable{
     private int cdid;	
     private int quantity;
     
-	  //[{"orderId":1,"cdid":1,"quantity":3},{"orderId":1,"cdid":2,"quantity":2}]
+
     public int getOrderitemId () {
         return orderitemId;
     }

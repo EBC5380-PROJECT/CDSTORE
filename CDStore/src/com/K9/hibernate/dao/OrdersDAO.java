@@ -10,7 +10,7 @@ import com.K9.util.ResponseFactory;
 
 
 /**
- * This Data Access Object class is used to access the Order table in the database.  The hibernate framework is used to manage the interaction with the database.
+ * This Data Access Object class is used to access the Orders table in the database.  The hibernate framework is used to manage the interaction with the database.
 
  * 
  * @author MBP

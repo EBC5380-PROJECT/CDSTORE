@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class PaymentInfo implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
 	// Getters and Setters are defined below for the values in this bean
 	
 	// This bean is not persisted in the database.  Simply used to transfer information from the View to the Model.

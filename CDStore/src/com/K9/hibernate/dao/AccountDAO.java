@@ -35,22 +35,20 @@ public class AccountDAO {
 	 * @param billingAddressId
 	 * @param shippingAddressId
 	 * @param email
-	 * @return
+	 * @return  
 	 */
     public String addAccountDetails(String accountName, String password1,String fName, String lName, int billingAddressId, int shippingAddressId, String email) {
         try {
-        	/**
-        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
-        	 * 
-        	 */
         	
+        	 // The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	         	
         	//Configure Hibernate and get the sessionFactory and get a session object
         	
         	Session session = HibernateUtil.getSessionFactory().openSession();
         	
         	            
         	//Starting Transaction
-        	 Transaction transaction=session.beginTransaction();    
+        	Transaction transaction=session.beginTransaction();    
         	 
         	//Instantiating a new Account class and setting the values to be stored in the account table.
                         
@@ -93,10 +91,9 @@ public class AccountDAO {
 	@SuppressWarnings("rawtypes")
     public String isUserNameUnique(String userName) {
     	 try {
-    		 /**
-         	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
-         	 * 
-         	 */
+    		 
+         	 //The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+         	 
          	
          	//Configure Hibernate and get the sessionFactory and get a session object
          	
@@ -146,10 +143,9 @@ public class AccountDAO {
         	//Define local variable
         	boolean validPassword = false;
         	
-        	/**
-        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
-        	 * 
-        	 */
+        	
+        	 //The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	 
         	
         	//Configure Hibernate and get the sessionFactory and get a session object
         	
@@ -193,11 +189,8 @@ public class AccountDAO {
    		 //Declare local variable
    		 	String json = "";
    		 	
-   		 /**
-        	 * The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
-        	 * 
-        	 */
-        	
+   		   	//The following steps are specific to Hibernate and are used to establish connectivity and a session with the database
+        	         	
         	//Configure Hibernate and get the sessionFactory and get a session object
         	
         	Session session = HibernateUtil.getSessionFactory().openSession();
@@ -206,38 +199,32 @@ public class AccountDAO {
         	//Starting Transaction
         	 Transaction transaction=session.beginTransaction();
         	 
-        	 
-        	 
-            /**
-             * The following method session.getNamedQuery calls a stored procedure which is defined in the Account bean.
-             */
+        	
+             //The following method session.getNamedQuery calls a stored procedure which is defined in the Account bean.
+             
             
             Query query = session.getNamedQuery("callRetrieveAccountInfo")
               		 .setParameter("userName", userName);
             
-            /**
-             * The result of the call to the stored procedure is returned and stored in the accountQueryResult.
-             */
+            //The result of the call to the stored procedure is returned and stored in the accountQueryResult.
+             
             if (query.list().isEmpty() != true) {
 	            Account accountQueryResult = (Account) query.uniqueResult();
 	            
-	            /**
-	             * The accountQueryResult is transformed into a Json string.
-	             */
+	            //The accountQueryResult is transformed into a Json string.
+	         
 	            
-	        	json = new Gson().toJson(accountQueryResult);
+	            json = new Gson().toJson(accountQueryResult);
 	            
             } 
             
-                       
-        	/**
-             * The transaction is finalised by calling the commit method.
-             */
+            //The transaction is finalised by calling the commit method.
+           
         	transaction.commit();
         	
-        	/**
-             * The json string is returned to the caller.
-             */
+        	
+           //The json string is returned to the caller.
+       
             return json;
             
    	 } catch (HibernateException e) {
