@@ -43,7 +43,7 @@ public class AddToCartAction extends HttpServlet {
 			int itemId = Integer.parseInt(request.getParameter("itemId"));
 			String itemName = URLDecoder.decode(request.getParameter("itemName"),"UTF-8");
 			float price = Float.parseFloat(request.getParameter("price"));
-			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			int quantity = request.getParameter("quantity")==null?1:Integer.parseInt(request.getParameter("quantity"));
 
 			HashMap item = new HashMap();
 			item.put("itemId", itemId);
