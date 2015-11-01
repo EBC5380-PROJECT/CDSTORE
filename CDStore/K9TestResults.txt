@@ -26,3 +26,5 @@ TestOrderProcessService_orderProcessTest_createOrder Test Result: {"orderId":1}
 
 TestOrderProcessService_orderProcessTest_confirmOrder Test Result: {"callStatus":0}
 
+OrderProcessService_getAccount: {"accountId":1,"accountName":"mbp","password1":"","fName":"michele","lName":"belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
+

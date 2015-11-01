@@ -22,6 +22,12 @@ import com.google.gson.*;
 
 public class _13TestOrderProcessService_confirmOrder {
 	{
+		
+	/*	
+		<ord:purchaseOrder>{"orderId":1,"accountId":0,"status":"","shippingCharge":5.2,"taxes":6.2,"totalCost":20.36}</ord:purchaseOrder>
+        <ord:shippingInfo>{"accountName":"mbp","shippingCharge":5.25,"taxes":4.25,"totalCost":50.32}</ord:shippingInfo>
+        <ord:paymentInfo>{"creditCardHolderName":"MBP","creditCardNumber":"4538452625981254","expiryDate":"12/2018","ccv":235</ord:paymentInfo>
+    */ 
 	
 	OrderProcessService service = new OrderProcessService();
 	
