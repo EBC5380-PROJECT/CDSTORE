@@ -97,7 +97,7 @@ public class _14TestOrderProcessService_orderProcessTest {
 		
 		//mbp	    
 		String result = service.creatAccount(accountName, accountInfo);
-		messageUtil.printMessage("TestOrderProcessService_orderProcessTest_createAccount Test Result: " + result);
+		messageUtil.printMessage("_14TestOrderProcessService_orderProcessTest_createAccount Test Result: " + result);
 		
 				
 		String shippingInfo1 = gson.toJson(shippingInfo);
@@ -106,7 +106,7 @@ public class _14TestOrderProcessService_orderProcessTest {
 		String jsonData="[{\"accountName\":\"mbp\",\"cdid\":\"1\",\"quantity\":\"3\"},{\"accountName\":\"mbp\",\"cdid\":\"2\",\"quantity\":\"2\"}]";
 		
 		String createOrder = service.createOrder(jsonData, shippingInfo1);
-		messageUtil.printMessage("TestOrderProcessService_orderProcessTest_createOrder Test Result: " + createOrder);
+		messageUtil.printMessage("_14TestOrderProcessService_orderProcessTest_createOrder Test Result: " + createOrder);
 		
 		
 			
@@ -119,7 +119,7 @@ public class _14TestOrderProcessService_orderProcessTest {
 		String confOrder = service.confirmOrder(order1, shippingInfo1, paymentInfo1);
 			
 		
-        messageUtil.printMessage("TestOrderProcessService_orderProcessTest_confirmOrder Test Result: " + confOrder);
+        messageUtil.printMessage("_14TestOrderProcessService_orderProcessTest_confirmOrder Test Result: " + confOrder);
 
 		
 	
