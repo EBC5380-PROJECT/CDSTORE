@@ -222,9 +222,9 @@ public class AccountDAO {
 	            Account accountQueryResult = (Account) query.uniqueResult();
 	            
 	            /**
-	             * The accountQueryResult is transformed into a Json string without the password.
+	             * The accountQueryResult is transformed into a Json string.
 	             */
-	            accountQueryResult.setPassword1("");
+	            
 	        	json = new Gson().toJson(accountQueryResult);
 	            
             } 

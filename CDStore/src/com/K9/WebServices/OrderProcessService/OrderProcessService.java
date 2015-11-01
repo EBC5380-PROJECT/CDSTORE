@@ -54,11 +54,11 @@ public class OrderProcessService {
 		 try {
 			 	 
 			 //Create a new instance of the AccountInfo class         
-	         AccountInfo accntInfo = new AccountInfo();
+	         AccountInformation accntInfo = new AccountInformation();
 	         
 	         //Convert the Json string received from the calling servlet into the accntInfo instance.
 	         Gson gson = new Gson();
-	         accntInfo = gson.fromJson(accountInfo, AccountInfo.class);	
+	         accntInfo = gson.fromJson(accountInfo, AccountInformation.class);	
 	         
 	         //Extract the accountName from the Json string received from the calling servlet
 	         Map jsonJavaRootObject = new Gson().fromJson(accountName, Map.class);
@@ -143,13 +143,15 @@ public String getAccount(String accountName, String password){
 	 String  password1;	
 	 
 	 try {
-			 
+			
+		 Gson gson = new Gson();
+		 
 		//Extracting the accountName from the Json string received from the calling servlet.		 
-         Map jsonJavaRootObject = new Gson().fromJson(accountName, Map.class);
+         Map jsonJavaRootObject = gson.fromJson(accountName, Map.class);
          accountName1=(String) jsonJavaRootObject.get("accountName");
          
          //Extracting the password from the Json string received from the calling servlet.
-         Map jsonJavaRootObject2 = new Gson().fromJson(password, Map.class);
+         Map jsonJavaRootObject2 = gson.fromJson(password, Map.class);
          password1=(String) jsonJavaRootObject2.get("password");
          
          //Creating a new instance of AccountDAO so the the userName and password can be validated before returning the account information. 
@@ -158,14 +160,20 @@ public String getAccount(String accountName, String password){
 		 String validUserCredentials = accntDAO.areCredentialsValid(accountName1, password1);
 		 
 		 
-		 if (validUserCredentials.equals("true")) 
+		 if (validUserCredentials.equals("true")) {
 			 //If credentials are valid, the account information is retrieved for the given accountName
 			acctInfo = accntDAO.getAccountInfo(accountName1);
+			//do not return password to calling servlet
+			 AccountInformation ai = gson.fromJson(acctInfo, AccountInformation.class);	
+			 ai.setPassword1("");
+			acctInfo = gson.toJson(ai);
+		 }
 		 else if (validUserCredentials.equals("false")) {
 			 return ResponseFactory.create(1);  //Invalid userName or password message			 
 		 } else 
 			 return validUserCredentials;  //returning system level error alert
 		 
+		 	
 			return acctInfo;  //return the account information to the calling servlet.
 		 
 	 	} catch (Exception e) {

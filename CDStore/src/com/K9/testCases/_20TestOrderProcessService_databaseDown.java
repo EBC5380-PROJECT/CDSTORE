@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.K9.WebServices.OrderProcessService.*;
 import com.K9.hibernate.bean.Orders;
-import com.K9.session.bean.AccountInfo;
+import com.K9.session.bean.AccountInformation;
 import com.K9.session.bean.PaymentInfo;
 import com.K9.session.bean.ShippingInfo;
 import com.K9.util.MessageUtil;
@@ -49,7 +49,7 @@ public class _20TestOrderProcessService_databaseDown {
 	paymentInfo.setCcv(235);
 	paymentInfo.setExpiryDate("12/2018");
 	
-	AccountInfo accntInfo = new AccountInfo();
+	AccountInformation accntInfo = new AccountInformation();
 
 	accntInfo.setAccountName("mbp");
 	//accntInfo.setbillingAddressId(1);

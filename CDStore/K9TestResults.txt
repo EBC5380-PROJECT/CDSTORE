@@ -28,3 +28,31 @@ TestOrderProcessService_orderProcessTest_confirmOrder Test Result: {"callStatus"
 
 OrderProcessService_getAccount: {"accountId":1,"accountName":"mbp","password1":"","fName":"michele","lName":"belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
 
+OrderProcessService_getAccount: {"callStatus":1000}
+
+OrderProcessService_getAccount: {"callStatus":1000}
+
+TestOrderProcessService_orderProcessTest_createAccount Test Result: {"callStatus":0}
+
+TestOrderProcessService_orderProcessTest_createOrder Test Result: {"orderId":1}
+
+TestOrderProcessService_orderProcessTest_confirmOrder Test Result: {"callStatus":0}
+
+OrderProcessService_getAccount: {"accountId":1,"accountName":"mbp","password1":"1000:f899580ba0838dadff45e02616ab02df4b22c8d72299800e:ae296440e4d3f1a0c3ce7aec8fee83b17e46de4ad9d84d73","fName":"Michele","lName":"Belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
+
+OrderProcessService_getAccount: {"accountId":1,"accountName":"mbp","password1":"1000:f899580ba0838dadff45e02616ab02df4b22c8d72299800e:ae296440e4d3f1a0c3ce7aec8fee83b17e46de4ad9d84d73","fName":"Michele","lName":"Belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
+
+OrderProcessService_getAccount: {"accountName":"mbp","password1":"","fName":"Michele","lName":"Belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
+
+_12TestOrderProcessService_createOrder: {"orderId":2}
+
+_13TestOrderProcessService_confirmOrder: {"callStatus":0}
+
+TestOrderProcessService_orderProcessTest_createAccount Test Result: {"callStatus":0}
+
+TestOrderProcessService_orderProcessTest_createOrder Test Result: {"orderId":1}
+
+TestOrderProcessService_orderProcessTest_confirmOrder Test Result: {"callStatus":0}
+
+OrderProcessService_getAccount: {"accountName":"mbp","password1":"","fName":"Michele","lName":"Belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
+

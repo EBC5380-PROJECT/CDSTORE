@@ -9,7 +9,7 @@ import org.junit.Test;
 
 
 import com.K9.WebServices.OrderProcessService.*;
-import com.K9.session.bean.AccountInfo;
+import com.K9.session.bean.AccountInformation;
 import com.K9.util.MessageUtil;
 
 //import static org.junit.Assert.assertEquals;
@@ -25,7 +25,7 @@ public class _16TestOrderProcessService_userNameNotUnique {
 	
 	OrderProcessService service = new OrderProcessService();
 	
-	AccountInfo accntInfo = new AccountInfo();
+	AccountInformation accntInfo = new AccountInformation();
 
 	accntInfo.setAccountName("mbp");
 	accntInfo.setEmail("mbp@gmail.com");
