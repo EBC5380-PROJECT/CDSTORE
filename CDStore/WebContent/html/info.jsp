@@ -32,14 +32,14 @@
 			
 			//session variables
 			//TODO: uncomment this
-			/*<% 
+			<% 
 				String un = session.getAttribute("username");
 				String ca = session.getAttribute("cart");
 			%>
 			username = "<%=un %>";
 			cart = "<%=ca %>";
 			cart = JSON.parse(cart);
-			*/
+			
 			
 			//TODO: remove this after JSP is tested
 			console.log("username: " + username);
@@ -52,7 +52,7 @@
 			
 			//convert cart object to string and update the session
 			//TODO: remove comment
-			//dom += '<% session.setAttribute("cart", JSON.stringify(cart)); %> '
+			dom += '<% session.setAttribute("cart", JSON.stringify(cart)); %> '
 			
 			dom += 'alert(\'Item added to Cart\');"';
 			
@@ -74,14 +74,14 @@
 			if(parameter == null || parameter == ''){
 				fail('No or incorrect URL parameter.')
 			} else {
-				$.ajax({type: "GET", url: (Service.productInfoService.queryAddress + parameter), 
+				$.ajax({type: "GET", url: (Service.productInfoService.queryAddress + "=" + parameter), 
 					success: function(d, status){
 						var data = JSON.parse(d);
 						
 						//database doesn't have this item
-						if(data.length != 1){
-							fail('Item ID ' + parameter + ' does not exist.');
-						} else {
+						//if(data.length != 1){
+						//	fail('Item ID ' + parameter + ' does not exist.');
+						//} else {
 							//insert category in DOM
 							var newDom = dom;
 							//@cdID
@@ -101,7 +101,7 @@
 							var imgdom = '<img id="img" src="' + Client.imgdir + data[0].image + '" class="img-responsive" alt="Generic placeholder thumbnail">';
 							$("#image_div").append(imgdom);
 						
-						}
+						//}
 					},
 					error: function(xhr){
 						fail('Failed to contact database. Are you sure the url parameters are correct? (' + Service.productInfoService.query + 'X, where X is the product ID)');

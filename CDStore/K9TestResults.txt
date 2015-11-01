@@ -2,3 +2,5 @@ _16TestOrderProcessService_userNameNotUnique Test Result: {"callStatus":2}
 
 _17TestOrderProcessService_wrongPassword: {"callStatus":1}
 
+OrderProcessService_getAccount: {"accountName":"mbp","password1":"","fName":"Michele","lName":"Belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
+

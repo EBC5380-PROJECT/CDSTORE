@@ -33,14 +33,14 @@
 			
 			//session variables
 			//TODO: remove comment in JSP
-			/*<% 
+			<% 
 				String un = session.getAttribute("username");
 				String ca = session.getAttribute("cart");
 			%>
 			username = "<%=un %>";
 			cart = "<%=ca %>";
 			cart = JSON.parse(cart);
-			*/
+			
 			
 			//TODO: remove this after JSP is tested
 			console.log("username: " + username);
@@ -56,7 +56,7 @@
 			
 			//convert cart object to string and update the session
 			//TODO: remove comment
-			//dom += '<% session.setAttribute("cart", JSON.stringify(cart)); %>'
+			dom += '<% session.setAttribute("cart", JSON.stringify(cart)); %>'
 			
 			dom += 'alert(\'Item added to cart.\')"';
 			

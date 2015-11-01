@@ -23,37 +23,37 @@ var page = function () {
 //parameter: GET url parameters
 var Client = {
 	"index": {
-		"address": "index.html",
+		"address": "index.jsp",
 		parameter: ""
 	},
 	"category": {
-		"address": "category.html",
+		"address": "category.jsp",
 		parameter: "c",
 		page: page
 	},
 	"info": {
-		"address": "info.html",
+		"address": "info.jsp",
 		parameter: "productid",
 		page: page
 	},
 	"cart": {
-		"address": "cart.html",
+		"address": "cart.jsp",
 		parameter: ""
 	},
 	"finish": {
-		"address": "finish.html",
+		"address": "finish.jsp",
 		parameter: ""
 	},
 	"payment": {
-		"address": "payment.html",
+		"address": "payment.jsp",
 		parameter: ""
 	},
 	"register": {
-		"address": "register.html",
+		"address": "register.jsp",
 		parameter: ""
 	},
 	"signin": {
-		"address": "signin.html",
+		"address": "signin.jsp",
 		parameter: ""
 	},
 	//these directories are all relative to the htmldir
@@ -175,7 +175,7 @@ var getNavBarLinks = function (loginstatus) {
 		//set username in session to null
 		//probably won't work
 		//TODO: uncomment and test this
-		//$("#fixed-top-sign").attr("onclick", '<% session.setAttribute("username", null); %");
+		$("#fixed-top-sign").attr("onclick", '<% session.setAttribute("username", null); %');
 		$("#fixed-top-sign").html("Sign out");
 		$("#fixed-top-sign").attr("href", Server.signoutService.url);
 	}

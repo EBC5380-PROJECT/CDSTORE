@@ -27,9 +27,9 @@
 			var username = null;
 			
 			//TODO: uncomment this
-			/*<% 
+			<% 
 				String un = session.username;
-			%>*/
+			%>
 			
 			username = "<%=un %>";		
 			
@@ -141,7 +141,7 @@
             <div class="carousel-caption">
               <h1>One way to get music CD</h1>
               <p></p>
-              <p><a class="btn btn-lg btn-primary" href="category.html" role="button">Browse gallery</a></p>
+              <p><a class="btn btn-lg btn-primary" href="category.jsp" role="button">Browse gallery</a></p>
             </div>
           </div>
         </div>

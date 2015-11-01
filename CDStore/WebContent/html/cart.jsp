@@ -29,17 +29,17 @@
 	<script>
 		var username = null;
 		//TODO: make this null in integration testing/production
-		var cart = testCart;
+		var cart = null;
 		
 		$(function(){			
 			//get session
 			//TODO: remove comment in JSP
-			/*<% 
+			<% 
 				String ca = session.getAttribute("cart");
 			%>
 			cart = "<%=ca %>";
 			cart = JSON.parse(cart);
-			*/
+			
 			
 			//load top nav-bar
 			getNavBarLinks(!(username == "null" || username == null));
@@ -57,7 +57,7 @@
 			dom += "$('#totaltax').html((total*tax).toFixed(2));";
 			//update JSP cart with <% session.setAttribute("cart", JSON.stringify(cart)); %>
 			//TODO: remove comment this in JSP
-			//dom += "<% session.setAttribute(&quot;cart&quot;, JSON.stringify(cart)); %>;
+			dom += "<% session.setAttribute(&quot;cart&quot;, JSON.stringify(cart)); %>;
 			
 			dom += '"style="width:25px ; height:25px ;"></input>';
 			
