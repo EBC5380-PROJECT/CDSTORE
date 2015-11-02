@@ -40,6 +40,7 @@ public class PurchaseAction extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//initiate variables
 		HttpSession session = request.getSession();
 		Gson gson = new Gson();
 		boolean verified = true;
@@ -88,23 +89,45 @@ public class PurchaseAction extends HttpServlet {
 		String finalShippingInfo = (String)session.getAttribute("finalShippingInfo");
 		String finalPurchaseOrder = (String)session.getAttribute("finalPurchaseOrder");
 		String finalPaymentInfo = gson.toJson(paymentInfo);
+		//if these two attributes are not in the session means user has skiped the checkout page
+		//user will be send back to cart
+		if(null == finalShippingInfo || null == finalPurchaseOrder){
+			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = rb.getString("700");
+			session.setAttribute("error", error);
+			ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+			String cartPage = pathRb.getString("cart");
+			response.sendRedirect(cartPage);
+			return;
+		}
 		
 		try {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
 			String jsonResult = opService.confirmOrder(finalPurchaseOrder, finalShippingInfo, finalPaymentInfo);
 
 			CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
-			
-			if(result.getCallStatus()!=0){
+			System.out.println("=============jsonResult: "+jsonResult);
+			System.out.println("=============result: "+result.getCallStatus());
+			//check result
+			if(result.getCallStatus()!=0){// if it's not 0 means its
 				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 				String error = rb.getString(String.valueOf(result.getCallStatus()));
+				System.out.println("=====================error:"+error);
+				session.removeAttribute("finalShippingInfo");
+				session.removeAttribute("finalPurchaseOrder");
 				session.setAttribute("error", error);
 				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
-				String paymentPage = pathRb.getString("payment");
-				response.sendRedirect(paymentPage);
+				String cartPage = pathRb.getString("cart");
+				response.sendRedirect(cartPage);
 			}else{
+				session.removeAttribute("finalShippingInfo");
+				session.removeAttribute("finalPurchaseOrder");
+				session.setAttribute("finalCart", session.getAttribute("cart"));
+				
+				session.setAttribute("cart", "[]");
 				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
 				String finishPage = pathRb.getString("finish");
+				System.out.println("=================finalCart: "+session.getAttribute("finalCart"));
 				response.sendRedirect(finishPage);
 			}
 			

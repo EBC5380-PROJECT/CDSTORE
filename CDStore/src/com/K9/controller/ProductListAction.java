@@ -22,41 +22,43 @@ import com.google.gson.Gson;
 public class ProductListAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public ProductListAction() {
-    }
+	/**
+	 * Default constructor. 
+	 */
+	public ProductListAction() {
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//initiate variables
 		int categoryId = 0;
 		String jsonProductList = "";
-		
-		String category = request.getParameter("category");
-		categoryId = (category==null||category.trim().equals(""))?0:Integer.parseInt(category);		
+		String tmpCategoryId = request.getParameter("category");
+		//check the parameter first
+		if(tmpCategoryId==null||tmpCategoryId.trim().equals("")){
+			jsonProductList = "";
+		}else{
+			try {
+				categoryId = Integer.parseInt(tmpCategoryId);
+				ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
+				if(categoryId != 0){
+					jsonProductList = pcService.getProductListByCategory(categoryId);
+				}else{
+					jsonProductList = pcService.getProductList();
+				}
 
-		
-		try {
-			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
-			if(categoryId != 0){
-				jsonProductList = pcService.getProductListByCategory(categoryId);
-			}else{
-				jsonProductList = pcService.getProductList();
+			} catch (ServiceException e) {
+				//handle the web service error
+				PrintWriter out = response.getWriter();
+				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+				String error = rb.getString("800");
+				out.print("{\"error\":\""+error+"\"}");
+				e.printStackTrace();
+				return;
 			}
-			
-		} catch (ServiceException e) {
-			//handle the web service error
-			PrintWriter out = response.getWriter();
-			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
-			String error = rb.getString("800");
-			out.print("{\"error\":\""+error+"\"}");
-			e.printStackTrace();
-			return;
 		}
-		
 		PrintWriter out = response.getWriter();
 		out.print(jsonProductList);
 

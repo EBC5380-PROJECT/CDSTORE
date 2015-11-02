@@ -66,7 +66,7 @@
 			//else use productListByCategoryService
 			var service = null;
 			if(currentCategoryId == null)
-				service = Service.productListByCategoryService.queryAddress;
+				service = Service.productListByCategoryService.queryAddress + "=0";
 			else
 				service = Service.productListByCategoryService.queryAddress + "=" + currentCategoryId;
 			

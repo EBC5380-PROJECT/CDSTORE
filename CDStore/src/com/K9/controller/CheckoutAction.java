@@ -113,6 +113,8 @@ public class CheckoutAction extends HttpServlet {
 				String jsonPurchaseOrder = gson.toJson(purchaseOrder);
 				//insert the created order info into session for next step
 				session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
+				//remove the error message
+				session.removeAttribute("error");
 				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
 				String paymentPage = pathRb.getString("payment");
 				response.sendRedirect(paymentPage);

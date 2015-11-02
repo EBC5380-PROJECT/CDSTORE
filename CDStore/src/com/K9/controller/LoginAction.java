@@ -72,6 +72,8 @@ public class LoginAction extends HttpServlet {
 				Date date = new Date();
 				//generate the login flag string by hashing the username and current date so it won't be the same every day for the same user to prevent spoofing.
 				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
+				//remove the error message
+				session.removeAttribute("error");
 				//get the redirect path and redirect
 				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
 				String indexPage = pathRb.getString("index");

@@ -22,6 +22,17 @@
 			$(function(){
 				getNavBarLinks();
 			});
+			
+			var finalcart = null;
+			$(function(){
+				<% String finalcart = (String)session.getAttribute("finalCart");%>
+				finalcart = <%=finalcart %>;
+				console.log(finalcart);
+				//finalcart = JSON.parse(finalcart);
+				
+				$("#finalmessage").html("Thank you for spending $" + getTotal(finalcart) + ". Have a nice day.");
+			});
+			
 		</script>
 	</head>
 
@@ -57,7 +68,7 @@
     <div class="container theme-showcase" role="main">
 
       <div class="page-header" id="thank">
-        <h1>Thank you for your order</h1>
+        <h1 id="finalmessage">Thank you for shopping with us.</h1>
 		<br>
 		<h3>Please come again.</h3>
 		

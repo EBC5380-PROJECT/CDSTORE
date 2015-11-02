@@ -52,7 +52,7 @@
 		<form class="form-signin" id="form" action="" method="post">
 			<h2 class="form-signin-heading">Payment Method</h2>
 			<!-- Error messages display here -->
-			<font color="red" id="msg-error">
+			<font color="red" id="msg_error">
 		  	 
 		  </font>
 
