@@ -1,0 +1,2 @@
+TestCategoryDAO Test Result: [{"categoryId":1,"categoryName":"COUNTRY","imageName":"countryImage.jpg"},{"categoryId":2,"categoryName":"ROCK","imageName":"rockImage.jpg"},{"categoryId":3,"categoryName":"POP","imageName":"popImage.jpg"}]
+

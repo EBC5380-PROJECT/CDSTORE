@@ -1,0 +1,2 @@
+TestCDDAO_getDetailedProductInfo Test Result: {"cdId":2,"title":"16 Biggest Hits","artistName":"Various artists","description":"16 Biggest Hits is a compilation album by country singer Willie Nelson. It was released on July 14, 1998","categoryId":1,"price":15.99,"image":"image2"}
+
