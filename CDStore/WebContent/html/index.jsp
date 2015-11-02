@@ -115,27 +115,15 @@
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
       </ol>
       <div class="carousel-inner" role="listbox" >
+       
         <div class="item active">
-          <img class="first-slide" src="" alt="First slide" style="width:80 px;height:200px;" style="padding 100px;">
-
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>It is all about music</h1>
-              <p></p>
-              <p><a class="btn btn-lg btn-primary" href="#" id="carousel-signup" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide" src="" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
               <h1>One way to get music CDs</h1>
               <p></p>
-              <p><a class="btn btn-lg btn-primary" id="carousel-category" href="category.html" role="button">Browse gallery</a></p>
+              <p><a class="btn btn-lg btn-primary" id="carousel-category" href="" role="button">Browse gallery</a></p>
             </div>
           </div>
         </div>

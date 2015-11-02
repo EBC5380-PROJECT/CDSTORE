@@ -49,12 +49,10 @@
 			dom += '$.get(\'' + Service.cartUpdateService.address + '?itemId=@cdID&itemName=@encodedtitle&price=@price\', function(data, status){ alert(\'Item added to cart.\'); });"';
 
 			
-			dom += ' href=\"#\" id="@cdID" title="@title" price="@price">Add to cart</a></div>';
+			dom += ' href="#" id="@cdID" title="@title" price="@price">Add to cart</a></div>';
 			
 			//convert cart object to string and update the session
 			//TODO: remove comment
-			
-			dom += ';"';
 			
 			//extract url query parameters, if any
 			//if none then use the all products service
@@ -97,9 +95,10 @@
 							//add element to "categories" in the dom
 							$("#info").append(newDom);
 							$("title").html(data.title);
+							
 
 							//append the image div
-							var imgdom = '<img id="img" src="' + Client.imgdir + data[0].image + '" class="img-responsive" alt="Generic placeholder thumbnail">';
+							var imgdom = '<img id="img" src="' + Client.imgdir + data.image + '" class="img-responsive" alt="Generic placeholder thumbnail">';
 							$("#image_div").append(imgdom);
 						
 						//}

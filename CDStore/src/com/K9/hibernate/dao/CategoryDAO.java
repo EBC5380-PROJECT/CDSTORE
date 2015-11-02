@@ -62,6 +62,7 @@ public class CategoryDAO {
             //The transaction is finalised by calling the commit method.
              
         	transaction.commit();
+        	session.close();
         	
         	
             //The json string is returned to the caller.

@@ -55,6 +55,7 @@ public class OrderItemDAO {
             
             //committing the transaction
             transaction.commit();
+            session.close();
             
             //returning the unique identifier of the orderItem just inserted into the database.
             return Integer.toString(orderItem.getOrderitemId());

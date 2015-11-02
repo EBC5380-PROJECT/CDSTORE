@@ -27,8 +27,6 @@
 			$('#left-all-category-link').attr('href', Client.category.address);
 			var currentCategoryId = (document.URL).split("?" + Client.category.parameter + "=")[1];
 			
-			//load top nav-bar
-			getNavBarLinks(username != null && username != "null");
 			
 			//session variables
 			//TODO: remove comment in JSP
@@ -37,6 +35,12 @@
 				String un = (String)session.getAttribute("username");
 			%>
 			username = "<%=un %>";
+			
+			//load top nav-bar
+			if(username == null)
+				getNavBarLinks(false);
+			else
+				getNavBarLinks(true);
 			
 			
 			

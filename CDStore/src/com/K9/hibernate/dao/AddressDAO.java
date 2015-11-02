@@ -57,6 +57,7 @@ public class AddressDAO {
             
             //committing the transaction
             transaction.commit();
+            session.close();
             
             //the Id of the newly created row in the Address table is returned to the calling class
             return Integer.toString(addressInfo.getAddressId());

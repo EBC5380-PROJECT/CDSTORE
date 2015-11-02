@@ -60,6 +60,7 @@ public class OrdersDAO {
             
             //committing the transaction
             transaction.commit();
+            session.close();
             String orderId = Integer.toString(ordersInfo.getOrderId());
             
             //the unique Id of the row just created in the Order table is returned to the calling class
@@ -114,6 +115,7 @@ public class OrdersDAO {
            
              //The transaction is finalised by calling the commit method.
              transaction.commit();
+             session.close();
              
              return "";
             

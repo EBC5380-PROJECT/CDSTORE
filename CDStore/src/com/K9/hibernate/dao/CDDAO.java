@@ -63,6 +63,7 @@ public class CDDAO {
 	            
 
 	            transaction.commit();
+	            session.close();
 	            
 	           
 	            //The json string is returned to the caller.
@@ -126,6 +127,7 @@ public class CDDAO {
 		            //The transaction is finalised by calling the commit method.
 		             
 		            transaction.commit();
+		            session.close();
 		            
 		            
 		             //The json string is returned to the caller.
@@ -196,6 +198,7 @@ public class CDDAO {
 		              
 
 		            transaction.commit();
+		            session.close();
 		            
 		            
 		            //The json string is returned to the caller.

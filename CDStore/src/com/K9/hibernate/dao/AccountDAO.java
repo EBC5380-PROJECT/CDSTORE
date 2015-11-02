@@ -69,6 +69,7 @@ public class AccountDAO {
             //Committing the transaction in the database.
 
             transaction.commit();
+            session.close();
             
                        
             return "";
@@ -111,6 +112,7 @@ public class AccountDAO {
              
              //commit transaction
              transaction.commit();
+             session.close();
                          		 
              if (accountList.isEmpty())
              	return "true"; //userName is unique
@@ -169,6 +171,7 @@ public class AccountDAO {
             } 
            //commit the transaction
             transaction.commit();
+            session.close();
             
                              	
             if (validPassword)
@@ -221,6 +224,7 @@ public class AccountDAO {
             //The transaction is finalised by calling the commit method.
            
         	transaction.commit();
+        	session.close();
         	
         	
            //The json string is returned to the caller.

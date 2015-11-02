@@ -91,7 +91,7 @@ var Server = {
 		"url": "CDStore/PurchaseAction"
 	},
 	"signoutService": {
-		"url": "CDStore/LogoutAction"	
+		"url": "../LogoutAction"	
 	},
 	"checkoutService": {
 		"url": "../CheckoutAction"
@@ -143,7 +143,9 @@ var retrieveCategory = function (currentCategoryID) {
 
 //display error message on the page
 var displayError = function (message) {
-	$("#msg_error").html(message);
+	if(message != "null" || message != null){
+		$("#msg_error").html(message);
+	}
 };
 
 //dynamically set the links for the top nav-bar
@@ -171,6 +173,7 @@ var getNavBarLinks = function (loginstatus) {
 		//probably won't work
 		//TODO: uncomment and test this
 		//$("#fixed-top-sign").attr("onclick", '<% session.setAttribute("username", null); %');
+		$("#fixed-top-register").remove();
 		$("#fixed-top-sign").html("Sign out");
 		$("#fixed-top-sign").attr("href", Server.signoutService.url);
 	}
