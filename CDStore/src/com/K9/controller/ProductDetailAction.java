@@ -33,18 +33,13 @@ public class ProductDetailAction extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		int productId = 0;
 		String jsonProductInfo = "";
 		
 		String tmpProductId = request.getParameter("productid");
 		productId = (tmpProductId==null||tmpProductId.trim().equals(""))?0:Integer.parseInt(tmpProductId);		
-//		HashMap<String,Integer> param = new HashMap<String,Integer>();
-//		param.put("categoryId", productId);
-//		Gson gson = new Gson();
-//		String jsonProductId = gson.toJson(param);
-//		productId = Integer.parseInt(request.getParameter("productid") != null?request.getParameter("productid"):"0");
-		
+
 		try {
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
 			jsonProductInfo = pcService.getProductInfo(productId);

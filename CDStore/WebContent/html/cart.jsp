@@ -34,7 +34,8 @@
 		//function for sending current cart to cart service
 		var updateCart = function(cart){
 			console.log("Cart not updated");
-			$.post(Service.cartUpdateService.address, {"cart": encodeURIComponent(JSON.stringify(cart))}.done(function(data, status){ }));
+			$.post(Service.cartUpdateService.address, {"cart": JSON.stringify(cart)});
+			location.reload();
 		};
 		
 		$(function(){			
@@ -92,7 +93,9 @@
 			if(username == "null" || username == null)
 				$("#checkout").attr("href", Client.signin.address);
 			else
-				$("#checkout").attr("href", Client.shipping.address);
+				$("#checkout").attr("href", Server.checkoutService.url);
+			
+			$("#checkout_button_form").attr("action", Server.checkoutService.url);
 		});
 		
 	</script>
@@ -160,7 +163,9 @@
 			</tbody>
 		</table>
 		<a href="" onclick="updateCart(cart);" id="update" class="label label-primary">Update</a>
-		<a href="" id="checkout" class="label label-primary">Checkout</a>
+		<form method="post" action="" id="checkout_button_form">
+			<button type="submit" id="checkout" class="label label-primary">Checkout</button>
+		</form>
 	</div>
 	</div>
 	<br>

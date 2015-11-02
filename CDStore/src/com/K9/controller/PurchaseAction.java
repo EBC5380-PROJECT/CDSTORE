@@ -41,14 +41,40 @@ public class PurchaseAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Gson gson = new Gson();
-
-		
-		String paymentmethod = (String) request.getAttribute("paymentmethod");
-		String cardname = (String) request.getAttribute("cardholdername");
-		String cardnumber = (String) request.getAttribute("cardnumber");
-		String expyear = (String) request.getAttribute("expyear");
-		String expmonth = (String) request.getAttribute("expmonth");
-		int securitycode = (int) request.getAttribute("securitycode");
+		boolean verified = true;
+		String errorMessage = "";
+		if(null == request.getParameter("paymentmethod")||request.getParameter("paymentmethod").length()==0){
+			verified = false;
+			errorMessage = "Please select payment method.\n";
+		}
+		if(null == request.getParameter("cardholdername")||request.getParameter("cardholdername").length()==0){
+			verified = false;
+			errorMessage += "Please input cardholder's name.\n";
+		}
+		if(null == request.getParameter("cardnumber")||request.getParameter("cardnumber").length()==0){
+			verified = false;
+			errorMessage += "Please input card number.\n";
+		}
+		if(null == request.getParameter("expyear")||request.getParameter("expyear").length()==0
+				||null == request.getParameter("expmonth")||request.getParameter("expmonth").length()==0){
+			verified = false;
+			errorMessage = "Please select expiry.\n";
+		}
+		if(null == request.getParameter("securitycode")||request.getParameter("securitycode").length()==0){
+			verified = false;
+			errorMessage += "Please input security code.\n";
+		}
+		if(!verified){
+			session.setAttribute("error", errorMessage);
+			response.sendRedirect("/CDStore/html/payment.jsp");
+			return;
+		}
+		String paymentmethod = (String) request.getParameter("paymentmethod");
+		String cardname = (String) request.getParameter("cardholdername");
+		String cardnumber = (String) request.getParameter("cardnumber");
+		String expyear = (String) request.getParameter("expyear");
+		String expmonth = (String) request.getParameter("expmonth");
+		int securitycode = Integer.parseInt(request.getParameter("securitycode"));
 		
 		PaymentInfo paymentInfo = new PaymentInfo();
 		paymentInfo.setCreditCardHolderName(cardname);
@@ -70,13 +96,16 @@ public class PurchaseAction extends HttpServlet {
 				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 				String error = rb.getString(String.valueOf(result.getCallStatus()));
 				session.setAttribute("error", error);
-				response.sendRedirect("/html/payment.jsp");
+				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+				String paymentPage = pathRb.getString("payment");
+				response.sendRedirect(paymentPage);
 			}else{
-				response.sendRedirect("/CDStore/html/finish.jsp");
+				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+				String finishPage = pathRb.getString("finish");
+				response.sendRedirect(finishPage);
 			}
 			
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -1,6 +1,8 @@
 package com.K9.controller;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +31,9 @@ public class LogoutAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("login");
 		session.removeAttribute("username");
-		response.sendRedirect("/CDStore/html/index.jsp");
+		ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+		String indexPage = pathRb.getString("index");
+		response.sendRedirect(indexPage);
 	}
 
 	/**

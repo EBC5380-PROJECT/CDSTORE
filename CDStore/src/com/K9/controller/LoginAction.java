@@ -41,11 +41,9 @@ public class LoginAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String userName = "";
-		String password = "";
-		
-		userName = request.getParameter("username");
-		password = request.getParameter("password");
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");
+
 		
 		try {
 			
@@ -63,8 +61,10 @@ public class LoginAction extends HttpServlet {
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 				Date date = new Date();
 				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
-				//TODO change the page path
-				response.sendRedirect("/CDStore/html/index.jsp");
+//				System.out.println("=======loginFlag:"+session.getAttribute("login").toString());
+				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+				String indexPage = pathRb.getString("index");
+				response.sendRedirect(indexPage);
 				
 			}else{
 				Gson gson = new Gson();

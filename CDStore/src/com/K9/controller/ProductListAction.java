@@ -36,10 +36,7 @@ public class ProductListAction extends HttpServlet {
 		
 		String category = request.getParameter("category");
 		categoryId = (category==null||category.trim().equals(""))?0:Integer.parseInt(category);		
-//		HashMap<String,Integer> param = new HashMap<String,Integer>();
-//		param.put("categoryId", categoryId);
-//		Gson gson = new Gson();
-//		String jsonCategoryId = gson.toJson(param);
+
 		
 		try {
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();

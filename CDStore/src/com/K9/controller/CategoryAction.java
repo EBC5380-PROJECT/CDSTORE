@@ -25,22 +25,21 @@ public class CategoryAction extends HttpServlet {
      */
     public CategoryAction() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
+			//create web service client
 			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
+			//get category list from web service
 			String jsonCategoryList = pcService.getCategoryList();
-			
+			//return it back to front end
 			PrintWriter out = response.getWriter();
 			out.print(jsonCategoryList);
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

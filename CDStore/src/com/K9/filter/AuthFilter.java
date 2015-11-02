@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -42,16 +43,15 @@ public class AuthFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
+		//If it's different request type, pass it because we cannot process it
 		if (!(request instanceof HttpServletRequest && response instanceof HttpServletResponse)) {
 
 		    chain.doFilter(request,response);
 		    return;
 		  }
-		  HttpServletRequest httpRequest=(HttpServletRequest)request;
-		  HttpServletResponse httpResponse=(HttpServletResponse)response;
+		//cast the ServletRequest and ServletResponse back to HttpServletRequest and HttpServletResponse
+		  HttpServletRequest httpRequest = (HttpServletRequest)request;
+		  HttpServletResponse httpResponse = (HttpServletResponse)response;
 		  HttpSession session = httpRequest.getSession();
 		  String loginFlag = (String) session.getAttribute("login");
 		  String username = (String) session.getAttribute("username");
@@ -59,15 +59,18 @@ public class AuthFilter implements Filter {
 		  Date date = new Date();
 		  System.out.println("==================loginflag"+loginFlag);
 		  System.out.println("==================calculateflag"+DigestUtils.sha256Hex(dateFormat.format(date)+username));
-		  
-		
-		if(loginFlag.equals(DigestUtils.sha256Hex(dateFormat.format(date)+username))){
+		  //check the loginFlag is the same one user loged in
+		if(username!=null && loginFlag!=null && loginFlag.equals(DigestUtils.sha256Hex(dateFormat.format(date)+username))){
 			// pass the request along the filter chain
 			chain.doFilter(httpRequest, httpResponse);
 			
 		}else{
-			//TODO change redirect to error message
-			httpResponse.sendRedirect("/CDStore/html/signin.jsp");
+			ResourceBundle errRb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = errRb.getString("900");
+			session.setAttribute("error", error);
+			ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+			String signinPage = pathRb.getString("signin");
+			httpResponse.sendRedirect(signinPage);
 		}
 		
 		

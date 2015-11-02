@@ -90,13 +90,11 @@ var Server = {
 	"paymentService": {
 		"url": "CDStore/PurchaseAction"
 	},
-	
-	//TODO: Check on this
-	//Might want to implement this server side.
-	//Give new session
-	//Redirect back to home page
 	"signoutService": {
 		"url": "CDStore/LogoutAction"	
+	},
+	"checkoutService": {
+		"url": "../CheckoutAction"
 	},
 
 	//TEST service: returns all key/value

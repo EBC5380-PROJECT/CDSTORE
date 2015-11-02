@@ -110,14 +110,18 @@ public class RegistrationAction extends HttpServlet {
 				String error = rb.getString(String.valueOf(result.getCallStatus()));
 				session.setAttribute("error", error);
 //				System.out.println("================4 commited: "+response.isCommitted());
-				response.sendRedirect("/CDStore/html/register.jsp");
+				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+				String indexPage = pathRb.getString("index");
+				response.sendRedirect(indexPage);
 			}else{
 				session.setAttribute("username", accountInfo.getAccountName());
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 				Date date = new Date();
 				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
 //				System.out.println("================5 commited: "+response.isCommitted());
-				response.sendRedirect("/CDStore/html/index.jsp");
+				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+				String indexPage = pathRb.getString("index");
+				response.sendRedirect(indexPage);
 				
 			}
 			

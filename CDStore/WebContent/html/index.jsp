@@ -31,7 +31,7 @@
 				String un = (String)session.getAttribute("username");
 			%>
 			
-			username = "<%=un %>";		
+			username = "<%=un %>";
 			
 			//top nav bar
 			getNavBarLinks(!(username == "null" || username == null));
@@ -53,10 +53,15 @@
 					//replace links
 					newDom = newDom.replaceAll("@link", Client.category.address + "?" + Client.category.parameter + "=" + data[i].categoryId);
 					//TO DO: uncomment this after image for categories has been placed
-					newDom = newDom.replace("@imgsrc", Client.imgstockdir + data[i].img);
+					console.log(Client.imgstockdir + data[i].img);
+					newDom = newDom.replace("@imgsrc", Client.imgstockdir + data[i].imageName);
 					
 					//add element to "categories" in the dom
 					$("#categories").append(newDom);
+					
+					//carousel
+					$("#carousel-category").attr("href", Client.category.address);
+					$("#carousel-signup").attr("href", Client.register.address);
 					
 				}},
 				error: function(xhr){
@@ -111,7 +116,6 @@
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner" role="listbox" >
         <div class="item active">
@@ -121,17 +125,7 @@
             <div class="carousel-caption">
               <h1>It is all about music</h1>
               <p></p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="second-slide" src="" alt="Second slide" >
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>All the ways you love music. <br>All in one place.</h1>
-              <p></p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+              <p><a class="btn btn-lg btn-primary" href="#" id="carousel-signup" role="button">Sign up today</a></p>
             </div>
           </div>
         </div>
@@ -139,9 +133,9 @@
           <img class="third-slide" src="" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>One way to get music CD</h1>
+              <h1>One way to get music CDs</h1>
               <p></p>
-              <p><a class="btn btn-lg btn-primary" href="category.html" role="button">Browse gallery</a></p>
+              <p><a class="btn btn-lg btn-primary" id="carousel-category" href="category.html" role="button">Browse gallery</a></p>
             </div>
           </div>
         </div>
