@@ -30,11 +30,10 @@
 			changeAction();
 
 			//access error message and display them
-			/*<% 
-				String error = session.getAttribute("error");
+			<% 
+				String error = (String)session.getAttribute("error");
 			%>
-			//error = "<%=error %>"
-			*/
+			error = "<%=error %>"
 
 			displayError();
 		});

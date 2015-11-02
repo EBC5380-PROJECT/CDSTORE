@@ -79,7 +79,7 @@ public class CheckoutAction extends HttpServlet {
 					ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 					String error = rb.getString(String.valueOf(result.getCallStatus()));
 					session.setAttribute("error", error);
-					response.sendRedirect("shipping.html");
+					response.sendRedirect("/html/shipping.html");
 				}
 			}else{
 				HashMap<String, Integer> resultMap = gson.fromJson(jsonResult, HashMap.class);
@@ -87,7 +87,7 @@ public class CheckoutAction extends HttpServlet {
 				String jsonPurchaseOrder = gson.toJson(purchaseOrder);
 				
 				session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
-				response.sendRedirect("payment.jsp");
+				response.sendRedirect("/CDStores/html/payment.jsp");
 			}
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block

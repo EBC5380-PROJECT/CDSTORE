@@ -41,16 +41,19 @@ public class RegistrationAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userName = (String)request.getAttribute("username");
-		String firstName = (String)request.getAttribute("firstname");
-		String lastName = (String)request.getAttribute("lastname");
-		String email = (String)request.getAttribute("email");
-		String password = (String)request.getAttribute("password");
-		String confirmPassword = (String)request.getAttribute("confirmpassword");
+//		System.out.println("================1 commited: "+response.isCommitted());
+		
+		String userName = (String)request.getParameter("username");
+		String firstName = (String)request.getParameter("firstname");
+		String lastName = (String)request.getParameter("lastname");
+		String email = (String)request.getParameter("email");
+		String password = (String)request.getParameter("password");
+		String confirmPassword = (String)request.getParameter("passwordconfirm");
 		
 		if(password == null || confirmPassword == null || !password.equals(confirmPassword)){
 			request.setAttribute("error", "password error");
-			response.sendRedirect("signin.jsp");
+			response.sendRedirect("/CDStore/html/register.jsp");
+			return;
 		}
 		
 		AccountInformation accountInfo = new AccountInformation();
@@ -60,12 +63,12 @@ public class RegistrationAction extends HttpServlet {
 		accountInfo.setEmail(email);
 		accountInfo.setPassword1(password);
 		
-		String shippingname = (String)request.getAttribute("shipping-name");
-		String shippingaddress = (String)request.getAttribute("shipping-address");
-		String shippingcity = (String)request.getAttribute("shipping-city");
-		String shippingprovince = (String)request.getAttribute("shipping-province");
-		String shippingpostalcode = (String)request.getAttribute("shipping-postalcode");
-		String shippingphone = (String)request.getAttribute("shipping-phone");
+
+		String shippingaddress = (String)request.getParameter("shipping-address");
+		String shippingcity = (String)request.getParameter("shipping-city");
+		String shippingprovince = (String)request.getParameter("shipping-province");
+		String shippingpostalcode = (String)request.getParameter("shipping-postalcode");
+		String shippingphone = (String)request.getParameter("shipping-phone");
 		
 		accountInfo.setShippingAddressId(0);
 		accountInfo.setShippingAddressStreet(shippingaddress);
@@ -76,11 +79,11 @@ public class RegistrationAction extends HttpServlet {
 		accountInfo.setShippingAddressCountry("Canada");
 		
 
-		String billingaddress = (String)request.getAttribute("billing-address");
-		String billingcity = (String)request.getAttribute("billing-city");
-		String billingprovince = (String)request.getAttribute("billing-province");
-		String billingpostalcode = (String)request.getAttribute("billing-postalcode");
-		String billingphone = (String)request.getAttribute("billing-phone");
+		String billingaddress = (String)request.getParameter("billing-address");
+		String billingcity = (String)request.getParameter("billing-city");
+		String billingprovince = (String)request.getParameter("billing-province");
+		String billingpostalcode = (String)request.getParameter("billing-postalcode");
+		String billingphone = (String)request.getParameter("billing-phone");
 		
 		accountInfo.setbillingAddressId(0);
 		accountInfo.setBillingAddressStreet(billingaddress);
@@ -89,27 +92,33 @@ public class RegistrationAction extends HttpServlet {
 		accountInfo.setBillingAddressPostalCode(billingpostalcode);
 		accountInfo.setBillingAddressPhone(billingphone);
 		accountInfo.setBillingAddressCountry("Canada");
-		
+//		System.out.println("================3 commited: "+response.isCommitted());
 		Gson gson = new Gson();
 		String accountInfoJson = gson.toJson(accountInfo);
 		HttpSession session = request.getSession();
 		try {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-			String jsonResult = opService.creatAccount(userName, accountInfoJson);
+			System.out.println("Registration accountName: "+"{\"accountName\":\""+userName+"\"}");
+			System.out.println("Registration accountInfoJson: "+accountInfoJson);
+			String jsonResult = opService.creatAccount("{\"accountName\":\""+userName+"\"}", accountInfoJson);
+			System.out.println("Registration jsonResult: "+jsonResult);
+			
 			CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
 			
 			if(result.getCallStatus()!=0){
 				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 				String error = rb.getString(String.valueOf(result.getCallStatus()));
 				session.setAttribute("error", error);
-				response.sendRedirect("register.jsp");
+//				System.out.println("================4 commited: "+response.isCommitted());
+				response.sendRedirect("/CDStore/html/register.jsp");
 			}else{
 				session.setAttribute("username", accountInfo.getAccountName());
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 				Date date = new Date();
 				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
+//				System.out.println("================5 commited: "+response.isCommitted());
+				response.sendRedirect("/CDStore/html/index.jsp");
 				
-				response.sendRedirect("index.jsp");
 			}
 			
 			

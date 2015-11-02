@@ -57,6 +57,8 @@ public class AuthFilter implements Filter {
 		  String username = (String) session.getAttribute("username");
 		  DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		  Date date = new Date();
+		  System.out.println("==================loginflag"+loginFlag);
+		  System.out.println("==================calculateflag"+DigestUtils.sha256Hex(dateFormat.format(date)+username));
 		  
 		
 		if(loginFlag.equals(DigestUtils.sha256Hex(dateFormat.format(date)+username))){
@@ -65,7 +67,7 @@ public class AuthFilter implements Filter {
 			
 		}else{
 			//TODO change redirect to error message
-			httpResponse.sendRedirect("/login.jsp");
+			httpResponse.sendRedirect("/CDStore/html/signin.jsp");
 		}
 		
 		

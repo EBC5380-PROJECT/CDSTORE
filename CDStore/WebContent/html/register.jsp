@@ -19,7 +19,7 @@
 	<script>
 		//change the form's action dynamically on page load such that there is
 		var changeAction = function () {
-			$("#form").attr("action", name + Server.testService.url)
+			$("#form").attr("action", name + Server.registerService.url)
 		};
 
 		//check password sameness
@@ -39,13 +39,13 @@
 			changeAction();
 
 			//access error message and display them
-			/*<% 
-				String error = session.getAttribute("error");
+			<% 
+				String error = (String)session.getAttribute("error");
 			%>
-			//error = "<%=error %>"
-			*/
+			error = "<%=error %>"
+			
 
-			displayError();
+			displayError(error);
 		});
 	</script>
 </head>

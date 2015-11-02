@@ -28,7 +28,7 @@
 			
 			//TODO: uncomment this
 			<% 
-				String un = session.username;
+				String un = (String)session.getAttribute("username");
 			%>
 			
 			username = "<%=un %>";		
@@ -53,7 +53,7 @@
 					//replace links
 					newDom = newDom.replaceAll("@link", Client.category.address + "?" + Client.category.parameter + "=" + data[i].categoryId);
 					//TO DO: uncomment this after image for categories has been placed
-					//newDom = newDom.replace("@imgsrc", Client.imgstockdir + data[i].img);
+					newDom = newDom.replace("@imgsrc", Client.imgstockdir + data[i].img);
 					
 					//add element to "categories" in the dom
 					$("#categories").append(newDom);
@@ -141,7 +141,7 @@
             <div class="carousel-caption">
               <h1>One way to get music CD</h1>
               <p></p>
-              <p><a class="btn btn-lg btn-primary" href="category.jsp" role="button">Browse gallery</a></p>
+              <p><a class="btn btn-lg btn-primary" href="category.html" role="button">Browse gallery</a></p>
             </div>
           </div>
         </div>

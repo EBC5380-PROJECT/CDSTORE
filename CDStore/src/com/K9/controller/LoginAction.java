@@ -52,7 +52,7 @@ public class LoginAction extends HttpServlet {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
 
 			HttpSession session = request.getSession();
-			String jsonAccountInfo = opService.getAccount(userName, password);
+			String jsonAccountInfo = opService.getAccount("{\"accountName\":\""+userName+"\"}", "{\"password\":\""+password+"\"}");
 
 			
 			if(!jsonAccountInfo.contains("callStatus")){
@@ -64,7 +64,7 @@ public class LoginAction extends HttpServlet {
 				Date date = new Date();
 				session.setAttribute("login", DigestUtils.sha256Hex(dateFormat.format(date)+accountInfo.getAccountName()));
 				//TODO change the page path
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("/CDStore/html/index.jsp");
 				
 			}else{
 				Gson gson = new Gson();
@@ -74,7 +74,8 @@ public class LoginAction extends HttpServlet {
 					ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
 					String error = rb.getString(String.valueOf(result.getCallStatus()));
 					session.setAttribute("error", error);
-					response.sendRedirect("signin.jsp");
+					String referer = request.getHeader("Referer");
+					response.sendRedirect(referer);
 				}
 
 			}

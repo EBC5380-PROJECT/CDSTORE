@@ -19,7 +19,7 @@
 	<script>
 		//change the form's action dynamically on page load such that there is
 		var changeAction = function () {
-			$("#form").attr("action", name + Server.testService.url)
+			$("#form").attr("action", name + Server.signInService.url)
 		};
 
 		var error = "";
@@ -29,13 +29,13 @@
 			changeAction();
 			
 			//access error message and display them
-			/*<% 
-				String error = session.getAttribute("error");
+			<% 
+				String error = (String)session.getAttribute("error");
 			%>
-			//error = "<%=error %>"
-			*/
+			error = "<%=error %>"
 			
-			displayError();
+			
+			displayError(error);
 		});
 	</script>
 
@@ -63,7 +63,7 @@
 					<input type="checkbox" name="remember">Remember me </input>
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit" onsubmit="return validate();">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 		</form>
 
 	</div>

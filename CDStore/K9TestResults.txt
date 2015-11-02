@@ -4,3 +4,7 @@ _17TestOrderProcessService_wrongPassword: {"callStatus":1}
 
 OrderProcessService_getAccount: {"accountName":"mbp","password1":"","fName":"Michele","lName":"Belanger","billingAddressId":1,"shippingAddressId":2,"email":"mbp@gmail.com"}
 
+OrderProcessService_getAccount: {"callStatus":1}
+
+_9TestOrderProcessService_createAccount Test Result: {"callStatus":0}
+

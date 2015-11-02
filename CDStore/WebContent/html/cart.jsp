@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Order Summary</title>
+	<title>Your cart</title>
 	<!-- Bootstrap core CSS -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- Bootstrap theme -->
@@ -29,15 +29,23 @@
 	<script>
 		var username = null;
 		//TODO: make this null in integration testing/production
-		var cart = null;
+		var cart = testCart;
+		
+		//function for sending current cart to cart service
+		var updateCart = function(cart){
+			console.log("Cart not updated");
+			$.post(Service.cartUpdateService.address, {"cart": encodeURIComponent(JSON.stringify(cart))}.done(function(data, status){ }));
+		};
 		
 		$(function(){			
 			//get session
 			//TODO: remove comment in JSP
 			<% 
-				String ca = session.getAttribute("cart");
+				String username = (String)session.getAttribute("username");
+				String ca = (String)session.getAttribute("cart");
 			%>
-			cart = "<%=ca %>";
+			username = '<%=username %>';
+			cart = '<%=ca %>';
 			cart = JSON.parse(cart);
 			
 			
@@ -55,9 +63,7 @@
 			dom += "var total = getTotal(cart);";
 			dom += "$('#total').html(total);";
 			dom += "$('#totaltax').html((total*tax).toFixed(2));";
-			//update JSP cart with <% session.setAttribute("cart", JSON.stringify(cart)); %>
-			//TODO: remove comment this in JSP
-			dom += "<% session.setAttribute(&quot;cart&quot;, JSON.stringify(cart)); %>;
+
 			
 			dom += '"style="width:25px ; height:25px ;"></input>';
 			
@@ -153,6 +159,7 @@
 
 			</tbody>
 		</table>
+		<a href="" onclick="updateCart(cart);" id="update" class="label label-primary">Update</a>
 		<a href="" id="checkout" class="label label-primary">Checkout</a>
 	</div>
 	</div>

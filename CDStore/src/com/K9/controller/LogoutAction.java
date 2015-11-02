@@ -29,7 +29,7 @@ public class LogoutAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("login");
 		session.removeAttribute("username");
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("/CDStore/html/index.jsp");
 	}
 
 	/**

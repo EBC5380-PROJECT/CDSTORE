@@ -19,7 +19,6 @@
 	  
 	<script>
 		var username = null;
-		var cart = [];
 		
 		$(function(){
 			//left sidebar
@@ -32,31 +31,30 @@
 			
 			//session variables
 			//TODO: uncomment this
+			
 			<% 
-				String un = session.getAttribute("username");
-				String ca = session.getAttribute("cart");
+				String un = (String)session.getAttribute("username");
 			%>
 			username = "<%=un %>";
-			cart = "<%=ca %>";
-			cart = JSON.parse(cart);
 			
 			
 			//TODO: remove this after JSP is tested
 			console.log("username: " + username);
-			console.log("cart: " + cart);
 			
 			
 			var dom = '<h1>@title</h1><h2> <span class="text-muted">@description</span></h2><br><p class="lead">price:$@price</p><h2><p></p></h2><a class="btn btn-success"';
 			
-			dom += 'onclick="cart = addToCart(cart,@cdID,\'@title\',@price); ';
+			dom += 'onclick="';
+			
+			dom += '$.get(\'' + Service.cartUpdateService.address + '?itemId=@cdID&itemName=@encodedtitle&price=@price\', function(data, status){ alert(\'Item added to cart.\'); });"';
+
+			
+			dom += ' href=\"#\" id="@cdID" title="@title" price="@price">Add to cart</a></div>';
 			
 			//convert cart object to string and update the session
 			//TODO: remove comment
-			dom += '<% session.setAttribute("cart", JSON.stringify(cart)); %> '
 			
-			dom += 'alert(\'Item added to Cart\');"';
-			
-			dom+= ' href="#">Add to cart</a>';
+			dom += ';"';
 			
 			//extract url query parameters, if any
 			//if none then use the all products service
@@ -84,18 +82,21 @@
 						//} else {
 							//insert category in DOM
 							var newDom = dom;
+							
+							newDom = newDom.replaceAll("@encodedtitle", encodeURIComponent(data.title));	
+						
 							//@cdID
-							newDom = newDom.replace("@cdID",  data[0].cdId);
+							newDom = newDom.replaceAll("@cdID",  data.cdId);
 							//@title
-							newDom = newDom.replaceAll("@title", data[0].title);
+							newDom = newDom.replaceAll("@title", data.title);
 							//@description
-							newDom = newDom.replace("@description", data[0].description);
+							newDom = newDom.replace("@description", data.description);
 							//@price
-							newDom = newDom.replaceAll("@price", data[0].price);
+							newDom = newDom.replaceAll("@price", data.price);
 
 							//add element to "categories" in the dom
 							$("#info").append(newDom);
-							$("title").html(data[0].title);
+							$("title").html(data.title);
 
 							//append the image div
 							var imgdom = '<img id="img" src="' + Client.imgdir + data[0].image + '" class="img-responsive" alt="Generic placeholder thumbnail">';

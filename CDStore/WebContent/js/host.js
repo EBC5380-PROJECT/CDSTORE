@@ -75,23 +75,20 @@ var Service = {
 
 	"productInfoService": new ServiceObject("CDStore/ProductDetailAction", "productid"),
 
-
+	"cartUpdateService": new ServiceObject("CDStore/AddToCartAction", "")
 };
 
 //POST authentication services at server
 var Server = {
 	//POST
 	"signInService": {
-		"url": "Test/SignIn"
+		"url": "CDStore/LoginAction"
 	},
 	"registerService": {
-		"url": "Test/Register"
+		"url": "CDStore/RegistrationAction"
 	},
 	"paymentService": {
-		"url": "Test/Payment"
-	},
-	"shippingService": {
-		"url": "Test/Shipping"
+		"url": "CDStore/PurchaseAction"
 	},
 	
 	//TODO: Check on this
@@ -99,12 +96,12 @@ var Server = {
 	//Give new session
 	//Redirect back to home page
 	"signoutService": {
-		"url": "Test/Signout"	
+		"url": "CDStore/LogoutAction"	
 	},
 
 	//TEST service: returns all key/value
 	"testService": {
-		"url": "Test/PostService"
+		"url": "CDStore/PostService"
 	}
 };
 
@@ -175,7 +172,7 @@ var getNavBarLinks = function (loginstatus) {
 		//set username in session to null
 		//probably won't work
 		//TODO: uncomment and test this
-		$("#fixed-top-sign").attr("onclick", '<% session.setAttribute("username", null); %');
+		//$("#fixed-top-sign").attr("onclick", '<% session.setAttribute("username", null); %');
 		$("#fixed-top-sign").html("Sign out");
 		$("#fixed-top-sign").attr("href", Server.signoutService.url);
 	}

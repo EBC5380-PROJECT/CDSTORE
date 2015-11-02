@@ -20,7 +20,6 @@
 	  
 	<script>
 		var username = null;
-		var cart = [];
 		
 		$(function(){
 			
@@ -29,38 +28,34 @@
 			var currentCategoryId = (document.URL).split("?" + Client.category.parameter + "=")[1];
 			
 			//load top nav-bar
-			getNavBarLinks();
+			getNavBarLinks(username != null && username != "null");
 			
 			//session variables
 			//TODO: remove comment in JSP
+			
 			<% 
-				String un = session.getAttribute("username");
-				String ca = session.getAttribute("cart");
+				String un = (String)session.getAttribute("username");
 			%>
 			username = "<%=un %>";
-			cart = "<%=ca %>";
-			cart = JSON.parse(cart);
+			
 			
 			
 			//TODO: remove this after JSP is tested
 			console.log("username: " + username);
-			console.log("cart: " + cart);
-			
 			
 			//retrieve category data for left sidebar
 			var retCat = retrieveCategory(currentCategoryId);
 			
 			var dom = '<div class="col-xs-6 col-sm-3 placeholder><a href="@link"><img src="@image" height="@imgx" width="@imgy" class="img-responsive" alt="Generic placeholder thumbnail"></a><a href="@link"><h4>@title</h4></a><span class="text-muted">@description</span><p class="lead">$@price</p><a class="btn btn-success"';
 			
-			dom += 'onclick="cart = addToCart(cart,@cdID,\'@title\',@price);';
+			dom += 'onclick="';
 			
 			//convert cart object to string and update the session
 			//TODO: remove comment
-			dom += '<% session.setAttribute("cart", JSON.stringify(cart)); %>'
+			dom += '$.get(\'' + Service.cartUpdateService.address + '?itemId=@cdID&itemName=@encodedtitle&price=@price\', function(data, status){ alert(\'Item added to cart.\'); });"';
+
 			
-			dom += 'alert(\'Item added to cart.\')"';
-			
-			dom += 'href="#" id="cdid-@cdID" title="@title" price="@price">Add to cart</a></div>';
+			dom += ' href=\"#\" id="@cdID" title="@title" price="@price">Add to cart</a></div>';
 			
 			//extract url query parameters, if any
 			//if none then use the all products service
@@ -78,6 +73,9 @@
 					//insert category in DOM
 					for(var i = 0; i < data.length; i++){
 						var newDom = dom;
+						
+						newDom = newDom.replaceAll("@encodedtitle", encodeURIComponent(data[i].title));
+						
 						//id for onclick action
 						newDom = newDom.replaceAll("@cdID", data[i].cdId);
 						
@@ -87,6 +85,7 @@
 						//@description
 						newDom = newDom.replaceAll("@description", data[i].description);
 						//@price
+						console.log(data[i].price);
 						newDom = newDom.replaceAll("@price", data[i].price);
 						//@link: replace the two instances of links: one for image one for title
 						newDom = newDom.replaceAll("@link", Client.info.page() + data[i].cdId);
@@ -94,7 +93,7 @@
 						newDom = newDom.replace("@image", Client.imgdir + data[i].image);
 						newDom = newDom.replace("@imgx", Client.imgx);
 						newDom = newDom.replace("@imgy", Client.imgy);
-						//TO DO: @add to cart button
+						newDom = newDom.replace("@cart", encodeURIComponent())
 
 						//add element to "categories" in the dom
 						$("#items").append(newDom);
