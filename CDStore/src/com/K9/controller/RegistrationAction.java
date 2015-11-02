@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,8 @@ import javax.xml.rpc.ServiceException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.K9.WSClient.OrderProcessService.*;
+import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
+import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
 import com.K9.session.bean.AccountInformation;
 import com.K9.util.CallStatus;
 import com.google.gson.Gson;;
@@ -33,7 +33,6 @@ public class RegistrationAction extends HttpServlet {
      */
     public RegistrationAction() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -98,10 +97,10 @@ public class RegistrationAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		try {
 			OrderProcessServiceSoapBindingStub opService = (OrderProcessServiceSoapBindingStub) new OrderProcessServiceServiceLocator().getOrderProcessService();
-			System.out.println("Registration accountName: "+"{\"accountName\":\""+userName+"\"}");
-			System.out.println("Registration accountInfoJson: "+accountInfoJson);
+//			System.out.println("Registration accountName: "+"{\"accountName\":\""+userName+"\"}");
+//			System.out.println("Registration accountInfoJson: "+accountInfoJson);
 			String jsonResult = opService.creatAccount("{\"accountName\":\""+userName+"\"}", accountInfoJson);
-			System.out.println("Registration jsonResult: "+jsonResult);
+//			System.out.println("Registration jsonResult: "+jsonResult);
 			
 			CallStatus result = gson.fromJson(jsonResult, CallStatus.class);
 			
@@ -122,12 +121,18 @@ public class RegistrationAction extends HttpServlet {
 				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
 				String indexPage = pathRb.getString("index");
 				response.sendRedirect(indexPage);
-				
 			}
 			
 			
 		} catch (ServiceException e) {
+			//handle the web service error
+			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = rb.getString("800");
 			e.printStackTrace();
+			//set the error message into session and give it back
+			session.setAttribute("error", error);
+			String referer = request.getHeader("Referer");
+			response.sendRedirect(referer);
 		}
 		
 		

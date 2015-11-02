@@ -2,10 +2,9 @@ package com.K9.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import javax.xml.rpc.ServiceException;
 
 import com.K9.WSClient.ProductCatalogService.ProductCatalogServiceServiceLocator;
 import com.K9.WSClient.ProductCatalogService.ProductCatalogServiceSoapBindingStub;
-import com.google.gson.Gson;
 
 /**
  * Servlet implementation class ItemDetailAction
@@ -33,21 +31,31 @@ public class ProductDetailAction extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int productId = 0;
+		//initiate variables
+		int productId;
 		String jsonProductInfo = "";
-		
 		String tmpProductId = request.getParameter("productid");
-		productId = (tmpProductId==null||tmpProductId.trim().equals(""))?0:Integer.parseInt(tmpProductId);		
-
-		try {
-			ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
-			jsonProductInfo = pcService.getProductInfo(productId);
-
-		} catch (ServiceException e) {
-			e.printStackTrace();
+		//check the parameter first
+		if(tmpProductId==null||tmpProductId.trim().equals("")){
+			jsonProductInfo = "";
+		}else{
+			productId = Integer.parseInt(tmpProductId);		
+			try {
+				//initiate web service client
+				ProductCatalogServiceSoapBindingStub pcService = (ProductCatalogServiceSoapBindingStub) new ProductCatalogServiceServiceLocator().getProductCatalogService();
+				//get the json product info from web service
+				jsonProductInfo = pcService.getProductInfo(productId);
+			} catch (ServiceException e) {
+				//handle the web service error
+				PrintWriter out = response.getWriter();
+				ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+				String error = rb.getString("800");
+				out.print("{\"error\":\""+error+"\"}");
+				e.printStackTrace();
+				return;
+			}
 		}
-		
+		//send the json product info to front end
 		PrintWriter out = response.getWriter();
 		out.print(jsonProductInfo);
 	
@@ -57,7 +65,6 @@ public class ProductDetailAction extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -1,6 +1,7 @@
 package com.K9.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -66,7 +67,9 @@ public class PurchaseAction extends HttpServlet {
 		}
 		if(!verified){
 			session.setAttribute("error", errorMessage);
-			response.sendRedirect("/CDStore/html/payment.jsp");
+			ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
+			String paymentPage = pathRb.getString("payment");
+			response.sendRedirect(paymentPage);
 			return;
 		}
 		String paymentmethod = (String) request.getParameter("paymentmethod");
@@ -106,7 +109,14 @@ public class PurchaseAction extends HttpServlet {
 			}
 			
 		} catch (ServiceException e) {
+			//handle the web service error
+			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = rb.getString("800");
 			e.printStackTrace();
+			//set the error message into session and give it back
+			session.setAttribute("error", error);
+			String referer = request.getHeader("Referer");
+			response.sendRedirect(referer);
 		}
 		
 		

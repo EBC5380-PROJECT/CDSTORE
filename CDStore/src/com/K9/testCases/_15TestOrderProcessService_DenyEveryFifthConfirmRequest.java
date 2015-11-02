@@ -66,7 +66,8 @@ public class _15TestOrderProcessService_DenyEveryFifthConfirmRequest {
 		
 		
 			
-		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		String x = service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		System.out.println("x***********1" + x);
 		
 	
 		
@@ -75,21 +76,24 @@ public class _15TestOrderProcessService_DenyEveryFifthConfirmRequest {
 		order1 = gson.toJson(order);
 		
 				
-		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		x=service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		System.out.println("x***********1" + x);
 		
 		_12TestOrderProcessService_createOrder createOrder2 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(3);
 		order1 = gson.toJson(order);
 		
 				
-		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		x=service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		System.out.println("x***********1" + x);
 		
 		_12TestOrderProcessService_createOrder createOrder3 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(4);
 		order1 = gson.toJson(order);
 		
 				
-		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		x=service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		System.out.println("x***********1" + x);
 		
 		
 		_12TestOrderProcessService_createOrder createOrder4 = new _12TestOrderProcessService_createOrder();
@@ -97,21 +101,24 @@ public class _15TestOrderProcessService_DenyEveryFifthConfirmRequest {
 		order1 = gson.toJson(order);
 		
 				
-		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		x=service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		System.out.println("x***********1" + x);
 		
 		_12TestOrderProcessService_createOrder createOrder5 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(6);
 		order1 = gson.toJson(order);
 		
 				
-		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		x = service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		System.out.println("x***********5" + x);
 		
 		_12TestOrderProcessService_createOrder createOrder6 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(7);
 		order1 = gson.toJson(order);
 		
 				
-		service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		x=service.confirmOrder(order1, shippingInfo1, paymentInfo1);
+		System.out.println("x***********6" + x);
 		
 		_12TestOrderProcessService_createOrder createOrder8 = new _12TestOrderProcessService_createOrder();
 		order.setOrderId(8);

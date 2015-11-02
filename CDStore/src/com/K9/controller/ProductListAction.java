@@ -3,6 +3,7 @@ package com.K9.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +48,13 @@ public class ProductListAction extends HttpServlet {
 			}
 			
 		} catch (ServiceException e) {
+			//handle the web service error
+			PrintWriter out = response.getWriter();
+			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = rb.getString("800");
+			out.print("{\"error\":\""+error+"\"}");
 			e.printStackTrace();
+			return;
 		}
 		
 		PrintWriter out = response.getWriter();
