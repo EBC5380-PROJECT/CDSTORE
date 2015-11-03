@@ -252,8 +252,13 @@ public String confirmOrder(String purchaseOrder, String shippingInfo, String pay
 		 OrdersDAO ordersDAO = new OrdersDAO(); 		 
 		 String result = ordersDAO.updateOrderStatus(orders.getOrderId(), status, accntId);
 		 
-		 if (result.equals(""))
-				return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.
+		 if (result.equals("")) {
+			 if (status.equals("DENIED"))
+				 return ResponseFactory.create(3);  //Authorization failed.
+				else
+					return ResponseFactory.create(0);  //no errors encountered.  Order was successfully created.
+		 }
+				
 			else
 				return result;  //returning system level error alert
 		 		

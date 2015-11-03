@@ -1,13 +1,13 @@
 package com.K9.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +16,8 @@ import javax.xml.rpc.ServiceException;
 
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceServiceLocator;
 import com.K9.WSClient.OrderProcessService.OrderProcessServiceSoapBindingStub;
-import com.K9.hibernate.bean.OrderItem;
 import com.K9.session.bean.OrderItemShoppingCart;
 import com.K9.session.bean.ShippingInfo;
-import com.K9.session.bean.ShoppingCartInfo;
 import com.K9.util.CallStatus;
 import com.google.gson.Gson;
 
@@ -60,7 +58,7 @@ public class CheckoutAction extends HttpServlet {
 			OrderItemShoppingCart newItem = new OrderItemShoppingCart();
 			Double tmpId = (Double) item.get("itemId");
 			Double tmpQuantity = (Double) item.get("quantity");
-			Double tmpprice = (Double) item.get("quantity");
+			Double tmpprice = (Double) item.get("price");
 			newItem.setAccountName(username);
 			newItem.setCdId(tmpId.intValue());
 			newItem.setQuantity(tmpQuantity.intValue());
@@ -73,14 +71,16 @@ public class CheckoutAction extends HttpServlet {
 		
 		//set shipping info
 		shippinginfo.setAccountName((String)session.getAttribute("username"));
-		shippinginfo.setTaxes(taxRate);
+		shippinginfo.setTaxes(totalcost*taxRate);
 		shippinginfo.setShippingCharge(0.0);
 		shippinginfo.setTotalCost(totalcost);
 		//Transform the shipping info object into json string
 		String jsonshippinginfo = gson.toJson(shippinginfo);
 		//set the shipping info into session to use in the next step
 		session.setAttribute("finalShippingInfo", jsonshippinginfo);
-		
+//		System.out.println("============totalcost: " +shippinginfo.getTotalCost());
+//		
+//		System.out.println("============finalShippingInfo: " +jsonshippinginfo);
 		//set order info
 		purchaseOrder.put("orderId", 0);
 		purchaseOrder.put("accountId", 0);
@@ -113,12 +113,21 @@ public class CheckoutAction extends HttpServlet {
 				String jsonPurchaseOrder = gson.toJson(purchaseOrder);
 				//insert the created order info into session for next step
 				session.setAttribute("finalPurchaseOrder", jsonPurchaseOrder);
+				//remove the error message
+				session.removeAttribute("error");
 				ResourceBundle pathRb = ResourceBundle.getBundle("com.K9.resources.pagePathBundle");
 				String paymentPage = pathRb.getString("payment");
 				response.sendRedirect(paymentPage);
 			}
 		} catch (ServiceException e) {
+			//handle the web service error
+			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = rb.getString("800");
 			e.printStackTrace();
+			//set the error message into session and give it back
+			session.setAttribute("error", error);
+			String referer = request.getHeader("Referer");
+			response.sendRedirect(referer);
 		}
 		
 		

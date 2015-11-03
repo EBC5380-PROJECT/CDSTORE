@@ -28,12 +28,19 @@
 	
 	<script>
 		var username = null;
-		//TODO: make this null in integration testing/production
-		var cart = testCart;
+		var cart = null;
+		var error = "";
 		
 		//function for sending current cart to cart service
 		var updateCart = function(cart){
-			console.log("Cart not updated");
+			//remove 0s
+			for(var i = 0; i < cart.length; i++){
+				if(cart[i].quantity <= 0){
+					cart.splice(i, 1);
+					i--;
+				}
+			}
+			
 			$.post(Service.cartUpdateService.address, {"cart": JSON.stringify(cart)});
 			location.reload();
 		};
@@ -44,14 +51,17 @@
 			<% 
 				String username = (String)session.getAttribute("username");
 				String ca = (String)session.getAttribute("cart");
+				String error = (String)session.getAttribute("error");
 			%>
 			username = '<%=username %>';
 			cart = '<%=ca %>';
+			error = '<%=error %>';
 			cart = JSON.parse(cart);
 			
 			
 			//load top nav-bar
 			getNavBarLinks(!(username == "null" || username == null));
+			displayError(error);
 			
 			var dom = '<tr id="row-@itemId"><td id="@itemId">@itemId</td><td id="@itemId-name"><a href="' + Client.info.page() + "@itemId" + '">';
 			dom += '@name</a></td><td id="@itemId-price">@price</td>';
@@ -134,9 +144,11 @@
 
 		<div class="page-header">
 			<h1>Your Cart</h1>
+			<font color="red" id="msg_error">
+			</font>
 		</div>
-
-
+		
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>

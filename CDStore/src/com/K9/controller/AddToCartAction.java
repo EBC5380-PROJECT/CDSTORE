@@ -86,7 +86,9 @@ public class AddToCartAction extends HttpServlet {
 		}
 		//update the cart in session
 		session.setAttribute("cart", jsonCart);
-		System.out.println("Add to Cart after:"+(String) session.getAttribute("cart"));
+//		System.out.println("Add to Cart after:"+(String) session.getAttribute("cart"));
+		//remove the error message
+		session.removeAttribute("error");
 		//get the origin page and redirect back
 		String referer = request.getHeader("Referer");
 		response.sendRedirect(referer);

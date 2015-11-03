@@ -2,9 +2,9 @@ package com.K9.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +40,11 @@ public class CategoryAction extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(jsonCategoryList);
 		} catch (ServiceException e) {
+			//handle the web service error
+			PrintWriter out = response.getWriter();
+			ResourceBundle rb = ResourceBundle.getBundle("com.K9.resources.messageBundle");
+			String error = rb.getString("800");
+			out.print("{\"error\":\""+error+"\"}");
 			e.printStackTrace();
 		}
 		

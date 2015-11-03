@@ -1,4 +1,4 @@
-var name = "http://localhost:8080/";
+var name = "https://localhost:8443/";
 
 String.prototype.replaceAll = function(search, replace) {
     if (replace === undefined) {
@@ -143,9 +143,12 @@ var retrieveCategory = function (currentCategoryID) {
 
 //display error message on the page
 var displayError = function (message) {
-	if(message != "null" || message != null){
+	if(message != "null" && message != null){
 		$("#msg_error").html(message);
+		return true;
 	}
+	
+	return false;
 };
 
 //dynamically set the links for the top nav-bar
